@@ -21,6 +21,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -180,7 +184,23 @@ public class MainActivity extends AppCompatActivity
                         "Connection IOException", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
-            return jsonstr;
+            if(jsonstr!=null){
+                try{
+                    JSONObject jsonObject=new JSONObject(jsonstr);
+                    JSONArray array=jsonObject.getJSONArray("productInfoList");
+                    for(int i=0;i<5;i++) {
+                        JSONObject firstarray = array.getJSONObject(i);
+                        JSONObject quote = firstarray.getJSONObject("productBaseInfoV1");
+                        if(line==null) line=quote.getString("title");
+                        else
+                        line =line + quote.getString("title");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            return line;
+
         }
 
         @Override
