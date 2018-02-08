@@ -3,44 +3,54 @@
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.fc.project.edroid.MainActivity"
-    tools:showIn="@layout/app_bar_main">
-
-    <EditText
-        android:id="@+id/etProduct"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="60dp"
-        android:ems="10"
-        android:hint="Enter Product"
-        android:inputType="textPersonName" />
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.fc.project.edroid.MainActivity"
+        tools:showIn="@layout/app_bar_main">
 
-    <TextView
-        android:id="@+id/tvList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etProduct"
-        android:scrollbars="vertical"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="126dp"
-        android:text="TextView" />
+        <EditText
+            android:id="@+id/etProduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="60dp"
+            android:ems="10"
+            android:hint="Enter Product"
+            android:inputType="textPersonName" />
 
-    <Button
-        android:id="@+id/btnSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etProduct"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="Search" />
+        <TextView
+            android:id="@+id/tvList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etProduct"
+            android:scrollbars="vertical"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="126dp"
+            android:text="TextView" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etProduct"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:text="Search" />
+
+        <ImageView
+            android:id="@+id/imgVIew"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/tvList"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="48dp"
+            android:layout_marginEnd="64dp" />
+
+    </RelativeLayout>
 </ScrollView>
