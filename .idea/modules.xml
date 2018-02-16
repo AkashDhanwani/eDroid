@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\AndroidStudioProjects\eDroid\eDroid\app\app.iml" filepath="D:\AndroidStudioProjects\eDroid\eDroid\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/eDroid.iml" filepath="$PROJECT_DIR$/eDroid.iml" />
-      <module fileurl="file://D:\AndroidStudioProjects\eDroid\eDroid\eDroid.iml" filepath="D:\AndroidStudioProjects\eDroid\eDroid\eDroid.iml" />
     </modules>
   </component>
 </project>

@@ -38,8 +38,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/etProduct"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
+            android:layout_marginEnd="26dp"
+            android:layout_marginTop="41dp"
+            android:layout_toStartOf="@+id/tvList"
             android:text="Search" />
 
         <ImageView
@@ -51,6 +52,16 @@
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="48dp"
             android:layout_marginEnd="64dp" />
+
+        <Button
+            android:id="@+id/btnAmazon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/btnSearch"
+            android:layout_alignBottom="@+id/btnSearch"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="30dp"
+            android:text="Amazon Activity" />
 
     </RelativeLayout>
 </ScrollView>
