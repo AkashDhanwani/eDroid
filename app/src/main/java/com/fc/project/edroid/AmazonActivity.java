@@ -9,15 +9,27 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 public class AmazonActivity extends AppCompatActivity {
 
@@ -88,16 +100,16 @@ public class AmazonActivity extends AppCompatActivity {
     {
         String jsonstr="";
         String line= "";
-        String searchResults="";
-        int price;
+        String title="";
+        String produrl="";
+        String resultSet="";
+        String price;
         @Override
         protected String doInBackground(String... strings) {
             try {
                 URL url = new URL(strings[0]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
-                //connection.setRequestProperty("Fk-Affiliate-Id", "akashdeveloper");
-                // connection.setRequestProperty("Fk-Affiliate-Token", "281eb157bf61470b91ba4fa9a2cdc98e");
                 connection.connect();
                 InputStream is = connection.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -113,14 +125,54 @@ public class AmazonActivity extends AppCompatActivity {
                 //      "Connection IOException", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
+            try {
+                // we use document builder to extract data from xml
 
-            return jsonstr;
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document document = builder.parse(new InputSource(new StringReader(jsonstr)));
+                //everything in xml is a node so we create nodes for tags
+                // then use the attribute of data which we want to extract
+
+                NodeList nList = document.getElementsByTagName("Item");
+
+
+                //for multiple elements use for loop
+                for(int i=0;i<nList.getLength();i++) {
+                    Node node = nList.item(i);
+                    if (node.getNodeType() == Node.ELEMENT_NODE) {
+                        Element element2 = (Element) node;
+                        title=getValue("Title",element2);
+                        price=getValue("FormattedPrice",element2);
+                        produrl=getValue("DetailPageURL",element2);
+
+                        //getValue() is method defined in the end which passes the attribute and return data that we want
+                        resultSet=resultSet+"\n\n\tTitle: "+title+"\n\tprice: "+price+"\n\tproduct url :"+produrl;
+                    }
+                }
+            } catch (SAXException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            }
+
+            return resultSet;
+
         }
+
+
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             tvList.setText(s);
         }
+    }
+    private static String getValue(String tag, Element element) {
+        NodeList nodeList = element.getElementsByTagName(tag).item(0).getChildNodes();
+        Node node = nodeList.item(0);
+        return node.getNodeValue();
     }
 }

@@ -41,7 +41,7 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    Button btnSearch, btnAmazon;
+    Button btnSearch, btnAmazon, btnEbay;
     EditText etProduct;
     TextView tvList;
     ImageView productImg;
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity
         tvList = findViewById(R.id.tvList);
         productImg=findViewById(R.id.imgVIew);
         btnAmazon = findViewById(R.id.btnAmazon);
+        btnEbay = findViewById(R.id.btnEbay);
 
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -75,6 +76,15 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AmazonActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        btnEbay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, EbayActivity.class);
                 startActivity(intent);
             }
         });

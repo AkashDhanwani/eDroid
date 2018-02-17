@@ -22,7 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AmazonActivity"></activity>
+        <activity android:name=".AmazonActivity" />
+        <activity android:name=".EbayActivity"></activity>
     </application>
 
 </manifest>

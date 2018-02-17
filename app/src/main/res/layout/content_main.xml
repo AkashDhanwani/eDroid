@@ -37,10 +37,10 @@
             android:id="@+id/btnSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/etProduct"
-            android:layout_marginEnd="26dp"
-            android:layout_marginTop="41dp"
-            android:layout_toStartOf="@+id/tvList"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="43dp"
             android:text="Search" />
 
         <ImageView
@@ -59,9 +59,18 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/btnSearch"
             android:layout_alignBottom="@+id/btnSearch"
+            android:layout_centerHorizontal="true"
+            android:text="Amazon" />
+
+        <Button
+            android:id="@+id/btnEbay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/btnAmazon"
+            android:layout_alignBottom="@+id/btnAmazon"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="30dp"
-            android:text="Amazon Activity" />
+            android:layout_marginEnd="23dp"
+            android:text="Ebay" />
 
     </RelativeLayout>
 </ScrollView>
