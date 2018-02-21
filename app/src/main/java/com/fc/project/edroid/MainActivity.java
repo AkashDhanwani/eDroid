@@ -41,7 +41,7 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    Button btnSearch, btnAmazon, btnEbay;
+    Button btnSearch, btnAmazon, btnEbay,btnyuge;
     EditText etProduct;
     TextView tvList;
     ImageView productImg;
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity
         productImg=findViewById(R.id.imgVIew);
         btnAmazon = findViewById(R.id.btnAmazon);
         btnEbay = findViewById(R.id.btnEbay);
+        btnyuge=findViewById(R.id.btndatayuge);
 
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -76,6 +77,14 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AmazonActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnyuge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, datayuge.class);
                 startActivity(intent);
             }
         });

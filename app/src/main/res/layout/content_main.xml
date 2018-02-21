@@ -43,6 +43,16 @@
             android:layout_marginTop="43dp"
             android:text="Search" />
 
+        <Button
+            android:id="@+id/btndatayuge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnAmazon"
+            android:layout_alignEnd="@+id/btnAmazon"
+            android:layout_marginBottom="17dp"
+            android:text="datayuge" />
+
+
         <ImageView
             android:id="@+id/imgVIew"
             android:layout_width="200dp"

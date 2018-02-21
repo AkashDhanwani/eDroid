@@ -23,7 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AmazonActivity" />
-        <activity android:name=".EbayActivity"></activity>
+        <activity android:name=".EbayActivity" />
+        <activity android:name=".datayuge"></activity>
     </application>
 
 </manifest>
