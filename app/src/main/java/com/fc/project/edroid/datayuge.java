@@ -70,12 +70,9 @@ public class datayuge extends AppCompatActivity {
     class Task2 extends AsyncTask<String,Void,String>
     {
         String jsonstr="";
-        String line= "";
         String name="";
-        String price="";
         String prodetails;
         String resultSet="";
-        String keyValue="";
         @Override
         protected String doInBackground(String... strings) {
            jsonstr = connection(strings);
