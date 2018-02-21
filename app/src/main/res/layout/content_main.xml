@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,59 +15,28 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="49dp"
             android:ems="10"
             android:hint="Enter Product"
             android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/tvList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/etProduct"
-            android:scrollbars="vertical"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="126dp"
-            android:text="TextView" />
 
         <Button
             android:id="@+id/btnSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/btnAmazon"
+            android:layout_alignBottom="@+id/btnAmazon"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/etProduct"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="43dp"
             android:text="Search" />
 
         <Button
-            android:id="@+id/btndatayuge"
+            android:id="@+id/btnDatayuge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/btnAmazon"
             android:layout_alignEnd="@+id/btnAmazon"
-            android:layout_marginBottom="17dp"
+            android:layout_below="@+id/etProduct"
             android:text="datayuge" />
 
-
-        <ImageView
-            android:id="@+id/imgVIew"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_below="@+id/tvList"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="48dp"
-            android:layout_marginEnd="64dp" />
-
-        <Button
-            android:id="@+id/btnAmazon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/btnSearch"
-            android:layout_alignBottom="@+id/btnSearch"
-            android:layout_centerHorizontal="true"
-            android:text="Amazon" />
 
         <Button
             android:id="@+id/btnEbay"
@@ -82,5 +48,23 @@
             android:layout_marginEnd="23dp"
             android:text="Ebay" />
 
+        <Button
+            android:id="@+id/btnAmazon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etProduct"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="37dp"
+            android:text="Amazon" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="464dp"
+
+
+            android:layout_below="@id/btnAmazon"/>
+
     </RelativeLayout>
-</ScrollView>
+
+

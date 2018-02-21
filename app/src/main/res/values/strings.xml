@@ -5,4 +5,11 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="descrption">Enter password</string>
+    <string name="or">Or</string>
+    <string name="signup">Sign Up</string>
+    <string name="Google">Google SignUp</string>
+    <string name="WelcomeUser">Welcome User</string>
+    <string name="OrSignUp">Or Sign Up through</string>
 </resources>
