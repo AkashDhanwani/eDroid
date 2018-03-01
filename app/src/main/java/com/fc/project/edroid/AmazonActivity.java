@@ -34,9 +34,10 @@ import javax.xml.parsers.ParserConfigurationException;
 public class AmazonActivity extends AppCompatActivity {
 
     String requestUrl = null, product;
-    Button btnSearch;
+    Button btnSearch,btnNext;
     EditText etProduct;
     TextView tvList;
+    int i;
     SignedRequestsHelper helper;// We have to use this java file for encoding purpose
 
     /*The below three variables are used for the authentication purpose by passing it to
@@ -57,6 +58,7 @@ public class AmazonActivity extends AppCompatActivity {
         setContentView(R.layout.activity_amazon);
 
         btnSearch = findViewById(R.id.btnSearch);
+        btnNext = findViewById(R.id.btnNext);
         etProduct = findViewById(R.id.etProduct);
         tvList = findViewById(R.id.tvList);
 
@@ -70,38 +72,62 @@ public class AmazonActivity extends AppCompatActivity {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 product = etProduct.getText().toString();
+                i=1;
+                callPages(i,product);
+            }
+
+        });
+
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                product = etProduct.getText().toString();
+               i++;
+                callPages(i,product);
+            }
+
+        });
+
+
+
+    }
+
+    private void callPages(int i, String product) {
+
+
 
                 /*  In this, we cannot directly pass the url like the flipkart's one
                 We have to fetch a unique url each time we fire a query for the product
                 Each url is the signed url containing the id and secret key
                 */
 
-                Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> params = new HashMap<String, String>();
 
-                params.put("Service", "AWSECommerceService");
-                params.put("Operation", "ItemSearch");
-                params.put("AWSAccessKeyId", "AKIAJREHRMEIPF5AWDRQ");
-                params.put("AssociateTag", "akashdhanwa05-21");
-                params.put("SearchIndex", "All");
-                params.put("ResponseGroup", "Images,ItemAttributes,Offers");
-                params.put("Keywords", product);
+        params.put("Service", "AWSECommerceService");
+        params.put("Operation", "ItemSearch");
+        params.put("AWSAccessKeyId", "AKIAJREHRMEIPF5AWDRQ");
+        params.put("AssociateTag", "akashdhanwa05-21");
+        params.put("SearchIndex", "All");
+        params.put("ItemPage", String.valueOf(i)); // increment this for second page
+        params.put("ResponseGroup", "Images,ItemAttributes,Offers");
+        params.put("Keywords", product);
 
-                // the purpose of the signed class used above is to get the signed url
-                requestUrl = helper.sign(params);
+        // the purpose of the signed class used above is to get the signed url
+        requestUrl = helper.sign(params);
 
-                Task1 t1 = new Task1();
-                t1.execute(requestUrl);
-            }
-        });
+        Task1 t1 = new Task1();
+        t1.execute(requestUrl);
     }
+
     class Task1 extends AsyncTask<String,Void,String>
     {
         String jsonstr="";
         String line= "";
         String title="";
         String produrl="";
+        String imgurl="";
         String resultSet="";
         String price;
         @Override
@@ -135,19 +161,22 @@ public class AmazonActivity extends AppCompatActivity {
                 // then use the attribute of data which we want to extract
 
                 NodeList nList = document.getElementsByTagName("Item");
-
+                NodeList nList2 = document.getElementsByTagName("MediumImage");
 
                 //for multiple elements use for loop
                 for(int i=0;i<nList.getLength();i++) {
                     Node node = nList.item(i);
+                    Node nodeimage=nList2.item(i);
                     if (node.getNodeType() == Node.ELEMENT_NODE) {
                         Element element2 = (Element) node;
+                        Element element3 = (Element) nodeimage;
                         title=getValue("Title",element2);
                         price=getValue("FormattedPrice",element2);
                         produrl=getValue("DetailPageURL",element2);
+                        imgurl=getValue("URL",element3);
 
                         //getValue() is method defined in the end which passes the attribute and return data that we want
-                        resultSet=resultSet+"\n\n\tTitle: "+title+"\n\tprice: "+price+"\n\tproduct url :"+produrl;
+                        resultSet=resultSet+"\n\n\tTitle: "+title+"\n\tprice: "+price+"\n\tproduct url :"+produrl+"\n\timage url :"+imgurl;
                     }
                 }
             } catch (SAXException e) {
