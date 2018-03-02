@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity
             if(jsonstr!=null){
                 try{
                     JSONObject jsonObject=new JSONObject(jsonstr);
-                    JSONArray array=jsonObject.getJSONArray("productInfoList");
+                    JSONArray array=jsonObject.getJSONArray("products");
                     for(int i=0;i<5;i++) {
                         //Public  List<Products> data=new ArrayList<>();
                         Products products=new Products();
