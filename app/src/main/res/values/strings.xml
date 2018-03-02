@@ -12,4 +12,8 @@
     <string name="Google">Google SignUp</string>
     <string name="WelcomeUser">Welcome User</string>
     <string name="OrSignUp">Or Sign Up through</string>
+    <string name="title_activity_nav2">nav2Activity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

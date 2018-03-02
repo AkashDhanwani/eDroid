@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity
         btnAmazon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AmazonActivity.class);
+                Intent intent = new Intent(MainActivity.this, nav2Activity.class);
                 startActivity(intent);
             }
         });
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity
         btnDatayuge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, datayuge.class);
+                Intent intent = new Intent(MainActivity.this, nav2Activity.class);
                 startActivity(intent);
             }
         });
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity
         btnEbay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, EbayActivity.class);
+                Intent intent = new Intent(MainActivity.this, nav2Activity.class);
                 startActivity(intent);
             }
         });
