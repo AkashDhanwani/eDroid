@@ -44,14 +44,14 @@
             android:id="@+id/btnsearch"
             android:layout_width="40dp"
             android:layout_height="32dp"
-            android:layout_marginLeft="15dp"
+
             android:background="@drawable/ic_search_black_24dp" />
 
         <Button
             android:id="@+id/btnspeak"
             android:layout_width="40dp"
             android:layout_height="32dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="7dp"
             android:background="@drawable/ic_keyboard_voice" />
     </LinearLayout>
 
