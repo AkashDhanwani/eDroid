@@ -12,6 +12,12 @@
     <string name="Google">Google SignUp</string>
     <string name="WelcomeUser">Welcome User</string>
     <string name="OrSignUp">Or Sign Up through</string>
+    <string name="strike"><strike></strike></string>
+    <string name="maxPrice">Retail Price</string>
+    <string name="flipkartSellngPrice">Flipkart\'s Price</string>
+    <string name="b"><b>bf</b></string>
+    <string name="edroid">Edroid</string>
+    <string name="type">Enter product name</string>
     <string name="title_activity_nav2">nav2Activity</string>
 
     <!-- TODO: Remove or change this placeholder text -->

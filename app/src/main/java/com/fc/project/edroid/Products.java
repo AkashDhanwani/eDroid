@@ -9,15 +9,21 @@ public class Products  {
     public String title;
     public String imgUrl;
     public String desc;
-
+    public String price;
+    public String flipkartSellingPrice;
+    public String inStock;
     public Products() {
 
     }
 
-    public Products(String title, String imgUrl, String desc) {
+    public Products(String title, String imgUrl, String desc,String price,String flipkartSellingPrice,String inStock) {
         this.title = title;
         this.imgUrl = imgUrl;
         this.desc = desc;
+        this.price=price;
+        this.flipkartSellingPrice=flipkartSellingPrice;
+        this.inStock=inStock;
+
     }
 
     public String getTitle() {
@@ -43,4 +49,28 @@ public class Products  {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getFlipkartSellingPrice() {
+        return flipkartSellingPrice;
+    }
+
+    public void setFlipkartSellingPrice(String flipkartSellingPrice) {
+        this.flipkartSellingPrice = flipkartSellingPrice;
+    }
+
+//    public String getInStock() {
+//        return inStock;
+//    }
+//
+//    public void setInStock(String inStock) {
+//        this.inStock = inStock;
+//    }
 }

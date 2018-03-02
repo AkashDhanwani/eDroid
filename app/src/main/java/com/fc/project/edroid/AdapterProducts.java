@@ -1,6 +1,7 @@
 package com.fc.project.edroid;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +35,8 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.product_file,parent,false);
+        //View view=inflater.inflate(R.layout.product_file,parent,false);
+        View view=inflater.inflate(R.layout.mainpage_flipkart_file,parent,false);
         MyHolder holder=new MyHolder(view);
         return holder;
     }
@@ -46,9 +48,12 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
         MyHolder myHolder=(MyHolder)holder;
       //  current=data.get(position);
         Products products=data.get(position);
-        myHolder.proTitle.setText(products.getTitle());
-        myHolder.proDesc.setText(products.getDesc());
-        Glide.with(context).load(products.getImgUrl()).into(myHolder.imageView);
+        myHolder.FlipkartproTitlee.setText(products.getTitle());
+        myHolder.FlipkartproDescc.setText(products.getDesc());
+        myHolder.FlipkartproPrice.setText("\u20B9"+products.getPrice());
+        myHolder.FlipkartproSellingPrice.setText("\u20B9"+products.getFlipkartSellingPrice());
+       // myHolder.FlipkartproInStock.setText(products.getInStock());
+        Glide.with(context).load(products.getImgUrl()).into(myHolder.FlipkartprooImg);
 
     }
 
@@ -60,13 +65,20 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
     class MyHolder extends RecyclerView.ViewHolder
     {
 
-        ImageView imageView;
-        TextView proDesc,proTitle;
+        ImageView imageView,FlipkartprooImg;
+        TextView proDesc,proTitle,FlipkartproTitlee,FlipkartproDescc,FlipkartproPrice,FlipkartproSellingPrice,FlipkartproInStock;
         public MyHolder(View itemView) {
             super(itemView);
-            proTitle=itemView.findViewById(R.id.title);
-            proDesc=itemView.findViewById(R.id.description);
-            imageView=itemView.findViewById(R.id.proImg);
+//            proTitle=itemView.findViewById(R.id.title);
+//            proDesc=itemView.findViewById(R.id.description);
+//            imageView=itemView.findViewById(R.id.proImg);
+            FlipkartprooImg=itemView.findViewById(R.id.FlipkartprooImg);
+            FlipkartproTitlee=itemView.findViewById(R.id.FlipkartproTitlee);
+            FlipkartproDescc=itemView.findViewById(R.id.FlipkartproDescc);
+            FlipkartproPrice=itemView.findViewById(R.id.FlipkartproPrice);
+            FlipkartproSellingPrice=itemView.findViewById(R.id.FlipkartproSellingPrice);
+            FlipkartproPrice.setPaintFlags(FlipkartproPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+         //   FlipkartproInStock=itemView.findViewById(R.id.FlipkartproInStock);
 
 
         }

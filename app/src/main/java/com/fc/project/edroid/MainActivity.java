@@ -1,15 +1,19 @@
 package com.fc.project.edroid;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,6 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,6 +33,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.stone.vega.library.VegaLayoutManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,16 +48,23 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    Button btnSearch, btnAmazon, btnEbay, btnDatayuge;
+    //Button btnSearch, btnAmazon, btnEbay, btnDatayuge;
+    Button btnSearch,btnSpeak;
     EditText etProduct;
     TextView tvList;
+    TextView textView;
     ImageView productImg;
-    ProgressBar progressBar;
+    EditText serachItem;
+    String dataa,res;
+    ViewPager viewPager;
     private RecyclerView recyclerView;
     private AdapterProducts adapterProducts;
     String[] productnames={"iphone","dell","nokia","samsung"};
@@ -64,11 +77,21 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        btnSearch = findViewById(R.id.btnSearch);
-        btnAmazon = findViewById(R.id.btnAmazon);
-        btnEbay = findViewById(R.id.btnEbay);
-        btnDatayuge=findViewById(R.id.btnDatayuge);
-        etProduct = findViewById(R.id.etProduct);
+
+        viewPager=findViewById(R.id.viewPager);
+        ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(this);
+        viewPager.setAdapter(viewPagerAdapter);
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new MyTimerTask(),2000,4000);
+        btnSearch=findViewById(R.id.btnsearch);
+        btnSpeak=findViewById(R.id.btnspeak);
+
+        textView=findViewById(R.id.textView);
+        String text="<font color=#3F51B5>E</font><font color=#f50808>d</font><font color=#ff6d40>r</font><font color=#3F51B5>o</font>" +
+                "<font color=#08f563>i</font><font color=#f50808>d</font>";
+        textView.setText(Html.fromHtml(text));
+//        etProduct = findViewById(R.id.etProduct);
+        serachItem=findViewById(R.id.Etsearch);
         tvList = findViewById(R.id.tvList);
         Random random = new Random();
         int index = random.nextInt(productnames.length);
@@ -78,20 +101,6 @@ public class MainActivity extends AppCompatActivity
         Task1 t1 = new Task1();
         t1.execute("https://affiliate-api.flipkart.net/affiliate/1.0/search.json?query="+product+"&resultCount=5");
 
-//        findViewById(R.id.btnAmazon).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent=new Intent(MainActivity.this,AmazonActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//        findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent=new Intent(MainActivity.this,EbayActivity.class);
-//                startActivity(intent);
-//            }
-//        });
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -105,67 +114,68 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(MainActivity.this,
                     "Connected to Internet Internet", Toast.LENGTH_SHORT).show();
 
-        btnAmazon.setOnClickListener(new View.OnClickListener() {
+
+
+
+
+//
+//        btnSearch.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+////                String product = etProduct.getText().toString();
+////                if (product.length() == 0) {
+////                    etProduct.setError("Please a Product name");
+////                    etProduct.requestFocus();
+////                    return;
+////                }
+//
+//                //TODO onClick recyclerView is working perfectly fine.
+//                //TODO as of now i am sending it to another activity.
+////
+////                Task1 t1 = new Task1();
+////                t1.execute("https://affiliate-api.flipkart.net/affiliate/1.0/search.json?query="+product+"&resultCount=5");
+//
+//
+//                Intent intent=new Intent(getApplicationContext(),AmazonActivity.class);
+//                Toast.makeText(MainActivity.this, "Amazon Activity", Toast.LENGTH_SHORT).show();
+//                startActivity(intent);
+//            }
+//        });
+        btnSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, nav2Activity.class);
-                startActivity(intent);
+                serachItem.setVisibility(View.VISIBLE);
+                Intent intent=new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+                if(intent.resolveActivity(getPackageManager()) != null)
+                    startActivityForResult(intent, 10);
+                else
+                    Toast.makeText(MainActivity.this, "Your Device Don't Support Speech Text", Toast.LENGTH_SHORT).show();
             }
+
         });
-
-        btnDatayuge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, nav2Activity.class);
-                startActivity(intent);
-            }
-        });
-
-
-        btnEbay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, nav2Activity.class);
-                startActivity(intent);
-            }
-        });
-
-
-
-
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-//                String product = etProduct.getText().toString();
-//                if (product.length() == 0) {
-//                    etProduct.setError("Please a Product name");
-//                    etProduct.requestFocus();
-//                    return;
-//                }
+                if(serachItem.getText().toString().equals(""))
+                {
+                    revealEditText();
+                }
+                else
+                {
+                    dataa=serachItem.getText().toString();
+                    Toast.makeText(MainActivity.this, "hello"+dataa, Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(getApplicationContext(),nav2Activity.class);
+                    startActivity(intent);
 
-                //TODO onClick recyclerView is working perfectly fine.
-                //TODO as of now i am sending it to another activity.
-//
-//                Task1 t1 = new Task1();
-//                t1.execute("https://affiliate-api.flipkart.net/affiliate/1.0/search.json?query="+product+"&resultCount=5");
-
-
-                Intent intent=new Intent(getApplicationContext(),AmazonActivity.class);
-                Toast.makeText(MainActivity.this, "Amazon Activity", Toast.LENGTH_SHORT).show();
-                startActivity(intent);
+                }
             }
         });
 
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -175,8 +185,69 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+
+    }//end of onCreate
+
+
+    public class MyTimerTask extends TimerTask {
+        @Override
+        public void run() {
+            MainActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(viewPager.getCurrentItem()==0)
+                    {
+                        viewPager.setCurrentItem(1);
+                    }
+                    else if (viewPager.getCurrentItem()==1)
+                    {
+                        viewPager.setCurrentItem(2);
+                    }
+                    else{
+                        viewPager.setCurrentItem(0);
+                    }
+                }
+            });
+        }
+    }
+    private void revealEditText(){
+        View view = findViewById(R.id.Etsearch);
+
+        //findind middle of widget
+        int cx = view.getWidth()/2;
+        int cy=view.getHeight()/2;
+
+        float finalRadius=(float)Math.hypot(cx,cy);
+        Animator anim = ViewAnimationUtils.createCircularReveal(view,cx,cy,0,finalRadius);
+        view.setVisibility(View.VISIBLE);
+        anim.start();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode)
+        {
+            case 10:
+
+                //ArrayList<String>result =data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                //serachItem.setText(result.get(0));
+                if(data!=null) {
+                    ArrayList<String>result =data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    serachItem.setText(result.get(0));
+                }
+                else
+                {
+                    Toast.makeText(this, "empty", Toast.LENGTH_SHORT).show();
+                }
+                //Toast.makeText(this, "welcome"+serachItem.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                break;
+        }
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -284,19 +355,24 @@ public class MainActivity extends AppCompatActivity
                 try{
                     JSONObject jsonObject=new JSONObject(jsonstr);
                     JSONArray array=jsonObject.getJSONArray("products");
-                    for(int i=0;i<5;i++) {
+                    for(int i=0;i<10;i++) {
                         //Public  List<Products> data=new ArrayList<>();
                         Products products=new Products();
                         JSONObject firstarray = array.getJSONObject(i);
                         JSONObject quote = firstarray.getJSONObject("productBaseInfoV1");
                         JSONObject quote1=quote.getJSONObject("imageUrls");
+                        JSONObject quote2=quote.getJSONObject("maximumRetailPrice");
+                        JSONObject quote3=quote.getJSONObject("flipkartSpecialPrice");
+                       // JSONObject quote4=quote.getJSONObject("inStock");
                         //  JSONObject quote1=secondArray.getJSONObject("imageUrls");
                         if(resultSet==null) {
                             //    resultSet=quote.getString("title");
                             products.title = quote.getString("title");
-                            products.desc=quote.getString("productDescription");
-                            products.imgUrl=quote1.getString("200x200");
-
+                          //  products.desc=quote.getString("productDescription");
+                            products.imgUrl=quote1.getString("400x400");
+                            products.price=quote2.getString("amount");
+                            products.flipkartSellingPrice=quote3.getString("amount");
+                            //products.inStock=quote4.getString("amount");
                             data.add(products);
 //                            data.notify();
                             //resultSet="Product Title is:"+line+"\n"+"Description:"+desc+"\n"+"ImageUrl"+imgurl;
@@ -310,8 +386,11 @@ public class MainActivity extends AppCompatActivity
 //                            resultSet=resultSet+"Product Title is:"+line+"\n"+"Description:"+desc+"\n"+"ImageUrl"+imgurl;
                             //data.remove(products);
                             products.title = quote.getString("title");
-                            products.desc=quote.getString("productDescription");
-                            products.imgUrl=quote1.getString("200x200");
+                          //  products.desc=quote.getString("productDescription");
+                            products.imgUrl=quote1.getString("400x400");
+                            products.price=quote2.getString("amount");
+                            products.flipkartSellingPrice=quote3.getString("amount");
+                           // products.inStock=quote4.getString("amount");
                             //data.removeAll(data);
                             data.add(products);
                         }
@@ -338,13 +417,16 @@ public class MainActivity extends AppCompatActivity
 //                    .into(productImg);
 
             recyclerView=findViewById(R.id.recyclerView);
+            recyclerView.setLayoutManager(new VegaLayoutManager());
             adapterProducts=new AdapterProducts(MainActivity.this,data);
             adapterProducts.notifyDataSetChanged();
             recyclerView.invalidate();
+
             recyclerView.setAdapter(adapterProducts);
 //            adapterProducts.notifyDataSetChanged();
             //recyclerView.invalidate();
-            recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+            //recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+//            recyclerView.setLayoutManager(new VegaLayoutManager());
         }
     }
 
