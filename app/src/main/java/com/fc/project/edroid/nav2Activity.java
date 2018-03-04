@@ -29,6 +29,7 @@ public class nav2Activity extends AppCompatActivity
     EbayFragment ebayFragment;
     FlipkartFragment flipkartFragment;
     AmazonFragment amazonFragment;
+    DatayugeFragment datayugeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +127,7 @@ public class nav2Activity extends AppCompatActivity
     }
 
     private class SectionsPagerAdapter extends FragmentPagerAdapter {
-        String titles[]=new String[]{"flipkart","amazon","ebay"};
+        String titles[]=new String[]{"flipkart","amazon","ebay","others"};
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -147,13 +148,17 @@ public class nav2Activity extends AppCompatActivity
                 case 2:
                     ebayFragment=new EbayFragment(query);
                     return ebayFragment;
+                case 3:
+                    datayugeFragment=new DatayugeFragment(query);
+                    return datayugeFragment;
+
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
     }
 }
