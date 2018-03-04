@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity
         textView.setText(Html.fromHtml(text));
 //        etProduct = findViewById(R.id.etProduct);
         serachItem=findViewById(R.id.Etsearch);
-        tvList = findViewById(R.id.tvList);
+       // tvList = findViewById(R.id.tvList);
         Random random = new Random();
         int index = random.nextInt(productnames.length);
 

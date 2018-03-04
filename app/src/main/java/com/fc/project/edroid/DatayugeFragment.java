@@ -53,9 +53,6 @@ public class DatayugeFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_datayuge,container,false);
 
-        etProduct=view.findViewById(R.id.etProduct);
-        tvList=view.findViewById(R.id.tvList);
-        btnSearch=view.findViewById(R.id.btnSearch);
 
 
                 String product = query;
