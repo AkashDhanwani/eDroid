@@ -1,26 +1,24 @@
 package com.fc.project.edroid;
 
-
-public class Products  {
+public class ProductsAma  {
 
     public String title;
-    public String imgUrl;
+    public String imgurl;
     public String desc;
-    public String produrl;
     public String price;
-    public String flipkartSellingPrice;
+    public String produrl;
     public String inStock;
-    public Products() {
+    public ProductsAma() {
 
     }
 
-    public Products(String title, String imgUrl, String desc,String price,String flipkartSellingPrice,String inStock) {
+    public ProductsAma(String title, String imgurl, String produrl,String price) {
         this.title = title;
-        this.imgUrl = imgUrl;
-        this.desc = desc;
+        this.imgurl = imgurl;
+        this.produrl = produrl;
         this.price=price;
-        this.flipkartSellingPrice=flipkartSellingPrice;
-        this.inStock=inStock;
+       // this.flipkartSellingPrice=flipkartSellingPrice;
+        //this.inStock=inStock;
 
     }
 
@@ -33,13 +31,12 @@ public class Products  {
     }
 
     public String getImgUrl() {
-        return imgUrl;
+        return imgurl;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setImgUrl(String imgurl) {
+        this.imgurl = imgurl;
     }
-
 
     public String getProdUrl() {
         return produrl;
@@ -49,15 +46,14 @@ public class Products  {
         this.produrl = produrl;
     }
 
-
-    public String getDesc() {
+   /* public String getDesc() {
         return desc;
     }
 
     public void setDesc(String desc) {
         this.desc = desc;
     }
-
+*/
     public String getPrice() {
         return price;
     }
@@ -65,14 +61,14 @@ public class Products  {
     public void setPrice(String price) {
         this.price = price;
     }
-
+/*
     public String getFlipkartSellingPrice() {
         return flipkartSellingPrice;
     }
 
     public void setFlipkartSellingPrice(String flipkartSellingPrice) {
         this.flipkartSellingPrice = flipkartSellingPrice;
-    }
+    }*/
 
 //    public String getInStock() {
 //        return inStock;

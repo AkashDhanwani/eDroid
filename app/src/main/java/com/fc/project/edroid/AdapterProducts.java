@@ -1,7 +1,9 @@
 package com.fc.project.edroid;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,6 +56,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
         myHolder.FlipkartproSellingPrice.setText("\u20B9"+products.getFlipkartSellingPrice());
        // myHolder.FlipkartproInStock.setText(products.getInStock());
         Glide.with(context).load(products.getImgUrl()).into(myHolder.FlipkartprooImg);
+        myHolder.produrl=products.getProdUrl();
 
     }
 
@@ -64,7 +67,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     class MyHolder extends RecyclerView.ViewHolder
     {
-
+        String produrl;
         ImageView imageView,FlipkartprooImg;
         TextView proDesc,proTitle,FlipkartproTitlee,FlipkartproDescc,FlipkartproPrice,FlipkartproSellingPrice,FlipkartproInStock;
         public MyHolder(View itemView) {
@@ -79,6 +82,15 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
             FlipkartproSellingPrice=itemView.findViewById(R.id.FlipkartproSellingPrice);
             FlipkartproPrice.setPaintFlags(FlipkartproPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
          //   FlipkartproInStock=itemView.findViewById(R.id.FlipkartproInStock);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Uri uri = Uri.parse(produrl); // missing 'http://' will cause crashed
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    context.startActivity(intent);
+                }
+            });
+
 
 
         }

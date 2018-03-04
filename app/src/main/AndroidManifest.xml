@@ -23,8 +23,6 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/newxyz"></activity>
-        <activity android:name=".AmazonActivity" />
-        <activity android:name=".EbayActivity" />
         <activity android:name=".datayuge" />
         <activity android:name=".OnBoardingActivity"></activity>
         <activity

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:elevation="15dp"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:elevation="10dp"
+        android:id="@+id/AmazoncardView"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <ImageView
+                android:id="@+id/AmazonprooImg"
+                android:layout_width="140dp"
+                android:layout_height="200dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@android:color/background_light" />
+
+            <TextView
+                android:id="@+id/AmazonproTitlee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/AmazonprooImg"
+                android:paddingLeft="5dp"
+                android:text="asd"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/AmazonproPriceSellingWords"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/AmazonproTitlee"
+                android:layout_below="@+id/AmazonproTitlee"
+                android:layout_marginTop="18dp"
+                android:padding="3dp"
+                android:text="@string/AmazonSellngPrice" />
+
+            <TextView
+                android:id="@+id/AmazonproPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/AmazonproPriceSellingWords"
+
+                android:layout_alignBottom="@+id/AmazonproPriceSellingWords"
+                android:layout_toEndOf="@+id/AmazonproPriceSellingWords"
+                android:padding="3dp"
+                android:text="@string/b"
+                android:textColor="@color/red_error" />
+            <!--<TextView-->
+            <!--android:id="@+id/AmazonproInStock"-->
+            <!--android:padding="5dp"-->
+            <!--android:layout_below="@+id/AmazonproSellingPrice"-->
+            <!--android:layout_toRightOf="@+id/AmazonprooImg"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

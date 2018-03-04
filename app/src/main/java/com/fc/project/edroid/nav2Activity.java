@@ -1,35 +1,43 @@
 package com.fc.project.edroid;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class nav2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager viewPager;
+    Button btnSearch;
+    EditText etsearch;
+    String query;
+    EbayFragment ebayFragment;
+    FlipkartFragment flipkartFragment;
+    AmazonFragment amazonFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       btnSearch=findViewById(R.id.btnsearch);
+       etsearch=findViewById(R.id.Etsearch);
         setSupportActionBar(toolbar);
-
         viewPager=(ViewPager)findViewById(R.id.viewpager);
         mSectionsPagerAdapter=new SectionsPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(mSectionsPagerAdapter);
@@ -45,8 +53,22 @@ public class nav2Activity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
+        Intent myIntent = getIntent();
+        if (myIntent.hasExtra("myExtra")){
+            query=myIntent.getStringExtra("myExtra"); }
 
+            btnSearch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    query=etsearch.getText().toString();
+
+                }
+            });
+
+
+
+
+        }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -98,7 +120,6 @@ public class nav2Activity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -118,13 +139,13 @@ public class nav2Activity extends AppCompatActivity
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    FlipkartFragment flipkartFragment=new FlipkartFragment();
+                    flipkartFragment=new FlipkartFragment(query);
                     return flipkartFragment;
                 case 1:
-                    AmazonFragment amazonFragment=new AmazonFragment();
+                    amazonFragment=new AmazonFragment(query);
                     return amazonFragment;
                 case 2:
-                    EbayFragment ebayFragment=new EbayFragment();
+                    ebayFragment=new EbayFragment(query);
                     return ebayFragment;
             }
             return null;
