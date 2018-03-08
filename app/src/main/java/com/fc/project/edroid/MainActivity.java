@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity
                 else
                 {
                     dataa=serachItem.getText().toString();
-                    Toast.makeText(MainActivity.this, "hello"+dataa, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "hello "+dataa, Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(getApplicationContext(),nav2Activity.class);
                     intent.putExtra("myExtra",dataa);
                     startActivity(intent);
