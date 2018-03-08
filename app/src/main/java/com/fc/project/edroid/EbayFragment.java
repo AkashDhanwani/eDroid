@@ -58,8 +58,6 @@ query=query1;
 
 
         //etProduct=view.findViewById(R.id.etProduct);
-        tvList=view.findViewById(R.id.tvList);
-        btnSearch=view.findViewById(R.id.btnSearch);
 
                 String product = query.toString();
                 if (product.length() == 0) {

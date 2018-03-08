@@ -77,8 +77,6 @@ View view,view2;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_amazon,container,false);
-        btnSearch = view.findViewById(R.id.btnSearch);
-        tvList = view.findViewById(R.id.tvList);
 
         try {
             helper = SignedRequestsHelper.getInstance(ENDPOINT, ACCESS_KEY_ID, SECRET_KEY);
