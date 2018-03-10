@@ -79,48 +79,5 @@ public class AuthActivity extends AppCompatActivity {
         }
     }
 
-    public void Googlelogin(View view) {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        Toast.makeText(AuthActivity.this, "Creating Account...", Toast.LENGTH_SHORT).show();
-        startActivity(intent);
-        finish();
-    }
+
 }
-//    public static class MyFragment extends Fragment
-//    {
-//        public MyFragment()
-//        {}
-//
-//
-//        @Override
-//        public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
-//           // return super.onCreateView(inflater, container, savedInstanceState);
-//           // return inflater.inflate(R.layout.tab1signup,container,false)
-//            TextView textView=new TextView(getActivity());
-//            textView.setText("hello world!");
-//            textView.setGravity(Gravity.CENTER);
-//            return textView;
-//        }
-//    }
-//
-//    private class MyPageAdapter extends FragmentStatePagerAdapter{
-//
-//        public MyPageAdapter(FragmentManager fm) {
-//            super(fm);
-//        }
-//
-//        @Override
-//        public Fragment getItem(int position) {
-//            AuthActivity.MyFragment myFragment=new AuthActivity.MyFragment();
-//            return myFragment;
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return 2;
-//        }
-//
-//        @Override
-//        public CharSequence getPageTitle(int position) {
-//            return super.getPageTitle(position);
-//        }
