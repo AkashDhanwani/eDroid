@@ -40,7 +40,6 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-
         AdapterProductsRes.MyHolder myHolder=(AdapterProductsRes.MyHolder)holder;
         ProductsRes products=data.get(position);
         myHolder.datayugeproTitlee.setText(products.getTitle());

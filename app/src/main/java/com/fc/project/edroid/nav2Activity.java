@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class nav2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -57,18 +58,20 @@ public class nav2Activity extends AppCompatActivity
         Intent myIntent = getIntent();
         if (myIntent.hasExtra("myExtra")){
             query=myIntent.getStringExtra("myExtra"); }
+            viewPager.setOffscreenPageLimit(3);
 
             btnSearch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     query=etsearch.getText().toString();
+                    flipkartFragment.refresh(query);
+                    amazonFragment.refresh(query);
+                    ebayFragment.refresh(query);
+                    datayugeFragment.refresh(query);
+                    Toast.makeText(nav2Activity.this, "The query is "+query, Toast.LENGTH_SHORT).show();
 
                 }
             });
-
-
-
-
         }
     @Override
     public void onBackPressed() {
@@ -127,7 +130,7 @@ public class nav2Activity extends AppCompatActivity
     }
 
     private class SectionsPagerAdapter extends FragmentPagerAdapter {
-        String titles[]=new String[]{"flipkart","amazon","ebay","others"};
+        String titles[]=new String[]{"flipkart","amazon","ebay","other"};
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);

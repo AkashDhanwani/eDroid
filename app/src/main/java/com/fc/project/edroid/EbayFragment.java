@@ -76,6 +76,24 @@ else {
 
     }
 
+    public void refresh(String query) {
+        data.clear();
+
+        String product = query.toString();
+        if (product.length() == 0) {
+
+            tvList.setText(query);
+        }
+        else {
+            EbayFragment.Task2 t1 = new EbayFragment.Task2();
+            t1.execute("http://svcs.ebay.com/services/search/FindingService/v1?" +
+                    "OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=" + Appid + "" +
+                    "&GLOBAL-ID=EBAY-IN&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&sortOrder=BestMatch&keywords=" + product);
+
+        }
+
+    }
+
 
     class Task2 extends AsyncTask<String,Void,String>
     {
@@ -154,6 +172,7 @@ else {
             recyclerView=view.findViewById(R.id.recyclerView);
             recyclerView.setLayoutManager(new VegaLayoutManager());
             adapterProducts=new AdapterProductsEba(getActivity(),data);
+            recyclerView.setOnFlingListener(null);
             adapterProducts.notifyDataSetChanged();
             recyclerView.invalidate();
 

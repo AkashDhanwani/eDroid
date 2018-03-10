@@ -53,14 +53,22 @@ public class DatayugeFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_datayuge,container,false);
 
-
-
                 String product = query;
 
                 Task2 t1 = new Task2();
                 t1.execute("http://price-api.datayuge.com/api/v1/compare/search?product="+product+"&api_key="+Appid);
 
         return view;
+    }
+
+    public void refresh(String query) {
+
+        data123.clear();
+        String product = query;
+
+        Task2 t1 = new Task2();
+        t1.execute("http://price-api.datayuge.com/api/v1/compare/search?product="+product+"&api_key="+Appid);
+
     }
 
 
@@ -127,6 +135,7 @@ public class DatayugeFragment extends Fragment {
             recyclerView=view.findViewById(R.id.recyclerView);
             recyclerView.setLayoutManager(new VegaLayoutManager());
             adapterProducts=new AdapterProductsRes(getActivity(),data123);
+            recyclerView.setOnFlingListener(null);
             adapterProducts.notifyDataSetChanged();
             recyclerView.invalidate();
 
