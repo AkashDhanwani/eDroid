@@ -39,18 +39,18 @@
         app:layout_constraintVertical_bias="0.126">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/ed_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-
             android:drawableRight="@android:drawable/ic_dialog_email"
             android:drawableTint="#000c40"
             android:fontFamily="monospace"
-            android:hint="Email Id"
+            android:hint="@string/email"
+            android:textColorHint="@color/white"
             android:textSize="13sp"
             android:inputType="textEmailAddress"
             android:textColor="#151313"
@@ -78,7 +78,7 @@
         app:passwordToggleEnabled="true">
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/ed_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -87,7 +87,8 @@
             android:layout_marginTop="8dp"
             android:textColor="#151313"
             android:fontFamily="monospace"
-            android:hint="password"
+            android:hint="@string/pass"
+            android:textColorHint="@color/white"
             android:inputType="textPassword"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -101,7 +102,7 @@
 
 
     <com.dd.processbutton.iml.ActionProcessButton
-        android:id="@+id/FireBaseLogin"
+        android:id="@+id/btnFirebaseLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -131,7 +132,7 @@
         custom:pb_textProgress="Logging You in.." />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/forgot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -143,10 +144,11 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
+        android:onClick="forgot"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FireBaseLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/btnFirebaseLogin" />
 
     <TextView
         android:id="@+id/textView3"
@@ -161,18 +163,18 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/actionProcessButton"
+        app:layout_constraintBottom_toTopOf="@+id/btnFirebaseSignUp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.dd.processbutton.iml.ActionProcessButton
-        android:id="@+id/actionProcessButton"
+        android:id="@+id/btnFirebaseSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:onClick="tryBtn"
+        android:onClick="firebaseSignUp"
         android:text="@string/create"
         android:textColor="@color/black"
         android:textSize="14sp"

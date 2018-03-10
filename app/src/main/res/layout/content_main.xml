@@ -37,6 +37,7 @@
             android:layout_marginLeft="22dp"
             android:visibility="invisible"
             android:fontFamily="monospace"
+            android:onClick="revealEditText"
             android:hint="@string/type"
             android:textSize="15sp" />
 

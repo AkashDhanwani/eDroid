@@ -28,4 +28,9 @@
     <string name="forgot">Forgot Password?</string>
     <string name="user">New User? continue with:</string>
     <string name="create">Create New Account!</string>
+    <string name="email">Email Address</string>
+    <string name="pass">Password</string>
+    <string name="action_settingss">Settings|Change Password</string>
+    <string name="changepass">Change Password</string>
+    <string name="logout">Logout</string>
 </resources>
