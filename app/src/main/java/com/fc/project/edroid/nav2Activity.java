@@ -58,7 +58,7 @@ public class nav2Activity extends AppCompatActivity
         Intent myIntent = getIntent();
         if (myIntent.hasExtra("myExtra")){
             query=myIntent.getStringExtra("myExtra"); }
-            viewPager.setOffscreenPageLimit(3);
+            viewPager.setOffscreenPageLimit(4);
 
             btnSearch.setOnClickListener(new View.OnClickListener() {
                 @Override

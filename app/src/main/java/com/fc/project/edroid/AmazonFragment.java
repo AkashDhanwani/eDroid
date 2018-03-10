@@ -231,10 +231,13 @@ View view,view2;
             recyclerView.setLayoutManager(new VegaLayoutManager());
             adapterProducts=new AdapterProductsAma(getActivity(),data);
             recyclerView.setOnFlingListener(null);
-            adapterProducts.notifyDataSetChanged();
+            if(getActivity()!=null){
+                adapterProducts.notifyDataSetChanged();
+                recyclerView.setAdapter(adapterProducts);
+            }
+
             recyclerView.invalidate();
 
-            recyclerView.setAdapter(adapterProducts);
         }
     }
     private static String getValue(String tag, Element element) {

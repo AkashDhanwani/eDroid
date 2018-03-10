@@ -134,12 +134,18 @@ public class DatayugeFragment extends Fragment {
             //tvList.setText();
             recyclerView=view.findViewById(R.id.recyclerView);
             recyclerView.setLayoutManager(new VegaLayoutManager());
-            adapterProducts=new AdapterProductsRes(getActivity(),data123);
-            recyclerView.setOnFlingListener(null);
-            adapterProducts.notifyDataSetChanged();
+
+
+            if(getActivity()!=null){
+                adapterProducts=new AdapterProductsRes(getActivity(),data123);
+
+                adapterProducts.notifyDataSetChanged();
+        recyclerView.setAdapter(adapterProducts);  }
+
+
+        recyclerView.setOnFlingListener(null);
             recyclerView.invalidate();
 
-            recyclerView.setAdapter(adapterProducts);
 
         }
     }
@@ -157,11 +163,8 @@ public class DatayugeFragment extends Fragment {
                 jsonstr+=line +"\n";
             }
         } catch (MalformedURLException e) {
-            Toast.makeText(getActivity(), "URL Malformed", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         } catch (IOException e) {
-            Toast.makeText(getActivity(),
-                    "Connection IOException", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
         return jsonstr;

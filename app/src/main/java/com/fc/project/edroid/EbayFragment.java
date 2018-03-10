@@ -136,7 +136,7 @@ else {
                     JSONArray search=f1.getJSONArray("searchResult");
                     JSONObject f2=search.getJSONObject(0);
                     JSONArray item=f2.getJSONArray("item");
-                    for(int i=0;i<5;i++) {
+                    for(int i=0;i<10;i++) {
                         JSONObject f3 = item.getJSONObject(i);
                         JSONArray title = f3.getJSONArray("title");
                         JSONArray itemlink = f3.getJSONArray("viewItemURL");
@@ -171,9 +171,12 @@ else {
             //tvList.setText(s);
             recyclerView=view.findViewById(R.id.recyclerView);
             recyclerView.setLayoutManager(new VegaLayoutManager());
+            if(getActivity()!=null)
+            {
             adapterProducts=new AdapterProductsEba(getActivity(),data);
+            adapterProducts.notifyDataSetChanged(); }
             recyclerView.setOnFlingListener(null);
-            adapterProducts.notifyDataSetChanged();
+
             recyclerView.invalidate();
 
             recyclerView.setAdapter(adapterProducts);

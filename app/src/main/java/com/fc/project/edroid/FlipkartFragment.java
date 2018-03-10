@@ -139,10 +139,13 @@ public class FlipkartFragment extends Fragment {
 
             recyclerView=view.findViewById(R.id.recyclerView);
             recyclerView.setLayoutManager(new VegaLayoutManager());
-            adapterProducts=new AdapterProducts(getActivity(),data);
+            if (getActivity() != null) {
+                adapterProducts=new AdapterProducts(getActivity(),data);
+                adapterProducts.notifyDataSetChanged();
+
+            }
             recyclerView.setAdapter(adapterProducts);
             recyclerView.setOnFlingListener(null);
-            adapterProducts.notifyDataSetChanged();
             recyclerView.invalidate();
 
 
