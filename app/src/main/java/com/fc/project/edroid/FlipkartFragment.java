@@ -44,17 +44,23 @@ public class FlipkartFragment extends Fragment {
         // Required empty public constructor
     }
 
-
-        @Override
-        public View onCreateView (LayoutInflater inflater, ViewGroup container,
+     public View onCreateView (LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState){
             view = inflater.inflate(R.layout.fragment_flipkart, container, false);
 
             String product = (String) query;
             Task1 t1 = new Task1();
-            t1.execute("https://affiliate-api.flipkart.net/affiliate/1.0/search.json?query=" + product + "&resultCount=5");
+            t1.execute("https://affiliate-api.flipkart.net/affiliate/1.0/search.json?query=" + product + "&resultCount=10");
             return view;
         }
+
+    public void refresh(String query) {
+            data.clear();
+        String product = query;
+        Task1 t1 = new Task1();
+        t1.execute("https://affiliate-api.flipkart.net/affiliate/1.0/search.json?query=" + product + "&resultCount=10");
+        Toast.makeText(getActivity(), "This is refresh method", Toast.LENGTH_SHORT).show();
+    }
 
 
 
@@ -133,11 +139,16 @@ public class FlipkartFragment extends Fragment {
 
             recyclerView=view.findViewById(R.id.recyclerView);
             recyclerView.setLayoutManager(new VegaLayoutManager());
-            adapterProducts=new AdapterProducts(getActivity(),data);
-            adapterProducts.notifyDataSetChanged();
+            if (getActivity() != null) {
+                adapterProducts=new AdapterProducts(getActivity(),data);
+                adapterProducts.notifyDataSetChanged();
+
+            }
+            recyclerView.setAdapter(adapterProducts);
+            recyclerView.setOnFlingListener(null);
             recyclerView.invalidate();
 
-            recyclerView.setAdapter(adapterProducts);
+
         }
     }
 

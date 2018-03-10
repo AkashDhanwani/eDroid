@@ -131,6 +131,20 @@ View view,view2;
         t1.execute(requestUrl);
     }
 
+    public void refresh(String query) {
+        try {
+            helper = SignedRequestsHelper.getInstance(ENDPOINT, ACCESS_KEY_ID, SECRET_KEY);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        data.clear();
+
+        product = query.toString();
+        i=1;
+        callPages(i,product);
+
+    }
+
     class Task1 extends AsyncTask<String,Void,String>
     {
         String jsonstr="";
@@ -172,17 +186,21 @@ View view,view2;
 
                 NodeList nList = document.getElementsByTagName("Item");
                 NodeList nList2 = document.getElementsByTagName("MediumImage");
+                NodeList nList3 = document.getElementsByTagName("OfferSummary");
+
 
                 //for multiple elements use for loop
                 for(int i=0;i<nList.getLength();i++) {
                     Node node = nList.item(i);
                     Node nodeimage=nList2.item(i);
+                    Node nodeprice=nList3.item(i);
                     ProductsAma products=new ProductsAma();
                     if (node.getNodeType() == Node.ELEMENT_NODE) {
                         Element element2 = (Element) node;
                         Element element3 = (Element) nodeimage;
+                        Element element4 = (Element) nodeprice;
                         products.title=getValue("Title",element2);
-                        products.price=getValue("FormattedPrice",element2);
+                        products.price=getValue("FormattedPrice",element4);
                         products.produrl=getValue("DetailPageURL",element2);
                         products.imgurl=getValue("URL",element3);
 
@@ -212,10 +230,14 @@ View view,view2;
             recyclerView=view.findViewById(R.id.recyclerView);
             recyclerView.setLayoutManager(new VegaLayoutManager());
             adapterProducts=new AdapterProductsAma(getActivity(),data);
-            adapterProducts.notifyDataSetChanged();
+            recyclerView.setOnFlingListener(null);
+            if(getActivity()!=null){
+                adapterProducts.notifyDataSetChanged();
+                recyclerView.setAdapter(adapterProducts);
+            }
+
             recyclerView.invalidate();
 
-            recyclerView.setAdapter(adapterProducts);
         }
     }
     private static String getValue(String tag, Element element) {

@@ -76,6 +76,24 @@ else {
 
     }
 
+    public void refresh(String query) {
+        data.clear();
+
+        String product = query.toString();
+        if (product.length() == 0) {
+
+            tvList.setText(query);
+        }
+        else {
+            EbayFragment.Task2 t1 = new EbayFragment.Task2();
+            t1.execute("http://svcs.ebay.com/services/search/FindingService/v1?" +
+                    "OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=" + Appid + "" +
+                    "&GLOBAL-ID=EBAY-IN&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&sortOrder=BestMatch&keywords=" + product);
+
+        }
+
+    }
+
 
     class Task2 extends AsyncTask<String,Void,String>
     {
@@ -118,7 +136,7 @@ else {
                     JSONArray search=f1.getJSONArray("searchResult");
                     JSONObject f2=search.getJSONObject(0);
                     JSONArray item=f2.getJSONArray("item");
-                    for(int i=0;i<5;i++) {
+                    for(int i=0;i<10;i++) {
                         JSONObject f3 = item.getJSONObject(i);
                         JSONArray title = f3.getJSONArray("title");
                         JSONArray itemlink = f3.getJSONArray("viewItemURL");
@@ -153,8 +171,12 @@ else {
             //tvList.setText(s);
             recyclerView=view.findViewById(R.id.recyclerView);
             recyclerView.setLayoutManager(new VegaLayoutManager());
+            if(getActivity()!=null)
+            {
             adapterProducts=new AdapterProductsEba(getActivity(),data);
-            adapterProducts.notifyDataSetChanged();
+            adapterProducts.notifyDataSetChanged(); }
+            recyclerView.setOnFlingListener(null);
+
             recyclerView.invalidate();
 
             recyclerView.setAdapter(adapterProducts);

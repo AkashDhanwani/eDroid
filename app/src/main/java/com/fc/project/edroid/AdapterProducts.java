@@ -29,6 +29,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
    Products current;
    int currentpos=0;
 
+
     public AdapterProducts(Context context, List<Products>data) {
         this.context = context;
         this.inflater =LayoutInflater.from(context);

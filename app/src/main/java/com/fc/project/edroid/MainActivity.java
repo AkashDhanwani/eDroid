@@ -339,11 +339,10 @@ public class MainActivity extends AppCompatActivity
                     jsonstr+=line +"\n";
                 }
             } catch (MalformedURLException e) {
-                Toast.makeText(MainActivity.this, "URL Malformed", Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(MainActivity.this, "URL Malformed", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             } catch (IOException e) {
-                Toast.makeText(MainActivity.this,
-                        "Connection IOException", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(MainActivity.this,"Connection IOException", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
             if(jsonstr!=null){
@@ -358,41 +357,18 @@ public class MainActivity extends AppCompatActivity
                         JSONObject quote1=quote.getJSONObject("imageUrls");
                         JSONObject quote2=quote.getJSONObject("maximumRetailPrice");
                         JSONObject quote3=quote.getJSONObject("flipkartSpecialPrice");
-                       // JSONObject quote4=quote.getJSONObject("inStock");
+                        // JSONObject quote4=quote.getJSONObject("inStock");
                         //  JSONObject quote1=secondArray.getJSONObject("imageUrls");
-                        if(resultSet==null) {
-                            //    resultSet=quote.getString("title");
-                            products.title = quote.getString("title");
-                          //  products.desc=quote.getString("productDescription");
-                            products.imgUrl=quote1.getString("400x400");
-                            products.price=quote2.getString("amount");
-                            products.flipkartSellingPrice=quote3.getString("amount");
-                            //products.inStock=quote4.getString("amount");
-                            data.add(products);
-//                            data.notify();
-                            //resultSet="Product Title is:"+line+"\n"+"Description:"+desc+"\n"+"ImageUrl"+imgurl;
-                        }
-                        else
-                        {
-//                            line = quote.getString("title");
-//                            desc=quote.getString("productDescription");
-//                            imgurl=quote1.getString("200x200");
-//
-//                            resultSet=resultSet+"Product Title is:"+line+"\n"+"Description:"+desc+"\n"+"ImageUrl"+imgurl;
-                            //data.remove(products);
-                            products.title = quote.getString("title");
-                          //  products.desc=quote.getString("productDescription");
-                            products.imgUrl=quote1.getString("400x400");
-                            products.price=quote2.getString("amount");
-                            products.flipkartSellingPrice=quote3.getString("amount");
-                           // products.inStock=quote4.getString("amount");
-                            //data.removeAll(data);
-                            data.add(products);
-                        }
-                        if(resultSet==null)
-                            resultSet=quote.getString("productDescription");
-                        else
-                            resultSet=resultSet+quote.getString("productDescription");
+//                        if(resultSet==null) {
+                        //    resultSet=quote.getString("title");
+                        products.title = quote.getString("title");
+                        products.produrl=quote.getString("productUrl");
+                        //  products.desc=quote.getString("productDescription");
+                        products.imgUrl=quote1.getString("400x400");
+                        products.price=quote2.getString("amount");
+                        products.flipkartSellingPrice=quote3.getString("amount");
+                        //products.inStock=quote4.getString("amount");
+                        data.add(products);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
