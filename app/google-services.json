@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "90602473348",
+    "firebase_url": "https://edroid-ae0e2.firebaseio.com",
+    "project_id": "edroid-ae0e2",
+    "storage_bucket": "edroid-ae0e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:90602473348:android:debf0a9ff1b30a1e",
+        "android_client_info": {
+          "package_name": "com.fc.project.edroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "90602473348-dcllfrfcbakqqe4ba3cbv87c93o3hl1c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fc.project.edroid",
+            "certificate_hash": "00d5caed6cd33ac5a34e807f77d0ec0e82bfd77e"
+          }
+        },
+        {
+          "client_id": "90602473348-554is5g4abc91a5qjch20165ic9u3vol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDslD3FDLxRW9HwKq4XfByFCSYt5XuIO7c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "90602473348-554is5g4abc91a5qjch20165ic9u3vol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
