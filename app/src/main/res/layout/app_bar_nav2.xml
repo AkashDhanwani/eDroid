@@ -16,7 +16,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             app:popupTheme="@style/AlertDialog.AppCompat.Light" >
 
             <TextView
@@ -31,7 +31,7 @@
 
 
             <EditText
-                android:background="@drawable/edit"
+
                 android:id="@+id/Etsearch"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
@@ -54,7 +54,7 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             app:tabIndicatorColor="@color/black"
             app:tabSelectedTextColor="@color/black">
 

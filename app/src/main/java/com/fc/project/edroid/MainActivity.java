@@ -74,7 +74,7 @@ MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+//TODO extract (categorySpeciificInfoV1,detailedSpecs)
         viewPager=findViewById(R.id.viewPager);
         ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(this);
         viewPager.setAdapter(viewPagerAdapter);
@@ -141,7 +141,7 @@ MainActivity extends AppCompatActivity
                 else
                 {
                     dataa=serachItem.getText().toString();
-                    Toast.makeText(MainActivity.this, "hello"+dataa, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Searching for "+dataa, Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(getApplicationContext(),nav2Activity.class);
                     intent.putExtra("myExtra",dataa);
                     startActivity(intent);
@@ -276,6 +276,8 @@ MainActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_share) {
+             Intent intent=new Intent(getApplicationContext(),DetailInfoActivity.class);
+             startActivity(intent);
 
         } else if (id == R.id.nav_send) {
 
