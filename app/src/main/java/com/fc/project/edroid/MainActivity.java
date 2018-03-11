@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.stone.vega.library.VegaLayoutManager;
 
 import org.json.JSONArray;
@@ -47,7 +48,8 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity
+public class
+MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     //Button btnSearch, btnAmazon, btnEbay, btnDatayuge;
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity
     EditText serachItem;
     String dataa,res;
     ViewPager viewPager;
+    FirebaseAuth mAuth;
     private RecyclerView recyclerView;
     private AdapterProducts adapterProducts;
     String[] productnames={"iphone","dell","nokia","samsung"};
@@ -79,7 +82,7 @@ public class MainActivity extends AppCompatActivity
         timer.scheduleAtFixedRate(new MyTimerTask(),2000,4000);
         btnSearch=findViewById(R.id.btnsearch);
         btnSpeak=findViewById(R.id.btnspeak);
-
+        mAuth=FirebaseAuth.getInstance();
         textView=findViewById(R.id.textView);
         String text="<font color=#3F51B5>E</font><font color=#f50808>d</font><font color=#ff6d40>r</font><font color=#3F51B5>o</font>" +
                 "<font color=#08f563>i</font><font color=#f50808>d</font>";
@@ -106,36 +109,12 @@ public class MainActivity extends AppCompatActivity
 
         } else
             Toast.makeText(MainActivity.this,
-                    "Connected to Internet Internet", Toast.LENGTH_SHORT).show();
+                    "Good to see your Internet is working well!", Toast.LENGTH_SHORT).show();
 
 
 
 
 
-//
-//        btnSearch.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-////                String product = etProduct.getText().toString();
-////                if (product.length() == 0) {
-////                    etProduct.setError("Please a Product name");
-////                    etProduct.requestFocus();
-////                    return;
-////                }
-//
-//                //TODO onClick recyclerView is working perfectly fine.
-//                //TODO as of now i am sending it to another activity.
-////
-////                Task1 t1 = new Task1();
-////                t1.execute("https://affiliate-api.flipkart.net/affiliate/1.0/search.json?query="+product+"&resultCount=5");
-//
-//
-//                Intent intent=new Intent(getApplicationContext(),AmazonActivity.class);
-//                Toast.makeText(MainActivity.this, "Amazon Activity", Toast.LENGTH_SHORT).show();
-//                startActivity(intent);
-//            }
-//        });
         btnSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -185,6 +164,10 @@ public class MainActivity extends AppCompatActivity
 
 
     }//end of onCreate
+
+    public void revealEditText(View view) {
+        revealEditText();
+    }
 
 
     public class MyTimerTask extends TimerTask {
@@ -268,9 +251,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -281,19 +264,29 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+//        if (id == R.id.nav_camera) {
+//            // Handle the camera action
+//        } else if (id == R.id.nav_gallery) {
+//
+//        } else if (id == R.id.nav_slideshow) {
+//
+//        }
+         if (id == R.id.nav_manage) {
+            Intent intent=new Intent(getApplicationContext(),ForgotPasswordActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
         }
+        else if(id==R.id.nav_logout)
+         {
+             mAuth.signOut();
+             Intent intent=new Intent(getApplicationContext(),AuthActivity.class);
+             startActivity(intent);
+             finish();
+         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

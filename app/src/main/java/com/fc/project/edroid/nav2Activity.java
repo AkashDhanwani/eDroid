@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class nav2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -27,6 +29,7 @@ public class nav2Activity extends AppCompatActivity
     Button btnSearch;
     EditText etsearch;
     String query;
+    FirebaseAuth mAuth;
     EbayFragment ebayFragment;
     FlipkartFragment flipkartFragment;
     AmazonFragment amazonFragment;
@@ -41,6 +44,7 @@ public class nav2Activity extends AppCompatActivity
        etsearch=findViewById(R.id.Etsearch);
         setSupportActionBar(toolbar);
         viewPager=(ViewPager)findViewById(R.id.viewpager);
+        mAuth=FirebaseAuth.getInstance();
         mSectionsPagerAdapter=new SectionsPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(mSectionsPagerAdapter);
         TabLayout tabLayout=(TabLayout)findViewById(R.id.tabs);
@@ -55,6 +59,7 @@ public class nav2Activity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        query=etsearch.getText().toString();
         Intent myIntent = getIntent();
         if (myIntent.hasExtra("myExtra")){
             query=myIntent.getStringExtra("myExtra"); }
@@ -63,13 +68,14 @@ public class nav2Activity extends AppCompatActivity
             btnSearch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    query=etsearch.getText().toString();
-                    flipkartFragment.refresh(query);
-                    amazonFragment.refresh(query);
-                    ebayFragment.refresh(query);
-                    datayugeFragment.refresh(query);
-                    Toast.makeText(nav2Activity.this, "The query is "+query, Toast.LENGTH_SHORT).show();
-
+//                    query=etsearch.getText().toString();
+                    if(!query.equals("")) {
+                        flipkartFragment.refresh(query);
+                        amazonFragment.refresh(query);
+                        ebayFragment.refresh(query);
+                        datayugeFragment.refresh(query);
+                        Toast.makeText(nav2Activity.this, "The query is " + query, Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }
@@ -98,9 +104,12 @@ public class nav2Activity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//
+////            return true;
+//            Intent intent=new Intent(getApplicationContext(),ForgotPasswordActivity.class);
+//            startActivity(intent);
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -111,19 +120,33 @@ public class nav2Activity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+//        if (id == R.id.nav_camera) {
+//            // Handle the camera action
+//            Intent intent=new Intent(getApplicationContext(),ForgotPasswordActivity.class);
+//            startActivity(intent);
+//            finish();
+//        } else if (id == R.id.nav_gallery) {
+//
+//        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
+        //}
+         if (id == R.id.nav_manage) {
+             Intent intent=new Intent(getApplicationContext(),ForgotPasswordActivity.class);
+             startActivity(intent);
+             finish();
 
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
         }
+        else if(id==R.id.nav_logout)
+         {
+             mAuth.signOut();
+             Intent intent=new Intent(getApplicationContext(),AuthActivity.class);
+             startActivity(intent);
+             finish();
+         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
