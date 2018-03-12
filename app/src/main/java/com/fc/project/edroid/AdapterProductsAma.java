@@ -3,6 +3,7 @@ package com.fc.project.edroid;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +50,11 @@ public class AdapterProductsAma extends RecyclerView.Adapter<RecyclerView.ViewHo
         //myHolder.AmazonproSellingPrice.setText("\u20B9"+products.getFlipkartSellingPrice());
         // myHolder.FlipkartproInStock.setText(products.getInStock());
         Glide.with(context).load(products.getImgUrl()).into(myHolder.AmazonprooImg);
+        myHolder.title=products.getTitle();
+        myHolder.imgurl=products.getImgUrl();
         myHolder.produrl=products.getProdUrl();
+        myHolder.specs=products.getSpecs();
+
 
     }
 
@@ -62,7 +67,8 @@ public class AdapterProductsAma extends RecyclerView.Adapter<RecyclerView.ViewHo
     {
 
         ImageView imageView,AmazonprooImg;
-        String produrl;
+        String[] specs=new String[5];
+        String title,imgurl,desc,produrl;
         TextView proDesc,proTitle,AmazonproTitlee,AmazonproDescc,AmazonproPrice,AmazonproSellingPrice,FlipkartproInStock;
         public MyHolder(View itemView) {
             super(itemView);
@@ -76,16 +82,23 @@ public class AdapterProductsAma extends RecyclerView.Adapter<RecyclerView.ViewHo
            // AmazonproSellingPrice=itemView.findViewById(R.id.AmazonproSellingPrice);
           //  AmazonproPrice.setPaintFlags(AmazonproPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             //   FlipkartproInStock=itemView.findViewById(R.id.FlipkartproInStock);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                     Uri uri = Uri.parse(produrl); // missing 'http://' will cause crashed
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    //Uri uri = Uri.parse(produrl); // missing 'http://' will cause crashed
+                    Bundle bundle=new Bundle();
+                    bundle.putString("title", title);
+                    bundle.putString("produrl",produrl);
+                    bundle.putString("imgurl",imgurl);
+                    for(int i=0;i<5;i++){
+                        bundle.putStringArray("specs",specs); }
+
+                    //    bundle.putString("desc",desc);
+                    Intent intent = new Intent(context, DetailInfoActivity.class);
+                    intent.putExtras(bundle);
                     context.startActivity(intent);
                 }
             });
-
 
         }
     }

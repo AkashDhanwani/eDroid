@@ -68,7 +68,7 @@ public class nav2Activity extends AppCompatActivity
             btnSearch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    query=etsearch.getText().toString();
+                    query=etsearch.getText().toString();
                     if(!query.equals("")) {
                         flipkartFragment.refresh(query);
                         amazonFragment.refresh(query);

@@ -187,6 +187,8 @@ View view,view2;
                 NodeList nList = document.getElementsByTagName("Item");
                 NodeList nList2 = document.getElementsByTagName("MediumImage");
                 NodeList nList3 = document.getElementsByTagName("OfferSummary");
+                NodeList nList4 = document.getElementsByTagName("ItemAttributes");
+
 
 
                 //for multiple elements use for loop
@@ -194,15 +196,24 @@ View view,view2;
                     Node node = nList.item(i);
                     Node nodeimage=nList2.item(i);
                     Node nodeprice=nList3.item(i);
+                    Node nodespecs=nList4.item(i);
+
                     ProductsAma products=new ProductsAma();
                     if (node.getNodeType() == Node.ELEMENT_NODE) {
                         Element element2 = (Element) node;
+                        Element element5 = (Element) nodespecs;
+
+
+                        for(int j=0;j<4;j++){
+                            products.specs[j]=getValue("Feature",element5, j);
+
+                        }
                         Element element3 = (Element) nodeimage;
                         Element element4 = (Element) nodeprice;
-                        products.title=getValue("Title",element2);
-                        products.price=getValue("FormattedPrice",element4);
-                        products.produrl=getValue("DetailPageURL",element2);
-                        products.imgurl=getValue("URL",element3);
+                        products.title=getValue("Title",element2, 0);
+                        products.price=getValue("FormattedPrice",element4, 0);
+                        products.produrl=getValue("DetailPageURL",element2, 0);
+                        products.imgurl=getValue("URL",element3, 0);
 
                         //getValue() is method defined in the end which passes the attribute and return data that we want
                         //resultSet=resultSet+"\n\n\tTitle: "+title+"\n\tprice: "+price+"\n\tproduct url :"+produrl+"\n\timage url :"+imgurl;
@@ -240,8 +251,8 @@ View view,view2;
 
         }
     }
-    private static String getValue(String tag, Element element) {
-        NodeList nodeList = element.getElementsByTagName(tag).item(0).getChildNodes();
+    private static String getValue(String tag, Element element, int i) {
+        NodeList nodeList = element.getElementsByTagName(tag).item(i).getChildNodes();
         Node node = nodeList.item(0);
         return node.getNodeValue();
     }

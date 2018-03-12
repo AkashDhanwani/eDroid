@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,12 +53,15 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
       //  current=data.get(position);
         Products products=data.get(position);
         myHolder.FlipkartproTitlee.setText(products.getTitle());
-        myHolder.FlipkartproDescc.setText(products.getDesc());
         myHolder.FlipkartproPrice.setText("\u20B9"+products.getPrice());
         myHolder.FlipkartproSellingPrice.setText("\u20B9"+products.getFlipkartSellingPrice());
-       // myHolder.FlipkartproInStock.setText(products.getInStock());
         Glide.with(context).load(products.getImgUrl()).into(myHolder.FlipkartprooImg);
+
+        myHolder.title=products.getTitle();
+        myHolder.imgurl=products.getImgUrl();
         myHolder.produrl=products.getProdUrl();
+        myHolder.desc=products.getDesc();
+        myHolder.specs=products.getSpecs();
 
     }
 
@@ -68,7 +72,8 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     class MyHolder extends RecyclerView.ViewHolder
     {
-        String produrl;
+        String produrl,imgurl,title,desc;
+        String[] specs=new String[5];
         ImageView imageView,FlipkartprooImg;
         TextView proDesc,proTitle,FlipkartproTitlee,FlipkartproDescc,FlipkartproPrice,FlipkartproSellingPrice,FlipkartproInStock;
         public MyHolder(View itemView) {
@@ -83,11 +88,20 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
             FlipkartproSellingPrice=itemView.findViewById(R.id.FlipkartproSellingPrice);
             FlipkartproPrice.setPaintFlags(FlipkartproPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);     //?
          //   FlipkartproInStock=itemView.findViewById(R.id.FlipkartproInStock);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Uri uri = Uri.parse(produrl); // missing 'http://' will cause crashed
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    //Uri uri = Uri.parse(produrl); // missing 'http://' will cause crashed
+                    Bundle bundle=new Bundle();
+                    bundle.putString("title", title);
+                    bundle.putString("produrl",produrl);
+                    bundle.putString("imgurl",imgurl);
+                    bundle.putString("desc",desc);
+                    for(int i=0;i<5;i++){
+                    bundle.putStringArray("specs",specs); }
+                    Intent intent = new Intent(context, DetailInfoActivity.class);
+                    intent.putExtras(bundle);
                     context.startActivity(intent);
                 }
             });

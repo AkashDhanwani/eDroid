@@ -71,6 +71,7 @@ public class FlipkartFragment extends Fragment {
         String jsonstr="";
         String line= "";
         String resultSet=null;
+        String[] specs=new String[5];
 
         @Override
         protected String doInBackground(String... strings) {
@@ -109,6 +110,11 @@ public class FlipkartFragment extends Fragment {
                         Products products=new Products();
                         JSONObject firstarray = array.getJSONObject(i);
                         JSONObject quote = firstarray.getJSONObject("productBaseInfoV1");
+                        JSONObject specs1 = firstarray.getJSONObject("categorySpecificInfoV1");
+                        JSONArray detailedspecs = specs1.getJSONArray("detailedSpecs");
+                        for(int s = 0; s<5; s++){
+                            products.specs[s]=detailedspecs.getString(s);
+                        }
                         JSONObject quote1=quote.getJSONObject("imageUrls");
                         JSONObject quote2=quote.getJSONObject("maximumRetailPrice");
                         JSONObject quote3=quote.getJSONObject("flipkartSpecialPrice");
@@ -118,7 +124,7 @@ public class FlipkartFragment extends Fragment {
                             //    resultSet=quote.getString("title");
                             products.title = quote.getString("title");
                             products.produrl=quote.getString("productUrl");
-                            //  products.desc=quote.getString("productDescription");
+                            products.desc=quote.getString("productDescription");
                             products.imgUrl=quote1.getString("400x400");
                             products.price=quote2.getString("amount");
                             products.flipkartSellingPrice=quote3.getString("amount");

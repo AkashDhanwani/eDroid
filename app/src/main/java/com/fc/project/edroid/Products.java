@@ -8,20 +8,21 @@ public class Products  {
     public String desc;
     public String produrl;
     public String price;
+    public String[] specs=new String[5];
     public String flipkartSellingPrice;
     public String inStock;
     public Products() {
 
     }
 
-    public Products(String title, String imgUrl, String desc,String price,String flipkartSellingPrice,String inStock) {
+    public Products(String title, String imgUrl, String desc,String price,String flipkartSellingPrice,String specs[]) {
         this.title = title;
         this.imgUrl = imgUrl;
         this.desc = desc;
         this.price=price;
         this.flipkartSellingPrice=flipkartSellingPrice;
         this.inStock=inStock;
-
+        this.specs=specs;
     }
 
     public String getTitle() {
@@ -39,6 +40,8 @@ public class Products  {
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
+
+    public String[] getSpecs(){ return specs; }
 
 
     public String getProdUrl() {

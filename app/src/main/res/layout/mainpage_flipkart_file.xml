@@ -41,16 +41,15 @@
 
             <TextView
                 android:id="@+id/FlipkartproDescc"
-                android:padding="5dp"
-                android:textSize="13sp"
-                android:layout_toRightOf="@+id/FlipkartprooImg"
-                android:text="dezcxvsdfsdf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/FlipkartproTitlee"
+                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/FlipkartproTitlee"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_toRightOf="@+id/FlipkartprooImg"
+                android:padding="5dp"
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/FlipkartproPriceWords"
