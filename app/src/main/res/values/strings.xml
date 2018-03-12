@@ -35,4 +35,6 @@
     <string name="logout">Logout</string>
     <string name="buy">Buy Now</string>
     <string name="shop">Compare Prices</string>
+    <string name="share">Share</string>
+    <string name="img">Loading image</string>
 </resources>

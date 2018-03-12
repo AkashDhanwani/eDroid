@@ -103,6 +103,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     Intent intent = new Intent(context, DetailInfoActivity.class);
                     intent.putExtras(bundle);
                     context.startActivity(intent);
+
                 }
             });
 

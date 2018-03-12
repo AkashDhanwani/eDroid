@@ -11,6 +11,7 @@ public class Products  {
     public String[] specs=new String[5];
     public String flipkartSellingPrice;
     public String inStock;
+
     public Products() {
 
     }
