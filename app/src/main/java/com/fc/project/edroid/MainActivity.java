@@ -75,6 +75,7 @@ MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 //TODO extract (categorySpeciificInfoV1,detailedSpecs)
+        //TODO handle nullPointerEXception
         viewPager=findViewById(R.id.viewPager);
         ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(this);
         viewPager.setAdapter(viewPagerAdapter);

@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 public class DetailInfoActivity extends AppCompatActivity {
 TextView tvTitle,tvDesc;
 ImageView ivimg;
-Button btnBuy,btnCompare,btnShare;
+Button btnBuy,btnShare;
 String[] specs=new String[5];
 Bundle bundle;
 Uri uri;
@@ -29,7 +29,6 @@ String res;
         tvDesc=findViewById(R.id.tvDesc);
         ivimg=findViewById(R.id.ivimg);
         btnBuy=findViewById(R.id.btnBuy);
-        btnCompare=findViewById(R.id.btncompare);
         btnShare=findViewById(R.id.btnShare);
         bundle=getIntent().getExtras();
         tvTitle.setText(bundle.getString("title"));
@@ -51,14 +50,6 @@ String res;
             }
         });
 
-        btnCompare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-       // res= String.valueOf(uri);
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -61,44 +61,28 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/btncompare"
+            android:id="@+id/btnShare"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/button_file"
-            android:text="@string/shop"
+            android:text="@string/share"
             android:textStyle="bold" />
     </LinearLayout>
 
     <View
+        android:id="@+id/vii"
         android:layout_margin="2dp"
         android:layout_below="@+id/linearLayout"
         android:layout_width="fill_parent"
         android:layout_height="2dp"
         android:background="#c0c0c0"/>
-    <Button
-        android:layout_margin="5dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:text="@string/share"
-        android:background="@drawable/button_file"
-        android:id="@+id/btnShare"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/btnShare"
+        android:layout_below="@+id/vii"
         android:layout_centerHorizontal="true"
         android:orientation="vertical">
-
-        <View
-            android:layout_margin="2dp"
-            android:layout_below="@+id/btnShare"
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:background="#c0c0c0"/>
 
                 <TextView
                     android:padding="5dp"
