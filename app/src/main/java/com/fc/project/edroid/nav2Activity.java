@@ -47,6 +47,11 @@ public class nav2Activity extends AppCompatActivity
         mAuth=FirebaseAuth.getInstance();
         mSectionsPagerAdapter=new SectionsPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(mSectionsPagerAdapter);
+//        int defaultValue = 0;
+//        int page = getIntent().getIntExtra("One", defaultValue);
+//        viewPager.setCurrentItem(page);
+
+
         TabLayout tabLayout=(TabLayout)findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
@@ -68,7 +73,7 @@ public class nav2Activity extends AppCompatActivity
             btnSearch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    query=etsearch.getText().toString();
+                    query=etsearch.getText().toString();
                     if(!query.equals("")) {
                         flipkartFragment.refresh(query);
                         amazonFragment.refresh(query);

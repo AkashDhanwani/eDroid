@@ -8,19 +8,27 @@ public class ProductsAma  {
     public String price;
     public String produrl;
     public String inStock;
+    public String[] specs=new String[5] ;
+
     public ProductsAma() {
 
     }
 
-    public ProductsAma(String title, String imgurl, String produrl,String price) {
+    public ProductsAma(String title, String imgurl, String produrl,String price, String[] specs) {
         this.title = title;
         this.imgurl = imgurl;
         this.produrl = produrl;
         this.price=price;
+        this.specs=specs;
        // this.flipkartSellingPrice=flipkartSellingPrice;
         //this.inStock=inStock;
 
     }
+
+    public String[] getSpecs() {
+        return specs;
+    }
+
 
     public String getTitle() {
         return title;

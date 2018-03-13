@@ -33,4 +33,8 @@
     <string name="action_settingss">Settings|Change Password</string>
     <string name="changepass">Change Password</string>
     <string name="logout">Logout</string>
+    <string name="buy">Buy Now</string>
+    <string name="shop">Compare Prices</string>
+    <string name="share">Share</string>
+    <string name="img">Loading image</string>
 </resources>

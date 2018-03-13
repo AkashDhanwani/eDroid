@@ -3,6 +3,7 @@ package com.fc.project.edroid;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,10 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
         // myHolder.FlipkartproInStock.setText(products.getInStock());
         Glide.with(context).load(products.getImgUrl()).into(myHolder.EbayprooImg);
         myHolder.produrl=products.getProdUrl();
+        myHolder.title=products.getTitle();
+        myHolder.imgurl=products.getImgUrl();
+
+
 
     }
 
@@ -63,21 +68,29 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
     {
 
         ImageView EbayprooImg;
-        String produrl;
+        String title,imgurl,produrl;
         TextView EbayproTitlee,EbayproPrice;
         public MyHolder(View itemView) {
             super(itemView);
             EbayprooImg=itemView.findViewById(R.id.EbayprooImg);
             EbayproTitlee=itemView.findViewById(R.id.EbayproTitlee);
             EbayproPrice=itemView.findViewById(R.id.EbayproPrice);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Uri uri = Uri.parse(produrl); // missing 'http://' will cause crashed
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    //Uri uri = Uri.parse(produrl); // missing 'http://' will cause crashed
+                    Bundle bundle=new Bundle();
+                    bundle.putString("title", title);
+                    bundle.putString("produrl",produrl);
+                    bundle.putString("imgurl",imgurl);
+                //    bundle.putString("desc",desc);
+                    Intent intent = new Intent(context, DetailInfoActivity.class);
+                    intent.putExtras(bundle);
                     context.startActivity(intent);
                 }
             });
+
 
 
         }

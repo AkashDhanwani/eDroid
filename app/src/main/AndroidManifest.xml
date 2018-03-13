@@ -34,7 +34,8 @@
             android:name=".nav2Activity"
             android:label="@string/title_activity_nav2"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ForgotPasswordActivity"></activity>
+        <activity android:name=".ForgotPasswordActivity" />
+        <activity android:name=".DetailInfoActivity"></activity>
     </application>
 
 </manifest>
