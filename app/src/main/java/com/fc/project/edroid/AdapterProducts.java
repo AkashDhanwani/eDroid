@@ -83,7 +83,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //            imageView=itemView.findViewById(R.id.proImg);
             FlipkartprooImg=itemView.findViewById(R.id.FlipkartprooImg);
             FlipkartproTitlee=itemView.findViewById(R.id.FlipkartproTitlee);
-            FlipkartproDescc=itemView.findViewById(R.id.FlipkartproDescc);
+   //         FlipkartproDescc=itemView.findViewById(R.id.FlipkartproDescc);
             FlipkartproPrice=itemView.findViewById(R.id.FlipkartproPrice);
             FlipkartproSellingPrice=itemView.findViewById(R.id.FlipkartproSellingPrice);
             FlipkartproPrice.setPaintFlags(FlipkartproPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);     //?

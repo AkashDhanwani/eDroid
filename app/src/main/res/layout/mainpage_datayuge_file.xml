@@ -1,75 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:elevation="15dp"
-    android:layout_height="wrap_content">
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:id="@+id/DatayugecardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_vertical_margin"
+        android:layout_margin="2dp"
         android:elevation="10dp">
 
         <RelativeLayout
             android:id="@+id/rl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp">
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/datayugeprooImg"
-                android:layout_width="140dp"
-                android:layout_height="200dp"
+                android:layout_width="60dp"
+                android:layout_height="100dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
                 android:background="@android:color/background_light" />
 
             <TextView
                 android:id="@+id/datayugeproTitlee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/datayugeprooImg"
                 android:paddingLeft="5dp"
                 android:text="asd"
-                android:layout_alignParentRight="@id/datayugeprooImg"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/button1"
+            <LinearLayout
+                android:id="@+id/lldatayuge"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_alignStart="@+id/datayugeproTitlee"
-                android:layout_below="@+id/datayugeproTitlee"
-                />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/datayugeprooImg"
+                android:layout_below="@id/datayugeproTitlee">
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignStart="@id/datayugeproTitlee"
-                android:layout_below="@+id/button1" />
+                <Button
+                    android:id="@+id/button1"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoSizeTextType="uniform"
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_alignStart="@id/datayugeproTitlee"
-                android:layout_below="@+id/button2" />
+                    android:layout_alignStart="@+id/datayugeproTitlee"
+                    android:layout_below="@+id/datayugeproTitlee"
+                    android:layout_weight="1" />
 
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_alignStart="@id/datayugeproTitlee"
-                android:layout_below="@+id/button3" />
+                <Button
+                    android:id="@+id/button2"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/button1"
+                    android:layout_marginLeft="1dp"
+                    android:layout_toRightOf="@id/button1"
+                    android:layout_weight="1" />
 
+            </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/datayugeprooImg"
+        android:layout_below="@id/lldatayuge">
 
+        <Button
+            android:id="@+id/button3"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignStart="@id/datayugeproTitlee"
+            android:layout_below="@+id/button1"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/button4"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_below="@+id/button2"
+            android:layout_marginLeft="1dp"
+            android:layout_toRightOf="@id/button3"
+            android:layout_weight="1" />
+
+            </LinearLayout>
         </RelativeLayout>
 
 
