@@ -9,14 +9,14 @@
     <android.support.v7.widget.CardView
         android:id="@+id/FlipkartcardView"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:padding="10dp">
+        android:padding="5dp">
 
         <RelativeLayout
             android:id="@+id/rl"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:padding="10dp">
 
             <ImageView
@@ -63,7 +63,7 @@
                 android:layout_toRightOf="@+id/FlipkartprooImg"
                 android:padding="5dp"
                 android:text="@string/maxPrice"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/FlipkartproPrice"
@@ -76,7 +76,7 @@
                 android:padding="5dp"
                 android:text="@string/strike"
                 android:textColor="@color/red_error"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
 
 
             <TextView
@@ -89,7 +89,7 @@
                 android:layout_toRightOf="@+id/FlipkartprooImg"
                 android:padding="3dp"
                 android:text="@string/flipkartSellngPrice"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/FlipkartproSellingPrice"
@@ -99,10 +99,10 @@
 
                 android:layout_below="@+id/FlipkartproPrice"
                 android:layout_toRightOf="@+id/FlipkartproPriceSellingWords"
-                android:padding="3dp"
+                android:padding="2dp"
                 android:text="@string/b"
                 android:textColor="@color/red_error"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
             <!--<TextView-->
             <!--android:id="@+id/FlipkartproInStock"-->
             <!--android:padding="5dp"-->

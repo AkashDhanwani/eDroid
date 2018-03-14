@@ -67,7 +67,9 @@ public class nav2Activity extends AppCompatActivity
         query=etsearch.getText().toString();
         Intent myIntent = getIntent();
         if (myIntent.hasExtra("myExtra")){
-            query=myIntent.getStringExtra("myExtra"); }
+            query=myIntent.getStringExtra("myExtra");
+            etsearch.setText(query);
+        }
             viewPager.setOffscreenPageLimit(4);
 
             btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +81,7 @@ public class nav2Activity extends AppCompatActivity
                         amazonFragment.refresh(query);
                         ebayFragment.refresh(query);
                         datayugeFragment.refresh(query);
-                        Toast.makeText(nav2Activity.this, "The query is " + query, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(nav2Activity.this, "Searching for " + query, Toast.LENGTH_SHORT).show();
                     }
                 }
             });
