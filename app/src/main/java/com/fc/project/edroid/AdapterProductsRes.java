@@ -146,8 +146,4 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-
-
-
-
 }

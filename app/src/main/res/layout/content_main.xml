@@ -32,12 +32,14 @@
         <EditText
             android:background="@drawable/edit"
             android:id="@+id/Etsearch"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="22dp"
+            android:layout_marginLeft="2dp"
             android:visibility="visible"
+            android:layout_weight="1"
             android:fontFamily="monospace"
             android:onClick="revealEditText"
+            android:maxLines="1"
             android:hint="@string/type"
             android:textSize="15sp" />
 
