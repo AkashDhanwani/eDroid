@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ public class EbayFragment extends Fragment {
     Button btnSearch;
     String Appid="AkashDha-edroid-PRD-110683bd3-0ab96331";
     View view;
+    ProgressBar pb;
     CharSequence query;
     private RecyclerView recyclerView;
     private AdapterProductsEba adapterProducts;
@@ -58,6 +60,8 @@ query=query1;
 
 
         //etProduct=view.findViewById(R.id.etProduct);
+        recyclerView=view.findViewById(R.id.recyclerView);
+        pb=view.findViewById(R.id.pb);
 
                 String product = query.toString();
                 if (product.length() == 0) {
@@ -78,7 +82,8 @@ else {
 
     public void refresh(String query) {
         data.clear();
-
+        pb.setVisibility(view.VISIBLE);
+        recyclerView.setVisibility(view.GONE);
         String product = query.toString();
         if (product.length() == 0) {
 
@@ -169,12 +174,14 @@ else {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             //tvList.setText(s);
-            recyclerView=view.findViewById(R.id.recyclerView);
+
             recyclerView.setLayoutManager(new VegaLayoutManager());
             if(getActivity()!=null)
             {
             adapterProducts=new AdapterProductsEba(getActivity(),data);
             adapterProducts.notifyDataSetChanged(); }
+            pb.setVisibility(view.GONE);
+            recyclerView.setVisibility(view.VISIBLE);
             recyclerView.setOnFlingListener(null);
 
             recyclerView.invalidate();

@@ -3,6 +3,8 @@ package com.fc.project.edroid;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -34,6 +38,7 @@ import java.util.List;
 public class DatayugeFragment extends Fragment {
     EditText etProduct;
     TextView tvList;
+    ProgressBar pb;
     Button btnSearch;
     String Appid="hhUP4ZbI8aQ1Tf0ufyoZBBH9E3KhG7DwfSK";
     View view;
@@ -52,7 +57,8 @@ public class DatayugeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_datayuge,container,false);
-
+        recyclerView=view.findViewById(R.id.recyclerView);
+        pb=view.findViewById(R.id.pb);
                 String product = query;
 
                 Task2 t1 = new Task2();
@@ -64,6 +70,8 @@ public class DatayugeFragment extends Fragment {
     public void refresh(String query) {
 
         data123.clear();
+        pb.setVisibility(view.VISIBLE);
+        recyclerView.setVisibility(view.GONE);
         String product = query;
 
         Task2 t1 = new Task2();
@@ -132,7 +140,8 @@ public class DatayugeFragment extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             //tvList.setText();
-            recyclerView=view.findViewById(R.id.recyclerView);
+            data123.clear();
+
             recyclerView.setLayoutManager(new VegaLayoutManager());
 
 
@@ -141,6 +150,8 @@ public class DatayugeFragment extends Fragment {
 
                 adapterProducts.notifyDataSetChanged();
         recyclerView.setAdapter(adapterProducts);  }
+            pb.setVisibility(view.GONE);
+            recyclerView.setVisibility(view.VISIBLE);
 
 
         recyclerView.setOnFlingListener(null);
@@ -163,6 +174,18 @@ public class DatayugeFragment extends Fragment {
                 jsonstr+=line +"\n";
             }
         } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+
+            handler.post(new Runnable() {
+
+                @Override
+                public void run() {
+                    Toast.makeText(getContext(), "Too many attempts on others tab, search again", Toast.LENGTH_LONG).show();
+                }
+            });
+
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();

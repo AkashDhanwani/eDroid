@@ -4,12 +4,15 @@ package com.fc.project.edroid;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -42,7 +46,8 @@ import javax.xml.parsers.ParserConfigurationException;
 @SuppressLint("ValidFragment")
 public class AmazonFragment extends Fragment {
 CharSequence query;
-View view,view2;
+View view;
+ProgressBar pb;
 
     String requestUrl = null, product;
     Button btnSearch,btnNext;
@@ -77,6 +82,8 @@ View view,view2;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_amazon,container,false);
+        pb=view.findViewById(R.id.pb);
+        recyclerView=view.findViewById(R.id.recyclerView);
 
         try {
             helper = SignedRequestsHelper.getInstance(ENDPOINT, ACCESS_KEY_ID, SECRET_KEY);
@@ -138,7 +145,8 @@ View view,view2;
             e.printStackTrace();
         }
         data.clear();
-
+        recyclerView.setVisibility(view.GONE);
+        pb.setVisibility(view.VISIBLE);
         product = query.toString();
         i=1;
         callPages(i,product);
@@ -153,7 +161,6 @@ View view,view2;
         String produrl="";
         String imgurl="";
         String resultSet="";
-        String price;
         @Override
         protected String doInBackground(String... strings) {
             try {
@@ -170,7 +177,19 @@ View view,view2;
             } catch (MalformedURLException e) {
                 Toast.makeText(getActivity(), "URL Malformed", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
-            } catch (IOException e) {
+            } catch (FileNotFoundException e) {
+                Handler handler = new Handler(Looper.getMainLooper());
+
+                handler.post(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        Toast.makeText(getContext(), "Too many attempts on amazon tab, search again", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                e.printStackTrace();
+            }catch (IOException e) {
                 //Toast.makeText(MainActivity.this,
                 //      "Connection IOException", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
@@ -182,16 +201,14 @@ View view,view2;
                 DocumentBuilder builder = factory.newDocumentBuilder();
                 Document document = builder.parse(new InputSource(new StringReader(jsonstr)));
                 //everything in xml is a node so we create nodes for tags
-                // then use the attribute of data which we want to extract
+                    // then use the attribute of data which we want to extract
 
                 NodeList nList = document.getElementsByTagName("Item");
-                NodeList nList2 = document.getElementsByTagName("MediumImage");
+                NodeList nList2 = document.getElementsByTagName("LargeImage");
                 NodeList nList3 = document.getElementsByTagName("OfferSummary");
                 NodeList nList4 = document.getElementsByTagName("ItemAttributes");
 
-
-
-                //for multiple elements use for loop
+               //for multiple elements use for loop
                 for(int i=0;i<nList.getLength();i++) {
                     Node node = nList.item(i);
                     Node nodeimage=nList2.item(i);
@@ -202,11 +219,10 @@ View view,view2;
                     if (node.getNodeType() == Node.ELEMENT_NODE) {
                         Element element2 = (Element) node;
                         Element element5 = (Element) nodespecs;
+                        NodeList featurelist = element5.getElementsByTagName("Feature");
 
-
-                        for(int j=0;j<4;j++){
+                        for(int j=0;j<featurelist.getLength() && j<4 ;j++){
                             products.specs[j]=getValue("Feature",element5, j);
-
                         }
                         Element element3 = (Element) nodeimage;
                         Element element4 = (Element) nodeprice;
@@ -238,7 +254,7 @@ View view,view2;
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             //tvList.setText(s);
-            recyclerView=view.findViewById(R.id.recyclerView);
+
             recyclerView.setLayoutManager(new VegaLayoutManager());
             adapterProducts=new AdapterProductsAma(getActivity(),data);
             recyclerView.setOnFlingListener(null);
@@ -246,14 +262,19 @@ View view,view2;
                 adapterProducts.notifyDataSetChanged();
                 recyclerView.setAdapter(adapterProducts);
             }
+            pb.setVisibility(view.GONE);
+            recyclerView.setVisibility(view.VISIBLE);
 
             recyclerView.invalidate();
 
         }
     }
     private static String getValue(String tag, Element element, int i) {
-        NodeList nodeList = element.getElementsByTagName(tag).item(i).getChildNodes();
-        Node node = nodeList.item(0);
-        return node.getNodeValue();
+        if (element.getElementsByTagName(tag).item(i).hasChildNodes()) {
+            NodeList nodeList = element.getElementsByTagName(tag).item(i).getChildNodes();
+            Node node = nodeList.item(0);
+            return node.getNodeValue();
+        }
+        return null;
     }
 }

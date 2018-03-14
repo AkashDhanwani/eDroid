@@ -92,7 +92,7 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
             });
 
         }
-        if(storename[3]==null) myHolder.button4.setVisibility(View.GONE);
+        if(storename[3]==null){ myHolder.button4.setVisibility(View.GONE);    }
         else {
             myHolder.button4.setText(storename[3] + ": " + price[3]);
             myHolder.button4.setOnClickListener(new View.OnClickListener() {

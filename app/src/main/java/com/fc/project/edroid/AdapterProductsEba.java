@@ -50,8 +50,6 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
         // myHolder.FlipkartproInStock.setText(products.getInStock());
         Glide.with(context).load(products.getImgUrl()).into(myHolder.EbayprooImg);
         myHolder.produrl=products.getProdUrl();
-        myHolder.title=products.getTitle();
-        myHolder.imgurl=products.getImgUrl();
 
 
 
@@ -68,7 +66,7 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
     {
 
         ImageView EbayprooImg;
-        String title,imgurl,produrl;
+        String produrl;
         TextView EbayproTitlee,EbayproPrice;
         public MyHolder(View itemView) {
             super(itemView);
@@ -79,14 +77,13 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Uri uri = Uri.parse(produrl); // missing 'http://' will cause crashed
-                    Bundle bundle=new Bundle();
+                    Uri uri = Uri.parse(produrl); // missing 'http://' will cause crashed
+                    /*Bundle bundle=new Bundle();
                     bundle.putString("title", title);
                     bundle.putString("produrl",produrl);
                     bundle.putString("imgurl",imgurl);
-                //    bundle.putString("desc",desc);
-                    Intent intent = new Intent(context, DetailInfoActivity.class);
-                    intent.putExtras(bundle);
+                //    bundle.putString("desc",desc); */
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     context.startActivity(intent);
                 }
             });

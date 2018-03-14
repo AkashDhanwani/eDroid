@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.stone.vega.library.VegaLayoutManager;
@@ -34,6 +35,7 @@ public class FlipkartFragment extends Fragment {
     View view;
     private RecyclerView recyclerView;
     private AdapterProducts adapterProducts;
+    private ProgressBar pb;
     public List<Products> data=new ArrayList<>();
     CharSequence query;
 
@@ -46,8 +48,11 @@ public class FlipkartFragment extends Fragment {
 
      public View onCreateView (LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState){
-            view = inflater.inflate(R.layout.fragment_flipkart, container, false);
 
+            view = inflater.inflate(R.layout.fragment_flipkart, container, false);
+         recyclerView=view.findViewById(R.id.recyclerView);
+         pb=view.findViewById(R.id.pb);
+         recyclerView.setVisibility(view.GONE);
             String product = (String) query;
             Task1 t1 = new Task1();
             t1.execute("https://affiliate-api.flipkart.net/affiliate/1.0/search.json?query=" + product + "&resultCount=10");
@@ -55,6 +60,8 @@ public class FlipkartFragment extends Fragment {
         }
 
     public void refresh(String query) {
+        pb.setVisibility(view.VISIBLE);
+        recyclerView.setVisibility(view.GONE);
             data.clear();
         String product = query;
         Task1 t1 = new Task1();
@@ -112,7 +119,8 @@ public class FlipkartFragment extends Fragment {
                         JSONObject quote = firstarray.getJSONObject("productBaseInfoV1");
                         JSONObject specs1 = firstarray.getJSONObject("categorySpecificInfoV1");
                         JSONArray detailedspecs = specs1.getJSONArray("detailedSpecs");
-                        for(int s = 0; s<5; s++){
+                        int size=detailedspecs.length();
+                        for(int s = 0; s<size && s<5; s++){
                             products.specs[s]=detailedspecs.getString(s);
                         }
                         JSONObject quote1=quote.getJSONObject("imageUrls");
@@ -143,13 +151,14 @@ public class FlipkartFragment extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            recyclerView=view.findViewById(R.id.recyclerView);
+
             recyclerView.setLayoutManager(new VegaLayoutManager());
             if (getActivity() != null) {
                 adapterProducts=new AdapterProducts(getActivity(),data);
                 adapterProducts.notifyDataSetChanged();
-
             }
+            pb.setVisibility(view.GONE);
+            recyclerView.setVisibility(view.VISIBLE);
             recyclerView.setAdapter(adapterProducts);
             recyclerView.setOnFlingListener(null);
             recyclerView.invalidate();

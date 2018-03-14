@@ -19,7 +19,6 @@ Button btnBuy,btnShare;
 String[] specs=new String[5];
 Bundle bundle;
 Uri uri;
-String res;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +34,7 @@ String res;
         tvDesc.setText(bundle.getString("desc"+"\n"));
         specs=bundle.getStringArray("specs");
         for(int i=0;i<specs.length;i++){
+            if(specs[i]!=null)
             tvDesc.append("* "+specs[i]+"\n\n");
         }
 
