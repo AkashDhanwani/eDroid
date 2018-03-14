@@ -101,11 +101,8 @@ public class FlipkartFragment extends Fragment {
                     jsonstr+=line +"\n";
                 }
             } catch (MalformedURLException e) {
-                Toast.makeText(getActivity(), "URL Malformed", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             } catch (IOException e) {
-                Toast.makeText(getActivity(),
-                        "Connection IOException", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
             if(jsonstr!=null){

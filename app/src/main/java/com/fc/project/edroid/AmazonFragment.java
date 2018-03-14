@@ -175,7 +175,6 @@ ProgressBar pb;
                     jsonstr+=line +"\n";
                 }
             } catch (MalformedURLException e) {
-                Toast.makeText(getActivity(), "URL Malformed", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             } catch (FileNotFoundException e) {
                 Handler handler = new Handler(Looper.getMainLooper());

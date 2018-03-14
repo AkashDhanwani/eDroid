@@ -83,7 +83,6 @@ public class DatayugeFragment extends Fragment {
     class Task2 extends AsyncTask<String, Void, String>
     {
         String jsonstr="";
-        String[][] pricestoresurl=new String[4][3];
         String prodetails;
         String resultSet="";
 
@@ -140,7 +139,7 @@ public class DatayugeFragment extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             //tvList.setText();
-            data123.clear();
+
 
             recyclerView.setLayoutManager(new VegaLayoutManager());
 

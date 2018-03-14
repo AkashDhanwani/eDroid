@@ -107,6 +107,8 @@ MainActivity extends AppCompatActivity
 
         if (!(networkInfo != null && networkInfo.isConnected())) {
             Toast.makeText(MainActivity.this, "Please Check Your network", Toast.LENGTH_SHORT).show();
+            btnSearch.setEnabled(false);
+
 
         } else
             Toast.makeText(MainActivity.this,

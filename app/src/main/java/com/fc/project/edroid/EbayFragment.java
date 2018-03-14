@@ -128,8 +128,6 @@ else {
                 Toast.makeText(getActivity(), "URL Malformed", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             } catch (IOException e) {
-                Toast.makeText(getActivity(),
-                        "Connection IOException", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
 
