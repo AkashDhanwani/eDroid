@@ -105,6 +105,12 @@ ProgressBar pb;
             }
 
         });*/
+            recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
+                @Override
+                public void onLoadMore() {
+                    callPages(i+1,product);
+                }
+            });
 
 
         return view;
@@ -148,10 +154,19 @@ ProgressBar pb;
         recyclerView.setVisibility(view.GONE);
         pb.setVisibility(view.VISIBLE);
         product = query.toString();
-        i=1;
         callPages(i,product);
+        recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
+            @Override
+            public void onLoadMore() {
+                callPages(i+1,product);
+            }
+        });
 
     }
+
+
+
+
 
     class Task1 extends AsyncTask<String,Void,String>
     {
