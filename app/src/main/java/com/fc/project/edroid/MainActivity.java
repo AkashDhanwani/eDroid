@@ -17,10 +17,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -126,13 +128,26 @@ MainActivity extends AppCompatActivity
                 intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
                 intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
 
-                if(intent.resolveActivity(getPackageManager()) != null)
+                dataa=serachItem.getText().toString();
+                Toast.makeText(MainActivity.this, "Searching for "+dataa, Toast.LENGTH_SHORT).show();
+                Intent intent1=new Intent(getApplicationContext(),nav2Activity.class);
+                intent1.putExtra("myExtra",dataa);
+                startActivity(intent);
+                
+                if(intent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(intent, 10);
+//                    dataa = serachItem.getText().toString();
+//                    Toast.makeText(MainActivity.this, "Searching for " + dataa, Toast.LENGTH_SHORT).show();
+//                    Intent intent1 = new Intent(getApplicationContext(), nav2Activity.class);
+//                    intent1.putExtra("myExtra", dataa);
+//                    startActivity(intent);
+                }
                 else
                     Toast.makeText(MainActivity.this, "Your Device Don't Support Speech Text", Toast.LENGTH_SHORT).show();
             }
 
         });
+
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,6 +168,30 @@ MainActivity extends AppCompatActivity
             }
         });
 
+
+        serachItem.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH) {
+                    //performSearch();
+                    if(serachItem.getText().toString().equals(""))
+                    {
+                        revealEditText();
+                    }
+                    else
+                    {
+                        dataa=serachItem.getText().toString();
+                        Toast.makeText(MainActivity.this, "Searching for "+dataa, Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(getApplicationContext(),nav2Activity.class);
+                        intent.putExtra("myExtra",dataa);
+                        startActivity(intent);
+
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
