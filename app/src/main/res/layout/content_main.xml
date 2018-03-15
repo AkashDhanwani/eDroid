@@ -40,6 +40,8 @@
             android:fontFamily="monospace"
             android:onClick="revealEditText"
             android:maxLines="1"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
             android:hint="@string/type"
             android:textSize="15sp" />
 

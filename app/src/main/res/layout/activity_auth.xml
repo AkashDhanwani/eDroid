@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo"
+        app:srcCompat="@drawable/logo2"
         tools:ignore="VectorDrawableCompat" />
 
     <android.support.design.widget.TextInputLayout

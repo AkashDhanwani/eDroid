@@ -20,10 +20,10 @@ public class SplashActivity extends AppCompatActivity {
                 .withSplashTimeOut(3000)
 //                .withBackgroundColor(Color.parseColor("#24898e"))
                 .withBackgroundResource(R.drawable.new_login_gradient)
-                .withLogo(R.drawable.newlogo)
+                .withLogo(R.drawable.logo2)
                 .withHeaderText("")
                 .withFooterText("Created by FC developers")
-                .withBeforeLogoText("Hello User")
+                .withBeforeLogoText("Hello Customer")
                 .withAfterLogoText("All set to go inside");
 
 
