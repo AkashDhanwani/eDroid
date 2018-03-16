@@ -38,7 +38,7 @@
                 android:title="Disclaimer" />
             <item
                 android:id="@+id/nav_logout"
-                android:icon="@drawable/logo"
+                android:icon="@drawable/ic_block_black_24dp"
                 android:title="@string/logout"
                 />
         </menu>
