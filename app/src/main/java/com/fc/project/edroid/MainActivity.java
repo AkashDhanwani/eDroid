@@ -133,7 +133,7 @@ MainActivity extends AppCompatActivity
                 Intent intent1=new Intent(getApplicationContext(),nav2Activity.class);
                 intent1.putExtra("myExtra",dataa);
                 startActivity(intent);
-                
+
                 if(intent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(intent, 10);
 //                    dataa = serachItem.getText().toString();
@@ -318,6 +318,14 @@ MainActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_share) {
+             String subject = "Hey there have a look at this great App";
+             String body = "This App is the one solution for all the famous shopping Apps like Amazon, Flipkart and eBay" +
+                     "\nhttp://bit.do/Edroid ";
+             Intent intent = new Intent(Intent.ACTION_SEND);
+             intent.setType("text/plain");
+             intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+             intent.putExtra(Intent.EXTRA_TEXT, body);
+             startActivity(Intent.createChooser(intent,"Share eDroid via"));
 
         } else if (id == R.id.nav_send) {
 
