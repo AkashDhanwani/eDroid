@@ -144,9 +144,11 @@ public class nav2Activity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_dis) {
+             Intent intent=new Intent(getApplicationContext(),Disclaimer.class);
+             startActivity(intent);
 
-        }
+         }
         else if(id==R.id.nav_logout)
          {
              mAuth.signOut();

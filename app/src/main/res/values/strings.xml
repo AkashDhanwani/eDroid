@@ -20,7 +20,7 @@
     <string name="b"><b>bf</b></string>
     <string name="edroid">Edroid</string>
     <string name="type">Enter product name</string>
-    <string name="title_activity_nav2">nav2Activity</string>
+    <string name="title_activity_nav2"></string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -37,4 +37,6 @@
     <string name="shop">Compare Prices</string>
     <string name="share">Share</string>
     <string name="img">Loading image</string>
+    <string name="avail">Available:</string>
+    <string name="disclaimer">Edroid is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linikng to <u>Amazon.in</u></string>
 </resources>

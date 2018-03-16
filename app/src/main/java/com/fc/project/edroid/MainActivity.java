@@ -14,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -49,6 +50,8 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static android.support.v7.widget.LinearLayoutManager.*;
 
 public class
 MainActivity extends AppCompatActivity
@@ -99,7 +102,7 @@ MainActivity extends AppCompatActivity
         //productImg=findViewById(R.id.imageView);
         String product="iphone";
         Task1 t1 = new Task1();
-        t1.execute("https://affiliate-api.flipkart.net/affiliate/1.0/search.json?query="+product+"&resultCount=5");
+        t1.execute("https://affiliate-api.flipkart.net/affiliate/1.0/search.json?query="+product+"&resultCount=10");
 
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -319,7 +322,9 @@ MainActivity extends AppCompatActivity
             finish();
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_dis) {
+             Intent intent=new Intent(getApplicationContext(),Disclaimer.class);
+             startActivity(intent);
 
         }
         else if(id==R.id.nav_logout)
@@ -392,7 +397,7 @@ MainActivity extends AppCompatActivity
                         JSONObject quote1=quote.getJSONObject("imageUrls");
                         JSONObject quote2=quote.getJSONObject("maximumRetailPrice");
                         JSONObject quote3=quote.getJSONObject("flipkartSpecialPrice");
-                        JSONObject quote4=quote.getJSONObject("categorySpecificInfoV1");
+//                        JSONObject quote4=quote.getJSONObject("categorySpecificInfoV1");
                         // JSONObject quote4=quote.getJSONObject("inStock");
                         //  JSONObject quote1=secondArray.getJSONObject("imageUrls");
 //                        if(resultSet==null) {
@@ -419,7 +424,8 @@ MainActivity extends AppCompatActivity
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             recyclerView=findViewById(R.id.recyclerView);
-            recyclerView.setLayoutManager(new VegaLayoutManager());
+      //      recyclerView.setLayoutManager(new VegaLayoutManager());
+            recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL,false));
             adapterProducts=new AdapterProducts(MainActivity.this,data);
             adapterProducts.notifyDataSetChanged();
             recyclerView.invalidate();

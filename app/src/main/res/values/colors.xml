@@ -8,5 +8,6 @@
     <color name="btnPressed">#4adfd8</color>
     <color name="btn">#f74848</color>
     <color name="btnNotPressed">#019e1b</color>
+    <color name="offerbg">#b9e4c0</color>
 </resources>
 <!-- <color name="colorPrimaryDark">#9d4adf</color>-->

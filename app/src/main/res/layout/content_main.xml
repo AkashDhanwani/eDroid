@@ -70,12 +70,27 @@
         android:layout_height="150dp">
 
     </android.support.v4.view.ViewPager>
-
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_margin="2dp"
+            android:layout_below="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
+            android:layout_margin="2dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
            android:layout_below="@+id/viewPager"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView1"
+                android:layout_margin="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/viewPager"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 
