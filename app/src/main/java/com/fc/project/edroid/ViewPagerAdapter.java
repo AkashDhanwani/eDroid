@@ -21,7 +21,7 @@ class ViewPagerAdapter extends PagerAdapter {
 
     Context context;
     LayoutInflater layoutInflater;
-    Integer[] images={R.drawable.amazon,R.drawable.ebay,R.drawable.flipkart};
+    Integer[] images={R.drawable.amazon,R.drawable.ebay,R.drawable.flipkart,R.drawable.shopclues,R.drawable.tatacliq};
 
 
     public ViewPagerAdapter(Context context) {
