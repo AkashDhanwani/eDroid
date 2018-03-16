@@ -1,6 +1,7 @@
 package com.fc.project.edroid;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -143,6 +144,15 @@ public class nav2Activity extends AppCompatActivity
              finish();
 
         } else if (id == R.id.nav_share) {
+             String subject = "Hey there have a look at this great App";
+             String body = "This App is the one solution for all the famous shopping Apps like Amazon, Flipkart and eBay" +
+                     "\nhttp://bit.do/Edroid ";
+             Intent intent = new Intent(Intent.ACTION_SEND);
+             intent.setType("text/plain");
+             intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+             intent.putExtra(Intent.EXTRA_TEXT, body);
+             startActivity(Intent.createChooser(intent,"Share eDroid via"));
+
 
         } else if (id == R.id.nav_dis) {
              Intent intent=new Intent(getApplicationContext(),Disclaimer.class);
