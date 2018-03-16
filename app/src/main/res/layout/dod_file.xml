@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/offer_bg"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:elevation="@dimen/activity_vertical_margin"
+        android:id="@+id/dodCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@drawable/border_file"
+        android:padding="5dp">
+
+        <RelativeLayout
+            android:id="@+id/r11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/dodImg"
+                android:layout_width="90dp"
+                android:layout_height="120dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/background_light" />
+
+            <TextView
+                android:fontFamily="casual"
+                android:id="@+id/offerProTitlee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/dodImg"
+                android:paddingLeft="10dp"
+                android:text="Title"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+
+            <!--/>-->
+
+            <TextView
+                android:fontFamily="casual"
+                android:id="@+id/dodDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/offerProTitlee"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@+id/dodImg"
+                android:padding="5dp"
+                android:text="Place Desc"
+                android:textSize="13sp" />
+
+
+
+            <TextView
+                android:fontFamily="casual"
+                android:id="@+id/startTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dodDesc"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="1dp"
+                android:layout_toRightOf="@+id/dodImg"
+                android:padding="3dp"
+                android:text="startTime"
+                android:textColor="@color/red_error"
+                android:textSize="13sp" />
+
+            <TextView
+                android:fontFamily="casual"
+                android:id="@+id/FlipkartproSellingPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/FlipkartproPriceSellingWords"
+                android:layout_below="@+id/dodDesc"
+                android:layout_toRightOf="@+id/startTime"
+                android:padding="2dp"
+                android:text="End Time"
+                android:textColor="@color/red_error"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>
