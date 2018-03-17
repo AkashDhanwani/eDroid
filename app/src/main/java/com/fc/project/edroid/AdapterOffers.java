@@ -50,11 +50,15 @@ public class AdapterOffers extends RecyclerView.Adapter<RecyclerView.ViewHolder>
       //  myHolder.FlipkartproPrice.setText("\u20B9"+products.getPrice());
         //myHolder.FlipkartproSellingPrice.setText("\u20B9"+products.getFlipkartSellingPrice());
         Glide.with(context).load(products.getImgUrl()).into(myHolder.FkImg);
-
-        myHolder.title=products.getTitle();
-        myHolder.imgurl=products.getImgUrl();
         myHolder.produrl=products.getProdUrl();
-        myHolder.desc=products.getDesc();
+        if(products.startmil!=0 && products.endmil!=0) {
+            myHolder.Starttime = products.getStarttime();
+            myHolder.endtime = products.getEndtime();
+
+            myHolder.FkStarttime.setText("Start: " + myHolder.Starttime[0] + " : " + myHolder.Starttime[1]);
+            myHolder.FkEndtime.setText("End: " + myHolder.endtime[0] + " : " + myHolder.endtime[1]);
+        }
+
      //   myHolder.specs=products.getSpecs();
 
     }
@@ -67,9 +71,10 @@ public class AdapterOffers extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     class MyHolder extends RecyclerView.ViewHolder
     {
         String produrl,imgurl,title,desc;
-        //String[] specs=new String[5];
+        String[] Starttime=new String[2];
+        String[] endtime=new String[2];
         ImageView FkImg;
-        TextView FkTitle,FkDesc;
+        TextView FkTitle,FkDesc,FkStarttime,FkEndtime;
         public MyHolder(View itemView) {
             super(itemView);
 //            proTitle=itemView.findViewById(R.id.title);
@@ -78,7 +83,12 @@ public class AdapterOffers extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             FkImg=itemView.findViewById(R.id.FkImg);
             FkTitle=itemView.findViewById(R.id.FkTitle);
             FkDesc=itemView.findViewById(R.id.FkDesc);
-           // FlipkartproPrice=itemView.findViewById(R.id.FlipkartproPrice);
+            FkStarttime=itemView.findViewById(R.id.FkStartime);
+            FkEndtime=itemView.findViewById(R.id.FkEndtime);
+
+
+
+            // FlipkartproPrice=itemView.findViewById(R.id.FlipkartproPrice);
            // FlipkartproSellingPrice=itemView.findViewById(R.id.FlipkartproSellingPrice);
            // FlipkartproPrice.setPaintFlags(FlipkartproPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);     //?
          //   FlipkartproInStock=itemView.findViewById(R.id.FlipkartproInStock);
@@ -100,6 +110,8 @@ public class AdapterOffers extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
                 }
             });
+
+
 
 
 

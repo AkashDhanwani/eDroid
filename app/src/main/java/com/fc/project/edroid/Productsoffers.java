@@ -1,26 +1,47 @@
 package com.fc.project.edroid;
 
 
+import java.util.Calendar;
+import java.util.Locale;
+
 public class Productsoffers {
 
     public String title;
     public String imgUrl;
     public String desc;
     public String produrl;
-    public String price;
-    public String[] specs=new String[5];
-    public String flipkartSellingPrice;
-    public String inStock;
-
+    public String[] Starttime=new String[2];
+    public String[] Endtime=new String[2];
+    public long startmil=0;
+    public long endmil=0;
     public Productsoffers() {
 
     }
 
-    public Productsoffers(String title, String imgUrl, String desc,String produrl) {
+    public Productsoffers(String title, String imgUrl, String desc,String produrl,long startmil,long endmil) {
         this.title = title;
         this.imgUrl = imgUrl;
         this.desc = desc;
         this.produrl=produrl;
+        this.startmil=startmil;
+        this.endmil=endmil;
+    }
+
+
+    public String[] getStarttime() {
+        datetime(startmil,Starttime);
+        return Starttime; }
+
+    public String[] getEndtime() {
+        datetime(endmil, Endtime);
+        return Endtime; }
+
+
+    private void datetime(long mil, String[] stringarr) {
+        Calendar cl = Calendar.getInstance();
+        cl.setTimeInMillis(mil);  //here your time in miliseconds
+        stringarr[0] = "" + cl.get(Calendar.DAY_OF_MONTH) + ":" + cl.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH ) + ":" + cl.get(Calendar.YEAR);
+        stringarr[1] = "" + cl.get(Calendar.HOUR_OF_DAY) + ":" + cl.get(Calendar.MINUTE) + ":" + cl.get(Calendar.SECOND);
     }
 
     public String getTitle() {
@@ -35,21 +56,11 @@ public class Productsoffers {
         return imgUrl;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-
-    public String[] getSpecs(){ return specs; }
 
 
     public String getProdUrl() {
         return produrl;
     }
-
-    public void setProdUrl(String produrl) {
-        this.produrl = produrl;
-    }
-
 
     public String getDesc() {
         return desc;
@@ -59,21 +70,6 @@ public class Productsoffers {
         this.desc = desc;
     }
 
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getFlipkartSellingPrice() {
-        return flipkartSellingPrice;
-    }
-
-    public void setFlipkartSellingPrice(String flipkartSellingPrice) {
-        this.flipkartSellingPrice = flipkartSellingPrice;
-    }
 
 //    public String getInStock() {
 //        return inStock;

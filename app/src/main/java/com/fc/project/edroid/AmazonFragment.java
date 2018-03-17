@@ -93,8 +93,14 @@ ProgressBar pb;
             e.printStackTrace();
         }
 
-                product = query.toString();
-                i=1;
+        String[] producttemp = query.toString().split(" ");
+        if(producttemp.length==1) product=producttemp[0];
+        else
+            product= producttemp[producttemp.length-1]+" "+producttemp[producttemp.length-2];
+
+
+
+        i=1;
                 callPages(i,product);
 
            /* recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
@@ -148,7 +154,11 @@ ProgressBar pb;
         data.clear();
         recyclerView.setVisibility(view.GONE);
         pb.setVisibility(view.VISIBLE);
-        product = query.toString();
+        String[] producttemp = query.toString().split(" ");
+        if(producttemp.length==1) product=producttemp[0];
+        else
+        product= producttemp[producttemp.length-1]+" "+producttemp[producttemp.length-2];
+
         callPages(i,product);
         /*recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
             @Override

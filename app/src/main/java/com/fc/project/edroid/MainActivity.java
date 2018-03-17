@@ -512,25 +512,12 @@ MainActivity extends AppCompatActivity
                         JSONObject offerprod = array.getJSONObject(i);
                         JSONArray images = offerprod.getJSONArray("imageUrls");
                         JSONObject images1 = images.getJSONObject(0);
-                        /*JSONObject quote = firstarray.getJSONObject("productBaseInfoV1");
-                        JSONObject quote1=quote.getJSONObject("imageUrls");
-                        JSONObject quote2=quote.getJSONObject("maximumRetailPrice");
-                        JSONObject quote3=quote.getJSONObject("flipkartSpecialPrice");
-//                        JSONObject quote4=quote.getJSONObject("categorySpecificInfoV1"); */
-                        // JSONObject quote4=quote.getJSONObject("inStock");
-                        //  JSONObject quote1=secondArray.getJSONObject("imageUrls");
-//                        if(resultSet==null) {
-                        //    resultSet=quote.getString("title");
                         products.title = offerprod.getString("title");
                         products.produrl=offerprod.getString("url");
                         products.desc=offerprod.getString("description");
+                        products.startmil=offerprod.getLong("startTime");
+                        products.endmil=offerprod.getLong("endTime");
                         products.imgUrl=images1.getString("url");
-                        //  products.desc=quote.getString("productDescription");
-                        // products.imgUrl=quote1.getString("400x400");
-                        //products.price=quote2.getString("amount");
-                        //products.flipkartSellingPrice=quote3.getString("amount");
-
-                        //products.inStock=quote4.getString("amount");
                         data1.add(products);
                     }
                 } catch (JSONException e) {
