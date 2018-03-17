@@ -48,8 +48,10 @@ public class AmazonFragment extends Fragment {
 CharSequence query;
 View view;
 ProgressBar pb;
+    Handler handler = new Handler(Looper.getMainLooper());
 
     String requestUrl = null, product;
+    static int flag=0;
     Button btnSearch,btnNext;
     TextView tvList;
     int i;
@@ -94,23 +96,15 @@ ProgressBar pb;
                 product = query.toString();
                 i=1;
                 callPages(i,product);
-            /*
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                product =query.toString();
-                i++;
-                callPages(i,product);
-            }
-
-        });*/
-            recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
+           /* recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
                 @Override
                 public void onLoadMore() {
+
                     callPages(i+1,product);
+                    //recyclerView.smoothScrollToPosition();
                 }
-            });
+            }); */
 
 
         return view;
@@ -150,17 +144,24 @@ ProgressBar pb;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        flag=0;
         data.clear();
         recyclerView.setVisibility(view.GONE);
         pb.setVisibility(view.VISIBLE);
         product = query.toString();
         callPages(i,product);
-        recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
+        /*recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
             @Override
             public void onLoadMore() {
-                callPages(i+1,product);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        callPages(i+1,product);
+                    }
+                }, 5000);
+
             }
-        });
+        }); */
 
     }
 
@@ -192,15 +193,17 @@ ProgressBar pb;
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (FileNotFoundException e) {
-                Handler handler = new Handler(Looper.getMainLooper());
+
 
                 handler.post(new Runnable() {
 
                     @Override
                     public void run() {
-                        Toast.makeText(getContext(), "Too many attempts on amazon tab, search again", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Too many attempts on amazon tab, hold your horses", Toast.LENGTH_LONG).show();
+
                     }
                 });
+
 
                 e.printStackTrace();
             }catch (IOException e) {
@@ -274,7 +277,8 @@ ProgressBar pb;
             recyclerView.setOnFlingListener(null);
             if(getActivity()!=null){
                 adapterProducts.notifyDataSetChanged();
-                recyclerView.setAdapter(adapterProducts);
+                    recyclerView.setAdapter(adapterProducts);
+
             }
             pb.setVisibility(view.GONE);
             recyclerView.setVisibility(view.VISIBLE);

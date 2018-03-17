@@ -2,7 +2,7 @@ package com.fc.project.edroid;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,21 +16,15 @@ import com.bumptech.glide.Glide;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by LakhwaniPc on 18-02-2018.
- */
-
-public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdapterOffers extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
    private Context context;
    private LayoutInflater inflater;
-   List<Products> data= Collections.emptyList();
-   Products current;
-   int currentpos=0;
+   List<Productsoffers> data= Collections.emptyList();
 
 
-    public AdapterProducts(Context context, List<Products>data) {
+    public AdapterOffers(Context context, List<Productsoffers>data) {
         this.context = context;
         this.inflater =LayoutInflater.from(context);
         this.data=data;
@@ -39,7 +33,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //View view=inflater.inflate(R.layout.product_file,parent,false);
-        View view=inflater.inflate(R.layout.mainpage_flipkart_file,parent,false);
+        View view=inflater.inflate(R.layout.mainpage_offer_file,parent,false);
         MyHolder holder=new MyHolder(view);
         return holder;
     }
@@ -50,17 +44,18 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         MyHolder myHolder=(MyHolder)holder;
       //  current=data.get(position);
-        Products products=data.get(position);
-        myHolder.FlipkartproTitlee.setText(products.getTitle());
-        myHolder.FlipkartproPrice.setText("\u20B9"+products.getPrice());
-        myHolder.FlipkartproSellingPrice.setText("\u20B9"+products.getFlipkartSellingPrice());
-        Glide.with(context).load(products.getImgUrl()).into(myHolder.FlipkartprooImg);
+        Productsoffers products=data.get(position);
+        myHolder.FkTitle.setText(products.getTitle());
+        myHolder.FkDesc.setText(products.getDesc());
+      //  myHolder.FlipkartproPrice.setText("\u20B9"+products.getPrice());
+        //myHolder.FlipkartproSellingPrice.setText("\u20B9"+products.getFlipkartSellingPrice());
+        Glide.with(context).load(products.getImgUrl()).into(myHolder.FkImg);
 
         myHolder.title=products.getTitle();
         myHolder.imgurl=products.getImgUrl();
         myHolder.produrl=products.getProdUrl();
         myHolder.desc=products.getDesc();
-        myHolder.specs=products.getSpecs();
+     //   myHolder.specs=products.getSpecs();
 
     }
 
@@ -72,35 +67,35 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
     class MyHolder extends RecyclerView.ViewHolder
     {
         String produrl,imgurl,title,desc;
-        String[] specs=new String[5];
-        ImageView imageView,FlipkartprooImg;
-        TextView proDesc,proTitle,FlipkartproTitlee,FlipkartproDescc,FlipkartproPrice,FlipkartproSellingPrice,FlipkartproInStock;
+        //String[] specs=new String[5];
+        ImageView FkImg;
+        TextView FkTitle,FkDesc;
         public MyHolder(View itemView) {
             super(itemView);
 //            proTitle=itemView.findViewById(R.id.title);
 //            proDesc=itemView.findViewById(R.id.description);
 //            imageView=itemView.findViewById(R.id.proImg);
-            FlipkartprooImg=itemView.findViewById(R.id.FkImg);
-            FlipkartproTitlee=itemView.findViewById(R.id.FkTitle);
-   //         FlipkartproDescc=itemView.findViewById(R.id.FlipkartproDescc);
-            FlipkartproPrice=itemView.findViewById(R.id.FlipkartproPrice);
-            FlipkartproSellingPrice=itemView.findViewById(R.id.FlipkartproSellingPrice);
-            FlipkartproPrice.setPaintFlags(FlipkartproPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);     //?
+            FkImg=itemView.findViewById(R.id.FkImg);
+            FkTitle=itemView.findViewById(R.id.FkTitle);
+            FkDesc=itemView.findViewById(R.id.FkDesc);
+           // FlipkartproPrice=itemView.findViewById(R.id.FlipkartproPrice);
+           // FlipkartproSellingPrice=itemView.findViewById(R.id.FlipkartproSellingPrice);
+           // FlipkartproPrice.setPaintFlags(FlipkartproPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);     //?
          //   FlipkartproInStock=itemView.findViewById(R.id.FlipkartproInStock);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Uri uri = Uri.parse(produrl); // missing 'http://' will cause crashed
+                    Uri uri = Uri.parse(produrl); // missing 'http://' will cause crashed
+                 /*
                     Bundle bundle=new Bundle();
                     bundle.putString("title", title);
                     bundle.putString("produrl",produrl);
                     bundle.putString("imgurl",imgurl);
                     bundle.putString("desc",desc);
                     for(int i=0;i<5;i++){
-                    bundle.putStringArray("specs",specs); }
-                    Intent intent = new Intent(context, DetailInfoActivity.class);
-                    intent.putExtras(bundle);
+                    bundle.putStringArray("specs",specs); } */
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     context.startActivity(intent);
 
                 }

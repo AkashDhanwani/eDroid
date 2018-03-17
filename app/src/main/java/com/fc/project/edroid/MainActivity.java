@@ -59,18 +59,16 @@ MainActivity extends AppCompatActivity
 
     //Button btnSearch, btnAmazon, btnEbay, btnDatayuge;
     Button btnSearch,btnSpeak;
-    EditText etProduct;
-    TextView tvList;
     TextView textView;
-    ImageView productImg;
     EditText serachItem;
-    String dataa,res;
+    String dataa;
     ViewPager viewPager;
     FirebaseAuth mAuth;
-    private RecyclerView recyclerView;
-    private AdapterProducts adapterProducts;
+    private RecyclerView recyclerView,recyclerView1;
+    private AdapterOffers adapterOffers;
     String[] productnames={"iphone","dell","nokia","samsung"};
-    public List<Products> data=new ArrayList<>();
+    public List<Productsoffers> data=new ArrayList<>();
+    public List<Productsoffers> data1=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,9 +98,11 @@ MainActivity extends AppCompatActivity
         int index = random.nextInt(productnames.length);
 
         //productImg=findViewById(R.id.imageView);
-        String product="iphone";
+
         Task1 t1 = new Task1();
-        t1.execute("https://affiliate-api.flipkart.net/affiliate/1.0/search.json?query="+product+"&resultCount=10");
+        Task2 t2 =new Task2();
+        t1.execute("https://affiliate-api.flipkart.net/affiliate/offers/v1/dotd/json");
+        t2.execute("https://affiliate-api.flipkart.net/affiliate/offers/v1/all/json");
 
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -362,7 +362,6 @@ MainActivity extends AppCompatActivity
 
         String jsonstr="";
         String line= "";
-        String desc="";
         String imgurl="";
         String resultSet=null;
 
@@ -395,35 +394,39 @@ MainActivity extends AppCompatActivity
                     jsonstr+=line +"\n";
                 }
             } catch (MalformedURLException e) {
-             //   Toast.makeText(MainActivity.this, "URL Malformed", Toast.LENGTH_SHORT).show();
+                //   Toast.makeText(MainActivity.this, "URL Malformed", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             } catch (IOException e) {
-               // Toast.makeText(MainActivity.this,"Connection IOException", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(MainActivity.this,"Connection IOException", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
             if(jsonstr!=null){
                 try{
                     JSONObject jsonObject=new JSONObject(jsonstr);
-                    JSONArray array=jsonObject.getJSONArray("products");
-                    for(int i=0;i<10;i++) {
+                    JSONArray array=jsonObject.getJSONArray("dotdList");
+                    for(int i=0;i<8;i++) {
                         //Public  List<Products> data=new ArrayList<>();
-                        Products products=new Products();
-                        JSONObject firstarray = array.getJSONObject(i);
-                        JSONObject quote = firstarray.getJSONObject("productBaseInfoV1");
+                        Productsoffers products=new Productsoffers();
+                        JSONObject dotdprod = array.getJSONObject(i);
+                        JSONArray images = dotdprod.getJSONArray("imageUrls");
+                        JSONObject images1 = images.getJSONObject(0);
+                        /*JSONObject quote = firstarray.getJSONObject("productBaseInfoV1");
                         JSONObject quote1=quote.getJSONObject("imageUrls");
                         JSONObject quote2=quote.getJSONObject("maximumRetailPrice");
                         JSONObject quote3=quote.getJSONObject("flipkartSpecialPrice");
-//                        JSONObject quote4=quote.getJSONObject("categorySpecificInfoV1");
+//                        JSONObject quote4=quote.getJSONObject("categorySpecificInfoV1"); */
                         // JSONObject quote4=quote.getJSONObject("inStock");
                         //  JSONObject quote1=secondArray.getJSONObject("imageUrls");
 //                        if(resultSet==null) {
                         //    resultSet=quote.getString("title");
-                        products.title = quote.getString("title");
-                        products.produrl=quote.getString("productUrl");
+                        products.title = dotdprod.getString("title");
+                        products.produrl=dotdprod.getString("url");
+                        products.desc=dotdprod.getString("description");
+                        products.imgUrl=images1.getString("url");
                         //  products.desc=quote.getString("productDescription");
-                        products.imgUrl=quote1.getString("400x400");
-                        products.price=quote2.getString("amount");
-                        products.flipkartSellingPrice=quote3.getString("amount");
+                        // products.imgUrl=quote1.getString("400x400");
+                        //products.price=quote2.getString("amount");
+                        //products.flipkartSellingPrice=quote3.getString("amount");
 
                         //products.inStock=quote4.getString("amount");
                         data.add(products);
@@ -440,12 +443,12 @@ MainActivity extends AppCompatActivity
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             recyclerView=findViewById(R.id.recyclerView);
-      //      recyclerView.setLayoutManager(new VegaLayoutManager());
+            //      recyclerView.setLayoutManager(new VegaLayoutManager());
             recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL,false));
-            adapterProducts=new AdapterProducts(MainActivity.this,data);
-            adapterProducts.notifyDataSetChanged();
+            adapterOffers=new AdapterOffers(MainActivity.this,data);
+            adapterOffers.notifyDataSetChanged();
             recyclerView.invalidate();
-            recyclerView.setAdapter(adapterProducts);
+            recyclerView.setAdapter(adapterOffers);
 //            adapterProducts.notifyDataSetChanged();
             //recyclerView.invalidate();
             //recyclerView.invaldate();
@@ -453,5 +456,108 @@ MainActivity extends AppCompatActivity
 //            recyclerView.setLayoutManager(new VegaLayoutManager());
         }
     }
+
+
+    class Task2 extends AsyncTask<String,Void,String>
+    {
+
+
+        String jsonstr="";
+        String line= "";
+        String imgurl="";
+        String resultSet=null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+//            progressBar.setVisibility(View.VISIBLE);
+
+
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                URL url = new URL(strings[0]);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                //connection.setRequestMethod("GET");
+                connection.setRequestProperty("Fk-Affiliate-Id", "akashdeveloper");
+                connection.setRequestProperty("Fk-Affiliate-Token", "281eb157bf61470b91ba4fa9a2cdc98e");
+                connection.connect();
+                InputStream is = connection.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+
+//                List<Products> data=new ArrayList<>();
+
+
+                while ((line = br.readLine()) != null)
+                {
+                    jsonstr+=line +"\n";
+                }
+            } catch (MalformedURLException e) {
+                //   Toast.makeText(MainActivity.this, "URL Malformed", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            } catch (IOException e) {
+                // Toast.makeText(MainActivity.this,"Connection IOException", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+            if(jsonstr!=null){
+                try{
+                    JSONObject jsonObject=new JSONObject(jsonstr);
+                    JSONArray array=jsonObject.getJSONArray("allOffersList");
+                    for(int i=0;i<20;i++) {
+                        //Public  List<Products> data=new ArrayList<>();
+                        Productsoffers products=new Productsoffers();
+                        JSONObject offerprod = array.getJSONObject(i);
+                        JSONArray images = offerprod.getJSONArray("imageUrls");
+                        JSONObject images1 = images.getJSONObject(0);
+                        /*JSONObject quote = firstarray.getJSONObject("productBaseInfoV1");
+                        JSONObject quote1=quote.getJSONObject("imageUrls");
+                        JSONObject quote2=quote.getJSONObject("maximumRetailPrice");
+                        JSONObject quote3=quote.getJSONObject("flipkartSpecialPrice");
+//                        JSONObject quote4=quote.getJSONObject("categorySpecificInfoV1"); */
+                        // JSONObject quote4=quote.getJSONObject("inStock");
+                        //  JSONObject quote1=secondArray.getJSONObject("imageUrls");
+//                        if(resultSet==null) {
+                        //    resultSet=quote.getString("title");
+                        products.title = offerprod.getString("title");
+                        products.produrl=offerprod.getString("url");
+                        products.desc=offerprod.getString("description");
+                        products.imgUrl=images1.getString("url");
+                        //  products.desc=quote.getString("productDescription");
+                        // products.imgUrl=quote1.getString("400x400");
+                        //products.price=quote2.getString("amount");
+                        //products.flipkartSellingPrice=quote3.getString("amount");
+
+                        //products.inStock=quote4.getString("amount");
+                        data1.add(products);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            return resultSet;
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            recyclerView1=findViewById(R.id.recyclerView1);
+            //      recyclerView.setLayoutManager(new VegaLayoutManager());
+            recyclerView1.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL,false));
+            adapterOffers=new AdapterOffers(MainActivity.this,data1);
+            adapterOffers.notifyDataSetChanged();
+            recyclerView1.invalidate();
+            recyclerView1.setAdapter(adapterOffers);
+//            adapterProducts.notifyDataSetChanged();
+            //recyclerView.invalidate();
+            //recyclerView.invaldate();
+            //recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+//            recyclerView.setLayoutManager(new VegaLayoutManager());
+        }
+    }
+
 
 }

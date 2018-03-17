@@ -3,6 +3,8 @@ package com.fc.project.edroid;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -41,7 +44,7 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         AdapterProductsRes.MyHolder myHolder=(AdapterProductsRes.MyHolder)holder;
-        ProductsRes products=data.get(position);
+        ProductsRes products=data.get(myHolder.getAdapterPosition());
         myHolder.datayugeproTitlee.setText(products.getTitle());
         String[] storename=new String[4];
         String[] price=new String[4];
@@ -53,7 +56,9 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
         price[i]=myHolder.storepriceurl[i][1];
         produrl[i]=myHolder.storepriceurl[i][2];
         }
-        if(storename[0]==null) myHolder.button1.setVisibility(View.GONE);
+        if(storename[0]==null){ myHolder.button1.setVisibility(View.GONE);
+       // removeAt(myHolder.getAdapterPosition(),position);
+        }
         else {
             myHolder.button1.setText(storename[0] + ": " + price[0]);
             myHolder.button1.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +72,7 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         }
         if(storename[1]==null) myHolder.button2.setVisibility(View.GONE);
+
         else {
             myHolder.button2.setText(storename[1] + ": " + price[1]);
             myHolder.button2.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +115,18 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     }
 
+    private void removeAt(final int adapterPosition, final int position) {
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(context, "Item removed", Toast.LENGTH_SHORT).show();
+                data.remove(adapterPosition);
+                notifyItemRemoved(adapterPosition);
+                notifyItemRangeChanged(adapterPosition, data.size());
+            }
+        });
+    }
 
 
     @Override

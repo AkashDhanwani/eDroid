@@ -20,7 +20,7 @@
             android:padding="10dp">
 
             <ImageView
-                android:id="@+id/FlipkartprooImg"
+                android:id="@+id/FkImg"
                 android:layout_width="60dp"
                 android:layout_height="100dp"
                 android:layout_alignParentStart="true"
@@ -29,13 +29,13 @@
                 android:background="@android:color/background_light" />
 
             <TextView
-                android:id="@+id/FlipkartproTitlee"
+                android:id="@+id/FkTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
-                android:layout_toRightOf="@+id/FlipkartprooImg"
+                android:layout_toRightOf="@+id/FkImg"
                 android:paddingLeft="10dp"
                 android:text="asd"
                 android:textSize="15sp"
@@ -57,10 +57,10 @@
                 android:id="@+id/FlipkartproPriceWords"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/FlipkartproTitlee"
+                android:layout_below="@+id/FkTitle"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="3dp"
-                android:layout_toRightOf="@+id/FlipkartprooImg"
+                android:layout_toRightOf="@+id/FkImg"
                 android:padding="5dp"
                 android:text="@string/maxPrice"
                 android:textSize="13sp" />
@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/FlipkartproPriceWords"
-                android:layout_below="@+id/FlipkartproTitlee"
+                android:layout_below="@+id/FkTitle"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/FlipkartproPriceWords"
                 android:padding="5dp"
@@ -86,7 +86,7 @@
                 android:layout_below="@+id/FlipkartproPriceWords"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="1dp"
-                android:layout_toRightOf="@+id/FlipkartprooImg"
+                android:layout_toRightOf="@+id/FkImg"
                 android:padding="3dp"
                 android:text="@string/flipkartSellngPrice"
                 android:textSize="13sp" />

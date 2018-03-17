@@ -81,7 +81,7 @@ public class nav2Activity extends AppCompatActivity
                         flipkartFragment.refresh(query);
                         amazonFragment.refresh(query);
                         ebayFragment.refresh(query);
-                    //    datayugeFragment.refresh(query);
+                        datayugeFragment.refresh(query);
                         Toast.makeText(nav2Activity.this, "Searching for " + query, Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -172,7 +172,7 @@ public class nav2Activity extends AppCompatActivity
     }
 
     private class SectionsPagerAdapter extends FragmentPagerAdapter {
-        String titles[]=new String[]{"flipkart","amazon","ebay"};
+        String titles[]=new String[]{"flipkart","amazon","ebay","others"};
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -193,17 +193,17 @@ public class nav2Activity extends AppCompatActivity
                 case 2:
                     ebayFragment=new EbayFragment(query);
                     return ebayFragment;
-            /*    case 3:
+                case 3:
                     datayugeFragment=new DatayugeFragment(query);
                     return datayugeFragment;
-*/
+
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
     }
 }

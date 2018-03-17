@@ -40,7 +40,7 @@ public class DatayugeFragment extends Fragment {
     TextView tvList;
     ProgressBar pb;
     Button btnSearch;
-    String Appid="hhUP4ZbI8aQ1Tf0ufyoZBBH9E3KhG7DwfSK";
+    String Appid="FwtyhRJJw82K0XEyOdd1JtjKpZXpEYjsy9S";
     View view;
     String query;
     private RecyclerView recyclerView;
@@ -101,7 +101,7 @@ public class DatayugeFragment extends Fragment {
                         String[][] pricestoresurl=new String[4][3];
                         JSONObject f1=data.getJSONObject(i);
                         String pid=f1.getString("product_id");
-                        String jsonstr1 = connection("https://price-api.datayuge.com/api/v1/compare/detail?api_key=hhUP4ZbI8aQ1Tf0ufyoZBBH9E3KhG7DwfSK&id="+pid);
+                        String jsonstr1 = connection("https://price-api.datayuge.com/api/v1/compare/detail?api_key=FwtyhRJJw82K0XEyOdd1JtjKpZXpEYjsy9S&id="+pid);
                         JSONObject jsonObject1=new JSONObject(jsonstr1);
                         JSONObject data1=jsonObject1.getJSONObject("data");
 
@@ -120,12 +120,18 @@ public class DatayugeFragment extends Fragment {
                                 String name=store1.getString("product_store");
                                 String price=store1.getString("product_price");
                                 String url=store1.getString("product_store_url");
-      pricestoresurl[n]= new String[] {name,price,url } ;
+                                pricestoresurl[n]= new String[] {name,price,url } ;
                               n++;
                             }
                             products.prods=pricestoresurl;
+                        }
+                        for(int j=0;j<n;j++){
+                            if(pricestoresurl[j]==null){}
+                            else{ data123.add(products); break; }
+                        }
 
-                        }  data123.add(products);
+
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
