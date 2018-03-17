@@ -137,6 +137,9 @@ public class AuthActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Please Enter Valid credentials "+task.getException(), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             }
