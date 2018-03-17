@@ -12,8 +12,8 @@ public class Productsoffers {
     public String produrl;
     public String[] Starttime=new String[2];
     public String[] Endtime=new String[2];
-    public long startmil=0;
-    public long endmil=0;
+    public long startmil;
+    public long endmil;
     public Productsoffers() {
 
     }

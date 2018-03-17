@@ -66,6 +66,8 @@ MainActivity extends AppCompatActivity
     FirebaseAuth mAuth;
     private RecyclerView recyclerView,recyclerView1;
     private AdapterOffers adapterOffers;
+    private AdapterDotd adapterDod;
+
     String[] productnames={"iphone","dell","nokia","samsung"};
     public List<Productsoffers> data=new ArrayList<>();
     public List<Productsoffers> data1=new ArrayList<>();
@@ -445,10 +447,10 @@ MainActivity extends AppCompatActivity
             recyclerView=findViewById(R.id.recyclerView);
             //      recyclerView.setLayoutManager(new VegaLayoutManager());
             recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL,false));
-            adapterOffers=new AdapterOffers(MainActivity.this,data);
-            adapterOffers.notifyDataSetChanged();
+            adapterDod=new AdapterDotd(MainActivity.this,data);
+            adapterDod.notifyDataSetChanged();
             recyclerView.invalidate();
-            recyclerView.setAdapter(adapterOffers);
+            recyclerView.setAdapter(adapterDod);
 //            adapterProducts.notifyDataSetChanged();
             //recyclerView.invalidate();
             //recyclerView.invaldate();
