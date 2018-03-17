@@ -10,27 +10,20 @@ public class Productsoffers {
     public String imgUrl;
     public String desc;
     public String produrl;
-    public String[] Starttime=new String[2];
     public String[] Endtime=new String[2];
-    public long startmil;
     public long endmil;
     public Productsoffers() {
 
     }
 
-    public Productsoffers(String title, String imgUrl, String desc,String produrl,long startmil,long endmil) {
+    public Productsoffers(String title, String imgUrl, String desc,String produrl,long endmil) {
         this.title = title;
         this.imgUrl = imgUrl;
         this.desc = desc;
         this.produrl=produrl;
-        this.startmil=startmil;
         this.endmil=endmil;
     }
 
-
-    public String[] getStarttime() {
-        datetime(startmil,Starttime);
-        return Starttime; }
 
     public String[] getEndtime() {
         datetime(endmil, Endtime);
