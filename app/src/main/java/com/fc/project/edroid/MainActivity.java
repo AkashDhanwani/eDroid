@@ -482,15 +482,11 @@ MainActivity extends AppCompatActivity
             try {
                 URL url = new URL(strings[0]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                //connection.setRequestMethod("GET");
                 connection.setRequestProperty("Fk-Affiliate-Id", "akashdeveloper");
                 connection.setRequestProperty("Fk-Affiliate-Token", "281eb157bf61470b91ba4fa9a2cdc98e");
                 connection.connect();
                 InputStream is = connection.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
-
-
-//                List<Products> data=new ArrayList<>();
 
 
                 while ((line = br.readLine()) != null)
@@ -517,7 +513,6 @@ MainActivity extends AppCompatActivity
                         products.title = offerprod.getString("title");
                         products.produrl=offerprod.getString("url");
                         products.desc=offerprod.getString("description");
-                        products.startmil=offerprod.getLong("startTime");
                         products.endmil=offerprod.getLong("endTime");
                         products.imgUrl=images1.getString("url");
                         data1.add(products);
