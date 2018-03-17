@@ -64,7 +64,7 @@ public class AdapterOffers extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     class MyHolder extends RecyclerView.ViewHolder
     {
-        String produrl,imgurl,title,desc;
+        String produrl,imgurl,title;
         String[] endtime=new String[2];
         ImageView FkImg;
         TextView FkTitle,FkDesc,FkEndtime;

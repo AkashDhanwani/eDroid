@@ -86,6 +86,7 @@ ProgressBar pb;
         view = inflater.inflate(R.layout.fragment_amazon,container,false);
         pb=view.findViewById(R.id.pb);
         recyclerView=view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new VegaLayoutManager());
 
         try {
             helper = SignedRequestsHelper.getInstance(ENDPOINT, ACCESS_KEY_ID, SECRET_KEY);
@@ -103,14 +104,14 @@ ProgressBar pb;
         i=1;
                 callPages(i,product);
 
-           /* recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
+            recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
                 @Override
                 public void onLoadMore() {
 
                     callPages(i+1,product);
-                    //recyclerView.smoothScrollToPosition();
+
                 }
-            }); */
+            });
 
 
         return view;
@@ -150,6 +151,7 @@ ProgressBar pb;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        i=1;
         flag=0;
         data.clear();
         recyclerView.setVisibility(view.GONE);
@@ -160,18 +162,7 @@ ProgressBar pb;
         product= producttemp[producttemp.length-1]+" "+producttemp[producttemp.length-2];
 
         callPages(i,product);
-        /*recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
-            @Override
-            public void onLoadMore() {
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        callPages(i+1,product);
-                    }
-                }, 5000);
 
-            }
-        }); */
 
     }
 
@@ -282,7 +273,7 @@ ProgressBar pb;
             super.onPostExecute(s);
             //tvList.setText(s);
 
-            recyclerView.setLayoutManager(new VegaLayoutManager());
+            //recyclerView.setLayoutManager(new VegaLayoutManager());
             adapterProducts=new AdapterProductsAma(getActivity(),data);
             recyclerView.setOnFlingListener(null);
             if(getActivity()!=null){

@@ -1,6 +1,5 @@
 package com.fc.project.edroid;
 
-
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -24,9 +23,7 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
 
         int visibleItemCount = recyclerView.getChildCount();
         int totalItemCount = recyclerView.getLayoutManager().getItemCount();
-        //int firstVisibleItem = ((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
-        int firstVisibleItem = ((VegaLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
-
+        int firstVisibleItem = ((VegaLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
 
         if (mLoading) {
             if (totalItemCount > mPreviousTotal) {
@@ -34,8 +31,9 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
                 mPreviousTotal = totalItemCount;
             }
         }
-        int visibleThreshold = 9;
-        if (!mLoading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)) {
+        int visibleThreshold = 10;
+        if (!mLoading && (totalItemCount - visibleItemCount)
+                <= (firstVisibleItem + visibleThreshold)) {
             // End has been reached
 
             onLoadMore();
