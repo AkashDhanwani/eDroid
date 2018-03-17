@@ -1,6 +1,7 @@
 package com.fc.project.edroid;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,6 @@ public class Disclaimer extends AppCompatActivity {
     }
 
     public void amazon(View view) {
-      //TODO intent to amazon website/app
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.amazon.in")));
     }
 }

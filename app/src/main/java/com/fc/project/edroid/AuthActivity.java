@@ -123,7 +123,7 @@ public class AuthActivity extends AppCompatActivity {
             if(btn.getProgress() < 100){
                 btn.setProgress(btn.getProgress() + 15);
                 et_email.setEnabled(false);
-                et_pass.setEnabled(false);
+                et_pass.setEnabled(true);
             }
             mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
@@ -132,13 +132,14 @@ public class AuthActivity extends AppCompatActivity {
                     {
                         currentuser=mAuth.getCurrentUser();
                         String userEmail=currentuser.getEmail();
-                        Toast.makeText(getApplicationContext(), "Login successful with email id"+userEmail, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Login successful with email id "+userEmail, Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                         startActivity(intent);
                         finish();
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Please Enter Valid credentials "+task.getException(), Toast.LENGTH_SHORT).show();
+
                     }
                 }
             });
