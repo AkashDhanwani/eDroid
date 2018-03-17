@@ -9,5 +9,7 @@
     <color name="btn">#f74848</color>
     <color name="btnNotPressed">#019e1b</color>
     <color name="offerbg">#b9e4c0</color>
+    <color name="offercolor">#251623</color>
+    <color name="offercolorTitle">#9d4adf</color>
 </resources>
 <!-- <color name="colorPrimaryDark">#9d4adf</color>-->

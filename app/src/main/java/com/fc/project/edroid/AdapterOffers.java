@@ -56,7 +56,7 @@ public class AdapterOffers extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             myHolder.endtime = products.getEndtime();
 
             myHolder.FkStarttime.setText("Start: " + myHolder.Starttime[0] + " : " + myHolder.Starttime[1]);
-            myHolder.FkEndtime.setText("End: " + myHolder.endtime[0] + " : " + myHolder.endtime[1]);
+            myHolder.FkEndtime.setText("End Of Offer at: " + myHolder.endtime[0] + " : " + myHolder.endtime[1]);
 
 
 
