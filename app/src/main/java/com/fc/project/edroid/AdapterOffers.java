@@ -33,7 +33,7 @@ public class AdapterOffers extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //View view=inflater.inflate(R.layout.product_file,parent,false);
-        View view=inflater.inflate(R.layout.mainpage_offer_file,parent,false);
+        View view=inflater.inflate(R.layout.offer_file,parent,false);
         MyHolder holder=new MyHolder(view);
         return holder;
     }
