@@ -53,20 +53,50 @@ public class FlipkartFragment extends Fragment {
          recyclerView=view.findViewById(R.id.recyclerView);
          pb=view.findViewById(R.id.pb);
          recyclerView.setVisibility(view.GONE);
-            String product = (String) query;
-            Task1 t1 = new Task1();
-            t1.execute("https://affiliate-api.flipkart.net/affiliate/1.0/search.json?query=" + product + "&resultCount=10");
-            return view;
+         recyclerView.setLayoutManager(new VegaLayoutManager());
+
+         final String product = (String) query;
+         final int[] i = {0};
+        callpages(product);
+
+         recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
+             @Override
+             public void onLoadMore() {
+                i[0] = i[0] + 1;
+                 callpages(product+" "+Integer.toString(i[0]));
+
+             }
+         });
+
+
+
+         return view;
         }
 
-    public void refresh(String query) {
+    private void callpages(String product) {
+        Task1 t1 = new Task1();
+        t1.execute("https://affiliate-api.flipkart.net/affiliate/1.0/search.json?query=" + product + "&resultCount=10");
+
+    }
+
+    public void refresh(final String query) {
         pb.setVisibility(view.VISIBLE);
         recyclerView.setVisibility(view.GONE);
             data.clear();
-        String product = query;
-        Task1 t1 = new Task1();
-        t1.execute("https://affiliate-api.flipkart.net/affiliate/1.0/search.json?query=" + product + "&resultCount=10");
+        final String product = query;
+        callpages(product);
         Toast.makeText(getActivity(), "This is refresh method", Toast.LENGTH_SHORT).show();
+        final int[] i = {0};
+        recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
+            @Override
+            public void onLoadMore() {
+                i[0] = i[0] + 1;
+                callpages(product+" "+Integer.toString(i[0]));
+
+            }
+        });
+
+
     }
 
 
@@ -148,8 +178,6 @@ public class FlipkartFragment extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-
-            recyclerView.setLayoutManager(new VegaLayoutManager());
             if (getActivity() != null) {
                 adapterProducts=new AdapterProducts(getActivity(),data);
                 adapterProducts.notifyDataSetChanged();

@@ -113,9 +113,6 @@ else {
             try {
                 URL url = new URL(strings[0]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                //connection.setRequestMethod("GET");
-                //connection.setRequestProperty("Fk-Affiliate-Id", "akashdeveloper");
-                //connection.setRequestProperty("Fk-Affiliate-Token", "281eb157bf61470b91ba4fa9a2cdc98e");
                 connection.connect();
                 InputStream is = connection.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -139,7 +136,7 @@ else {
                     JSONArray search=f1.getJSONArray("searchResult");
                     JSONObject f2=search.getJSONObject(0);
                     JSONArray item=f2.getJSONArray("item");
-                    for(int i=0;i<10;i++) {
+                    for(int i=0;i<25;i++) {
                         JSONObject f3 = item.getJSONObject(i);
                         JSONArray title = f3.getJSONArray("title");
                         JSONArray itemlink = f3.getJSONArray("viewItemURL");
