@@ -21,7 +21,7 @@ import java.util.List;
 
 public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-
+    int flag=1;
     private Context context;
     private LayoutInflater inflater;
     List<ProductsRes> data = Collections.emptyList();
@@ -140,7 +140,7 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
         ImageView datayugeprooImg;
         String[][] storepriceurl=new String[4][3];
         TextView datayugeproTitlee;
-        Button button1,button2,button3,button4;
+        Button button1,button2,button3,button4,btn;
         public MyHolder(View itemView) {
             super(itemView);
             button1=itemView.findViewById(R.id.button1);
@@ -149,6 +149,25 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
             button4=itemView.findViewById(R.id.button4);
             datayugeprooImg=itemView.findViewById(R.id.datayugeprooImg);
             datayugeproTitlee=itemView.findViewById(R.id.datayugeproTitlee);
+            btn=itemView.findViewById(R.id.btnDatayugeBookMark);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(flag==1)
+                    {
+                        //button.setBackgroundColor(Color.CYAN);
+                        btn.setBackgroundResource(R.drawable.ic_star_black_24dp);
+                        Toast.makeText(context.getApplicationContext(), "set bookmark", Toast.LENGTH_SHORT).show();
+                        flag=0;
+                    }
+                    else
+                    {
+                        btn.setBackgroundResource(R.drawable.ic_star_border_black_24dp);
+                   //     Toast.makeText(context.getApplicationContext(), "cancel bookmark", Toast.LENGTH_SHORT).show();
+                        flag=1;
+                    }
+                }
+            });
             //EbayproPrice=itemView.findViewById(R.id.EbayproPrice);
 /*
             itemView.setOnClickListener(new View.OnClickListener() {

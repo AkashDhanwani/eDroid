@@ -104,7 +104,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     else
                     {
                         btnBookMark.setBackgroundResource(R.drawable.ic_star_border_black_24dp);
-                        Toast.makeText(context.getApplicationContext(), "cancel bookmark", Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(context.getApplicationContext(), "cancel bookmark", Toast.LENGTH_SHORT).show();
                         flag=1;
                     }
                 }

@@ -8,7 +8,7 @@
     <android.support.v7.widget.CardView
         android:id="@+id/AmazoncardView"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:elevation="10dp">
 
@@ -49,20 +49,20 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="3dp"
                 android:padding="3dp"
-                android:textSize="13dp"
-                android:text="@string/AmazonSellngPrice" />
+                android:text="@string/AmazonSellngPrice"
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/AmazonproPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/AmazonproPriceSellingWords"
-                android:textSize="13dp"
                 android:layout_alignBottom="@+id/AmazonproPriceSellingWords"
                 android:layout_toEndOf="@+id/AmazonproPriceSellingWords"
                 android:padding="3dp"
                 android:text="@string/b"
-                android:textColor="@color/red_error" />
+                android:textColor="@color/red_error"
+                android:textSize="13dp" />
             <!--<TextView-->
             <!--android:id="@+id/AmazonproInStock"-->
             <!--android:padding="5dp"-->
@@ -72,6 +72,25 @@
             <!--android:layout_marginTop="5dp"-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content" />-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/AmazonproPrice"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@+id/AmazonprooImg"
+                android:padding="3dp"
+                android:id="@+id/tt"
+                android:text="@string/setb"
+                android:textSize="13dp" />
+            <Button
+                android:id="@+id/btnAmazonBookMark"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/AmazonproPrice"
+                android:layout_toRightOf="@+id/tt"
+                android:layout_width="30dp"
+                android:background="@drawable/ic_star_border_black_24dp"
+                android:layout_height="30dp" />
 
         </RelativeLayout>
 

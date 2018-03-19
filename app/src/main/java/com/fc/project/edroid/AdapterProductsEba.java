@@ -8,8 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -22,7 +24,7 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
     private Context context;
     private LayoutInflater inflater;
     List<ProductsEba> data = Collections.emptyList();
-
+    int flag=1;
     public AdapterProductsEba(Context context, List<ProductsEba> data) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
@@ -68,12 +70,31 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
         ImageView EbayprooImg;
         String produrl;
         TextView EbayproTitlee,EbayproPrice;
+        Button btn;
         public MyHolder(View itemView) {
             super(itemView);
             EbayprooImg=itemView.findViewById(R.id.EbayprooImg);
             EbayproTitlee=itemView.findViewById(R.id.EbayproTitlee);
             EbayproPrice=itemView.findViewById(R.id.EbayproPrice);
-
+            btn=itemView.findViewById(R.id.btnEbayBookMark);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(flag==1)
+                    {
+                        //button.setBackgroundColor(Color.CYAN);
+                        btn.setBackgroundResource(R.drawable.ic_star_black_24dp);
+                        Toast.makeText(context.getApplicationContext(), "set bookmark", Toast.LENGTH_SHORT).show();
+                        flag=0;
+                    }
+                    else
+                    {
+                        btn.setBackgroundResource(R.drawable.ic_star_border_black_24dp);
+                        //Toast.makeText(context.getApplicationContext(), "cancel bookmark", Toast.LENGTH_SHORT).show();
+                        flag=1;
+                    }
+                }
+            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

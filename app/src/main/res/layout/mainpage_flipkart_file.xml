@@ -36,7 +36,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
                 android:layout_toRightOf="@+id/FkImg"
-                android:paddingLeft="10dp"
+                android:paddingLeft="7dp"
                 android:text="asd"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/FlipkartproPriceWords"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="1dp"
                 android:layout_toRightOf="@+id/FkImg"
                 android:padding="3dp"
@@ -104,25 +104,46 @@
                 android:textColor="@color/red_error"
                 android:textSize="13sp" />
 
+            <!--<TextView-->
+                <!--android:layout_toRightOf="@+id/FkImg"-->
+                <!--android:layout_below="@+id/FlipkartproSellingPrice"-->
+                <!--android:text="@string/setb"-->
+                <!--android:id="@+id/setb"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginTop="1dp"-->
+                <!--android:padding="3dp"-->
+                <!--android:textSize="13sp"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+
             <TextView
-                android:layout_toRightOf="@+id/FkImg"
-                android:layout_below="@+id/FlipkartproSellingPrice"
-                android:text="@string/setb"
-                android:id="@+id/setb"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="1dp"
-                android:padding="3dp"
-                android:textSize="13sp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/FlipkartproSellingPrice"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@+id/FkImg"
+                android:padding="3dp"
+                android:id="@+id/tt"
+                android:text="@string/setb"
+                android:textSize="13dp" />
             <Button
                 android:id="@+id/btnBookMark"
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/FlipkartproSellingPrice"
-                android:layout_toRightOf="@+id/setb"
-                android:layout_width="wrap_content"
+                android:layout_toRightOf="@+id/tt"
+                android:layout_width="30dp"
                 android:background="@drawable/ic_star_border_black_24dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="30dp" />
+
+            <!--<Button-->
+                <!--android:id="@+id/btnBookMark"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:layout_below="@+id/FlipkartproPrice"-->
+                <!--android:layout_toRightOf="@+id/FlipkartproSellingPrice"-->
+                <!--android:layout_width="30dp"-->
+                <!--android:background="@drawable/ic_star_border_black_24dp"-->
+                <!--android:layout_height="30dp" />-->
             <!--<TextView-->
             <!--android:id="@+id/FlipkartproInStock"-->
             <!--android:padding="5dp"-->
