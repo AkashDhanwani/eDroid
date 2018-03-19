@@ -8,8 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -28,7 +30,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
    List<Products> data= Collections.emptyList();
    Products current;
    int currentpos=0;
-
+    int flag=1;
 
     public AdapterProducts(Context context, List<Products>data) {
         this.context = context;
@@ -74,6 +76,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
         String produrl,imgurl,title,desc;
         String[] specs=new String[5];
         ImageView imageView,FlipkartprooImg;
+        Button btnBookMark;
         TextView proDesc,proTitle,FlipkartproTitlee,FlipkartproDescc,FlipkartproPrice,FlipkartproSellingPrice,FlipkartproInStock;
         public MyHolder(View itemView) {
             super(itemView);
@@ -86,8 +89,26 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
             FlipkartproPrice=itemView.findViewById(R.id.FlipkartproPrice);
             FlipkartproSellingPrice=itemView.findViewById(R.id.FlipkartproSellingPrice);
             FlipkartproPrice.setPaintFlags(FlipkartproPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);     //?
+            btnBookMark=itemView.findViewById(R.id.btnBookMark);
          //   FlipkartproInStock=itemView.findViewById(R.id.FlipkartproInStock);
-
+            btnBookMark.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(flag==1)
+                    {
+                        //button.setBackgroundColor(Color.CYAN);
+                        btnBookMark.setBackgroundResource(R.drawable.ic_star_black_24dp);
+                        Toast.makeText(context.getApplicationContext(), "set bookmark", Toast.LENGTH_SHORT).show();
+                        flag=0;
+                    }
+                    else
+                    {
+                        btnBookMark.setBackgroundResource(R.drawable.ic_star_border_black_24dp);
+                        Toast.makeText(context.getApplicationContext(), "cancel bookmark", Toast.LENGTH_SHORT).show();
+                        flag=1;
+                    }
+                }
+            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
