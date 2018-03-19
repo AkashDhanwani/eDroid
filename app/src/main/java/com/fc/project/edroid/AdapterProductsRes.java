@@ -26,10 +26,14 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
     private LayoutInflater inflater;
     List<ProductsRes> data = Collections.emptyList();
 
+    final MyDatabaseHelper dbh;
+
     public AdapterProductsRes(Context context, List<ProductsRes> data) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.data = data;
+        dbh=new MyDatabaseHelper(context);
+
     }
 
     @Override
@@ -46,6 +50,7 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
         AdapterProductsRes.MyHolder myHolder=(AdapterProductsRes.MyHolder)holder;
         ProductsRes products=data.get(myHolder.getAdapterPosition());
         myHolder.datayugeproTitlee.setText(products.getTitle());
+        myHolder.title=products.getTitle();
         String[] storename=new String[4];
         String[] price=new String[4];
         final String[] produrl=new String[4];
@@ -138,6 +143,7 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
     {
 
         ImageView datayugeprooImg;
+        String title;
         String[][] storepriceurl=new String[4][3];
         TextView datayugeproTitlee;
         Button button1,button2,button3,button4,btn;
@@ -158,6 +164,7 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
                         //button.setBackgroundColor(Color.CYAN);
                         btn.setBackgroundResource(R.drawable.ic_star_black_24dp);
                         Toast.makeText(context.getApplicationContext(), "set bookmark", Toast.LENGTH_SHORT).show();
+                        dbh.addBookmark(title);
                         flag=0;
                     }
                     else

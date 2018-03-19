@@ -47,6 +47,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -262,6 +263,11 @@ MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            String query = data.getStringExtra("title");
+            serachItem.setText(query);
+        }
         switch (requestCode)
         {
             case 10:
@@ -345,12 +351,10 @@ MainActivity extends AppCompatActivity
              startActivity(intent);
 
         }
-        else if(id==R.id.nav_logout)
-         {
-             mAuth.signOut();
-             Intent intent=new Intent(getApplicationContext(),AuthActivity.class);
-             startActivity(intent);
-             finish();
+         else if (id == R.id.nav_bookmark) {
+             Intent intent=new Intent(MainActivity.this,bookmark.class);
+             startActivityForResult(intent, 1 );
+
          }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -542,6 +546,7 @@ MainActivity extends AppCompatActivity
 //            recyclerView.setLayoutManager(new VegaLayoutManager());
         }
     }
+
 
 
 }

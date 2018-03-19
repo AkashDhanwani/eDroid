@@ -32,10 +32,16 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
    int currentpos=0;
     int flag=1;
 
+    final MyDatabaseHelper dbh;
+
+
+
     public AdapterProducts(Context context, List<Products>data) {
         this.context = context;
         this.inflater =LayoutInflater.from(context);
         this.data=data;
+        dbh=new MyDatabaseHelper(context);
+
     }
 
     @Override
@@ -43,6 +49,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
         //View view=inflater.inflate(R.layout.product_file,parent,false);
         View view=inflater.inflate(R.layout.mainpage_flipkart_file,parent,false);
         MyHolder holder=new MyHolder(view);
+
         return holder;
     }
 
@@ -90,6 +97,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
             FlipkartproSellingPrice=itemView.findViewById(R.id.FlipkartproSellingPrice);
             FlipkartproPrice.setPaintFlags(FlipkartproPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);     //?
             btnBookMark=itemView.findViewById(R.id.btnBookMark);
+
          //   FlipkartproInStock=itemView.findViewById(R.id.FlipkartproInStock);
             btnBookMark.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -99,6 +107,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         //button.setBackgroundColor(Color.CYAN);
                         btnBookMark.setBackgroundResource(R.drawable.ic_star_black_24dp);
                         Toast.makeText(context.getApplicationContext(), "set bookmark", Toast.LENGTH_SHORT).show();
+                        dbh.addBookmark(title);
                         flag=0;
                     }
                     else

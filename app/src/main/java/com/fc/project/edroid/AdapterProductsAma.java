@@ -24,11 +24,13 @@ public class AdapterProductsAma extends RecyclerView.Adapter<RecyclerView.ViewHo
     private Context context;
     private LayoutInflater inflater;
     List<ProductsAma> data= Collections.emptyList();
+    final MyDatabaseHelper dbh;
 
     public AdapterProductsAma(Context context, List<ProductsAma>data) {
         this.context = context;
         this.inflater =LayoutInflater.from(context);
         this.data=data;
+        dbh=new MyDatabaseHelper(context);
     }
 
     @Override
@@ -91,6 +93,7 @@ public class AdapterProductsAma extends RecyclerView.Adapter<RecyclerView.ViewHo
                         //button.setBackgroundColor(Color.CYAN);
                         btn.setBackgroundResource(R.drawable.ic_star_black_24dp);
                         Toast.makeText(context.getApplicationContext(), "set bookmark", Toast.LENGTH_SHORT).show();
+                        dbh.addBookmark(title);
                         flag=0;
                     }
                     else

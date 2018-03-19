@@ -36,7 +36,8 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".DetailInfoActivity" />
-        <activity android:name=".Disclaimer"></activity>
+        <activity android:name=".Disclaimer" />
+        <activity android:name=".bookmark"></activity>
     </application>
 
 </manifest>

@@ -52,6 +52,8 @@ public class nav2Activity extends AppCompatActivity
 //        int page = getIntent().getIntExtra("One", defaultValue);
 //        viewPager.setCurrentItem(page);
 
+        final MyDatabaseHelper dbh=new MyDatabaseHelper(this);
+
 
         TabLayout tabLayout=(TabLayout)findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -159,6 +161,12 @@ public class nav2Activity extends AppCompatActivity
              startActivity(intent);
 
          }
+         else if (id == R.id.nav_bookmark) {
+             Intent intent=new Intent(nav2Activity.this,bookmark.class);
+             startActivityForResult(intent, 1 );
+             // startActivity(intent);
+
+         }
         else if(id==R.id.nav_logout)
          {
              mAuth.signOut();
@@ -206,4 +214,19 @@ public class nav2Activity extends AppCompatActivity
             return 4;
         }
     }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            String query = data.getStringExtra("title");
+            etsearch.setText(query);
+            flipkartFragment.refresh(query);
+            amazonFragment.refresh(query);
+            ebayFragment.refresh(query);
+            datayugeFragment.refresh(query);
+
 }
+    }
+
+    }

@@ -25,10 +25,12 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
     private LayoutInflater inflater;
     List<ProductsEba> data = Collections.emptyList();
     int flag=1;
+    final MyDatabaseHelper dbh;
     public AdapterProductsEba(Context context, List<ProductsEba> data) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.data = data;
+        dbh=new MyDatabaseHelper(context);
     }
 
     @Override
@@ -46,6 +48,7 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
         AdapterProductsEba.MyHolder myHolder=(AdapterProductsEba.MyHolder)holder;
         ProductsEba products=data.get(position);
         myHolder.EbayproTitlee.setText(products.getTitle());
+        myHolder.title=products.getTitle();
         //myHolder.AmazonproDescc.setText(products.getDesc());
         myHolder.EbayproPrice.setText("\u20B9"+products.getPrice());
         //myHolder.AmazonproSellingPrice.setText("\u20B9"+products.getFlipkartSellingPrice());
@@ -69,6 +72,7 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         ImageView EbayprooImg;
         String produrl;
+        String title;
         TextView EbayproTitlee,EbayproPrice;
         Button btn;
         public MyHolder(View itemView) {
@@ -85,6 +89,7 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
                         //button.setBackgroundColor(Color.CYAN);
                         btn.setBackgroundResource(R.drawable.ic_star_black_24dp);
                         Toast.makeText(context.getApplicationContext(), "set bookmark", Toast.LENGTH_SHORT).show();
+                        dbh.addBookmark(title);
                         flag=0;
                     }
                     else
