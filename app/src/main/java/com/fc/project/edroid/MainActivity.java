@@ -85,11 +85,11 @@ MainActivity extends AppCompatActivity
 
 //TODO extract (categorySpeciificInfoV1,detailedSpecs)
         //TODO handle nullPointerEXception
-        viewPager=findViewById(R.id.viewPager);
-        ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(this);
-        viewPager.setAdapter(viewPagerAdapter);
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new MyTimerTask(),2000,4000);
+//        viewPager=findViewById(R.id.viewPager);
+//        ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(this);
+//        viewPager.setAdapter(viewPagerAdapter);
+//        Timer timer = new Timer();
+//        timer.scheduleAtFixedRate(new MyTimerTask(),2000,4000);
 //        btnSearch=findViewById(R.id.btnsearch);
 //        btnSpeak=findViewById(R.id.btnspeak);
         mAuth=FirebaseAuth.getInstance();
@@ -247,35 +247,35 @@ MainActivity extends AppCompatActivity
     }
 
 
-    public class MyTimerTask extends TimerTask {
-        @Override
-        public void run() {
-            MainActivity.this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if(viewPager.getCurrentItem()==0)
-                    {
-                        viewPager.setCurrentItem(1);
-                    }
-                    else if (viewPager.getCurrentItem()==1)
-                    {
-                        viewPager.setCurrentItem(2);
-                    }
-                    else if (viewPager.getCurrentItem()==2)
-                    {
-                        viewPager.setCurrentItem(3);
-                    }
-                    else if (viewPager.getCurrentItem()==3)
-                    {
-                        viewPager.setCurrentItem(4);
-                    }
-                    else{
-                        viewPager.setCurrentItem(0);
-                    }
-                }
-            });
-        }
-    }
+//    public class MyTimerTask extends TimerTask {
+//        @Override
+//        public void run() {
+//            MainActivity.this.runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    if(viewPager.getCurrentItem()==0)
+//                    {
+//                        viewPager.setCurrentItem(1);
+//                    }
+//                    else if (viewPager.getCurrentItem()==1)
+//                    {
+//                        viewPager.setCurrentItem(2);
+//                    }
+//                    else if (viewPager.getCurrentItem()==2)
+//                    {
+//                        viewPager.setCurrentItem(3);
+//                    }
+//                    else if (viewPager.getCurrentItem()==3)
+//                    {
+//                        viewPager.setCurrentItem(4);
+//                    }
+//                    else{
+//                        viewPager.setCurrentItem(0);
+//                    }
+//                }
+//            });
+//        }
+//    }
     private void revealEditText(){
         View view = findViewById(R.id.Etsearch);
 
