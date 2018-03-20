@@ -83,14 +83,14 @@
                 android:id="@+id/tt"
                 android:text="@string/setb"
                 android:textSize="13dp" />
+
             <Button
                 android:id="@+id/btnAmazonBookMark"
-                android:layout_marginLeft="20dp"
-                android:layout_below="@+id/AmazonproPrice"
-                android:layout_toRightOf="@+id/tt"
                 android:layout_width="30dp"
-                android:background="@drawable/ic_star_border_black_24dp"
-                android:layout_height="30dp" />
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/tt"
+                android:background="@drawable/ic_star_border_black_24dp" />
 
         </RelativeLayout>
 

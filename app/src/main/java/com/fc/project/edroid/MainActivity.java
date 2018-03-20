@@ -382,6 +382,12 @@ MainActivity extends AppCompatActivity
              startActivity(intent);
              finish();
          }
+         else if (id == R.id.nav_bookmark) {
+             Intent intent=new Intent(MainActivity.this,bookmark.class);
+             //startActivityForResult(intent, 1 );
+              startActivity(intent);
+
+         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

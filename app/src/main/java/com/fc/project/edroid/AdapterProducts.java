@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -120,14 +122,18 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 public void onClick(View view) {
                     if(flag==1)
                     {
+                        Animation animation = AnimationUtils.loadAnimation(context, R.anim.rotate);
                         btnBookMark.setBackgroundResource(R.drawable.ic_star_black_24dp);
+                        btnBookMark.startAnimation(animation);
                         Toast.makeText(context.getApplicationContext(), "Bookmark set", Toast.LENGTH_SHORT).show();
                         dbh.addBookmark(title);
                         flag=0;
                     }
                     else
                     {
+                        Animation animation = AnimationUtils.loadAnimation(context, R.anim.rotate);
                         btnBookMark.setBackgroundResource(R.drawable.ic_star_border_black_24dp);
+                        btnBookMark.startAnimation(animation);
                         Toast.makeText(context.getApplicationContext(), "Bookmark delete", Toast.LENGTH_SHORT).show();
                         dbh.delBookmark(title);
                         flag=1;
