@@ -1,6 +1,7 @@
 package com.fc.project.edroid;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
 
 import static android.widget.AdapterView.*;
 
@@ -22,10 +26,30 @@ public class bookmark extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookmark);
         lvbm=findViewById(R.id.lvbm);
-
+        SharedPreferences sharedPreferences=getSharedPreferences("firstTime",0);
+        boolean first=sharedPreferences.getBoolean("pehliBaar",false);
         final MyDatabaseHelper dbh=MyDatabaseHelper.getInstance(this);
          adapter=new ArrayAdapter(bookmark.this,android.R.layout.simple_list_item_1,dbh.getAllbookmark());
         lvbm.setAdapter(adapter);
+        if(first==false)
+        {
+            SharedPreferences.Editor editor=sharedPreferences.edit();
+            TapTargetView.showFor(this, TapTarget.forView(findViewById(R.id.lvbm),"Long Press",
+                    "To delete saved bookmark long press the title")
+            .tintTarget(true)
+            .cancelable(true)
+            .outerCircleColor(R.color.colorAccent),
+                    new TapTargetView.Listener(){
+                        @Override
+                        public void onTargetClick(TapTargetView view)
+                        {
+                            super.onTargetClick(view);
+                            Toast.makeText(bookmark.this, "You Got it!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+            editor.putBoolean("pehliBaar",true);
+            editor.commit();
+        }
         lvbm.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
