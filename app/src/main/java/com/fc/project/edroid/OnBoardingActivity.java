@@ -20,18 +20,18 @@ public class OnBoardingActivity extends AhoyOnboarderActivity {
 
         AhoyOnboarderCard card1=new AhoyOnboarderCard("Welcome User!","We are thrilled to have you on our service.", R.drawable.logo2);
         AhoyOnboarderCard card2=new AhoyOnboarderCard("Compare","Compare Prices of your Favourite products with ease", R.drawable.comapre);
-       // AhoyOnboarderCard card3=new AhoyOnboarderCard("Bookmark","Bookmark your products to keep a track on them.", R.drawable.bookmark);
+        AhoyOnboarderCard card3=new AhoyOnboarderCard("Bookmark","Bookmark your products to keep a track on them.", R.drawable.bookmark);
         AhoyOnboarderCard card4=new AhoyOnboarderCard("A little reminder","Always keep your wifi or mobile data on and now you are all set to go :)", R.drawable.wfi);
 
         card1.setBackgroundColor(R.color.black_transparent);
         card2.setBackgroundColor(R.color.black_transparent);
-        //card3.setBackgroundColor(R.color.black_transparent);
+        card3.setBackgroundColor(R.color.black_transparent);
         card4.setBackgroundColor(R.color.black_transparent);
 
         List<AhoyOnboarderCard> cards=new ArrayList<>();
         cards.add(card1);
         cards.add(card2);
-        //cards.add(card3);
+        cards.add(card3);
         cards.add(card4);
 
         for (AhoyOnboarderCard card: cards)
