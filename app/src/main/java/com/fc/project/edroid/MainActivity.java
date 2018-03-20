@@ -266,7 +266,12 @@ MainActivity extends AppCompatActivity
 
         if (requestCode == 1 && resultCode == RESULT_OK) {
             String query = data.getStringExtra("title");
-            serachItem.setText(query);
+            dataa=query;
+            Toast.makeText(MainActivity.this, "Searching for "+dataa, Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(getApplicationContext(),nav2Activity.class);
+            intent.putExtra("myExtra",dataa);
+            startActivity(intent);
+
         }
         switch (requestCode)
         {
