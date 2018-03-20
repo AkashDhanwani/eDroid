@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+
+android:layout_height="match_parent"
+tools:context="com.fc.project.edroid.bookmark">
+
+<RelativeLayout
+    android:id="@+id/r1"
+
+    android:background="@color/colorPrimary"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <View
+        android:layout_margin="1dp"
+        android:id="@+id/vvv"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#000"/>
+    <TextView
+        android:text="@string/bookmark"
+        android:id="@+id/randomtex"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_margin="5dp"
+        android:padding="4dp"
+        android:fontFamily="monospace"
+        android:textStyle="italic"
+        android:layout_below="@+id/vvv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <View
+        android:id="@+id/vvv1"
+        android:layout_margin="1dp"
+        android:layout_below="@+id/randomtex"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#000"/>
+</RelativeLayout>
+    <RelativeLayout
+        android:layout_margin="5dp"
+        android:background="@drawable/bookmark_border"
+        android:layout_below="@+id/r1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <ListView
+      android:id="@+id/lvbm"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      tools:layout_editor_absoluteX="8dp"
+      tools:layout_editor_absoluteY="8dp" />
+    </RelativeLayout>
+</RelativeLayout>

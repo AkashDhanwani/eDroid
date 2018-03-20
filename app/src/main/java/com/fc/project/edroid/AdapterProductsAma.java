@@ -8,25 +8,31 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class AdapterProductsAma extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-
+    int flag=1;
     private Context context;
     private LayoutInflater inflater;
     List<ProductsAma> data= Collections.emptyList();
+    final MyDatabaseHelper dbh;
 
     public AdapterProductsAma(Context context, List<ProductsAma>data) {
         this.context = context;
         this.inflater =LayoutInflater.from(context);
         this.data=data;
+        dbh=MyDatabaseHelper.getInstance(context);
     }
 
     @Override
@@ -56,6 +62,17 @@ public class AdapterProductsAma extends RecyclerView.Adapter<RecyclerView.ViewHo
         myHolder.specs=products.getSpecs();
 
 
+
+        ArrayList<String> marksbook=new ArrayList<String>(dbh.getAllbookmark());
+        Iterator<String> itc=marksbook.iterator();
+        while(itc.hasNext()){
+            if(itc.next().compareTo(myHolder.title)==1){
+                flag=0;
+                myHolder.btn.setBackgroundResource(R.drawable.ic_star_black_24dp);
+                break;
+            }
+        }
+
     }
 
     @Override
@@ -69,6 +86,7 @@ public class AdapterProductsAma extends RecyclerView.Adapter<RecyclerView.ViewHo
         ImageView imageView,AmazonprooImg;
         String[] specs=new String[5];
         String title,imgurl,desc,produrl;
+        Button btn;
         TextView proDesc,proTitle,AmazonproTitlee,AmazonproDescc,AmazonproPrice,AmazonproSellingPrice,FlipkartproInStock;
         public MyHolder(View itemView) {
             super(itemView);
@@ -79,6 +97,27 @@ public class AdapterProductsAma extends RecyclerView.Adapter<RecyclerView.ViewHo
             AmazonproTitlee=itemView.findViewById(R.id.AmazonproTitlee);
           //  AmazonproDescc=itemView.findViewById(R.id.AmazonproDescc);
             AmazonproPrice=itemView.findViewById(R.id.AmazonproPrice);
+            btn=itemView.findViewById(R.id.btnAmazonBookMark);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(flag==1)
+                    {
+                        //button.setBackgroundColor(Color.CYAN);
+                        btn.setBackgroundResource(R.drawable.ic_star_black_24dp);
+                        Toast.makeText(context.getApplicationContext(), "set bookmark", Toast.LENGTH_SHORT).show();
+                        dbh.addBookmark(title);
+                        flag=0;
+                    }
+                    else
+                    {
+                        btn.setBackgroundResource(R.drawable.ic_star_border_black_24dp);
+                      //  Toast.makeText(context.getApplicationContext(), "cancel bookmark", Toast.LENGTH_SHORT).show();
+                        dbh.delBookmark(title);
+                        flag=1;
+                    }
+                }
+            });
            // AmazonproSellingPrice=itemView.findViewById(R.id.AmazonproSellingPrice);
           //  AmazonproPrice.setPaintFlags(AmazonproPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             //   FlipkartproInStock=itemView.findViewById(R.id.FlipkartproInStock);

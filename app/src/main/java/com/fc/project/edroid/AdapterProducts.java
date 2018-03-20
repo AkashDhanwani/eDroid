@@ -8,13 +8,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by LakhwaniPc on 18-02-2018.
@@ -28,12 +33,18 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
    List<Products> data= Collections.emptyList();
    Products current;
    int currentpos=0;
+    int flag=1;
+
+    final MyDatabaseHelper dbh;
+
 
 
     public AdapterProducts(Context context, List<Products>data) {
         this.context = context;
         this.inflater =LayoutInflater.from(context);
         this.data=data;
+        dbh=MyDatabaseHelper.getInstance(context);
+
     }
 
     @Override
@@ -41,6 +52,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
         //View view=inflater.inflate(R.layout.product_file,parent,false);
         View view=inflater.inflate(R.layout.mainpage_flipkart_file,parent,false);
         MyHolder holder=new MyHolder(view);
+
         return holder;
     }
 
@@ -62,6 +74,18 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
         myHolder.desc=products.getDesc();
         myHolder.specs=products.getSpecs();
 
+        ArrayList<String> marksbook=new ArrayList<String>(dbh.getAllbookmark());
+        Iterator<String> itc=marksbook.iterator();
+        while(itc.hasNext()){
+           if(itc.next().compareTo(myHolder.title)==0){
+                flag=0;
+                myHolder.btnBookMark.setBackgroundResource(R.drawable.ic_star_black_24dp);
+                Toast.makeText(context.getApplicationContext(), "this is working", Toast.LENGTH_SHORT).show();
+                break;
+            }
+        }
+
+
     }
 
     @Override
@@ -73,7 +97,8 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
     {
         String produrl,imgurl,title,desc;
         String[] specs=new String[5];
-        ImageView imageView,FlipkartprooImg;
+        ImageView FlipkartprooImg;
+        Button btnBookMark;
         TextView proDesc,proTitle,FlipkartproTitlee,FlipkartproDescc,FlipkartproPrice,FlipkartproSellingPrice,FlipkartproInStock;
         public MyHolder(View itemView) {
             super(itemView);
@@ -86,8 +111,29 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
             FlipkartproPrice=itemView.findViewById(R.id.FlipkartproPrice);
             FlipkartproSellingPrice=itemView.findViewById(R.id.FlipkartproSellingPrice);
             FlipkartproPrice.setPaintFlags(FlipkartproPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);     //?
-         //   FlipkartproInStock=itemView.findViewById(R.id.FlipkartproInStock);
+            btnBookMark=itemView.findViewById(R.id.btnBookMark);
 
+
+         //   FlipkartproInStock=itemView.findViewById(R.id.FlipkartproInStock);
+            btnBookMark.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(flag==1)
+                    {
+                        btnBookMark.setBackgroundResource(R.drawable.ic_star_black_24dp);
+                        Toast.makeText(context.getApplicationContext(), "Bookmark set", Toast.LENGTH_SHORT).show();
+                        dbh.addBookmark(title);
+                        flag=0;
+                    }
+                    else
+                    {
+                        btnBookMark.setBackgroundResource(R.drawable.ic_star_border_black_24dp);
+                        Toast.makeText(context.getApplicationContext(), "Bookmark delete", Toast.LENGTH_SHORT).show();
+                        dbh.delBookmark(title);
+                        flag=1;
+                    }
+                }
+            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

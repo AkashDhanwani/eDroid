@@ -16,20 +16,26 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-
+    int flag=1;
     private Context context;
     private LayoutInflater inflater;
     List<ProductsRes> data = Collections.emptyList();
+
+    final MyDatabaseHelper dbh;
 
     public AdapterProductsRes(Context context, List<ProductsRes> data) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.data = data;
+        dbh=MyDatabaseHelper.getInstance(context);
+
     }
 
     @Override
@@ -46,6 +52,7 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
         AdapterProductsRes.MyHolder myHolder=(AdapterProductsRes.MyHolder)holder;
         ProductsRes products=data.get(myHolder.getAdapterPosition());
         myHolder.datayugeproTitlee.setText(products.getTitle());
+        myHolder.title=products.getTitle();
         String[] storename=new String[4];
         String[] price=new String[4];
         final String[] produrl=new String[4];
@@ -113,6 +120,17 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
 
 
+        ArrayList<String> marksbook=new ArrayList<String>(dbh.getAllbookmark());
+        Iterator<String> itc=marksbook.iterator();
+        while(itc.hasNext()){
+            if(itc.next().compareTo(myHolder.title)==1){
+                flag=0;
+                myHolder.btn.setBackgroundResource(R.drawable.ic_star_black_24dp);
+                Toast.makeText(context.getApplicationContext(), "this is working", Toast.LENGTH_SHORT).show();
+                break;
+            }
+        }
+
     }
 
     private void removeAt(final int adapterPosition, final int position) {
@@ -138,9 +156,10 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
     {
 
         ImageView datayugeprooImg;
+        String title;
         String[][] storepriceurl=new String[4][3];
         TextView datayugeproTitlee;
-        Button button1,button2,button3,button4;
+        Button button1,button2,button3,button4,btn;
         public MyHolder(View itemView) {
             super(itemView);
             button1=itemView.findViewById(R.id.button1);
@@ -149,6 +168,27 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
             button4=itemView.findViewById(R.id.button4);
             datayugeprooImg=itemView.findViewById(R.id.datayugeprooImg);
             datayugeproTitlee=itemView.findViewById(R.id.datayugeproTitlee);
+            btn=itemView.findViewById(R.id.btnDatayugeBookMark);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(flag==1)
+                    {
+                        //button.setBackgroundColor(Color.CYAN);
+                        btn.setBackgroundResource(R.drawable.ic_star_black_24dp);
+                        Toast.makeText(context.getApplicationContext(), "set bookmark", Toast.LENGTH_SHORT).show();
+                        dbh.addBookmark(title);
+                        flag=0;
+                    }
+                    else
+                    {
+                        btn.setBackgroundResource(R.drawable.ic_star_border_black_24dp);
+                   //     Toast.makeText(context.getApplicationContext(), "cancel bookmark", Toast.LENGTH_SHORT).show();
+                        dbh.delBookmark(title);
+                        flag=1;
+                    }
+                }
+            });
             //EbayproPrice=itemView.findViewById(R.id.EbayproPrice);
 /*
             itemView.setOnClickListener(new View.OnClickListener() {
