@@ -249,7 +249,7 @@ public class nav2Activity extends AppCompatActivity
 
         if (requestCode == 1 && resultCode == RESULT_OK) {
             String query = data.getStringExtra("title");
-            etsearch.setText(query);
+            etsearch.setSearchText(query);
             flipkartFragment.refresh(query);
             amazonFragment.refresh(query);
             ebayFragment.refresh(query);
