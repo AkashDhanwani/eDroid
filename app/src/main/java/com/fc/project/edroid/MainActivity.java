@@ -3,6 +3,7 @@ package com.fc.project.edroid;
 import android.animation.Animator;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -30,6 +31,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arlib.floatingsearchview.FloatingSearchView;
+import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 import com.google.firebase.auth.FirebaseAuth;
 import com.stone.vega.library.VegaLayoutManager;
 
@@ -47,7 +50,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -61,7 +63,8 @@ MainActivity extends AppCompatActivity
     //Button btnSearch, btnAmazon, btnEbay, btnDatayuge;
     Button btnSearch,btnSpeak;
     TextView textView;
-    EditText serachItem;
+    //EditText serachItem;
+    FloatingSearchView serachItem;
     String dataa;
     ViewPager viewPager;
     FirebaseAuth mAuth;
@@ -87,14 +90,14 @@ MainActivity extends AppCompatActivity
         viewPager.setAdapter(viewPagerAdapter);
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimerTask(),2000,4000);
-        btnSearch=findViewById(R.id.btnsearch);
-        btnSpeak=findViewById(R.id.btnspeak);
+//        btnSearch=findViewById(R.id.btnsearch);
+//        btnSpeak=findViewById(R.id.btnspeak);
         mAuth=FirebaseAuth.getInstance();
-        textView=findViewById(R.id.textView);
-        String text="<font color=#3F51B5>E</font><font color=#f50808>d</font><font color=#ff6d40>r</font><font color=#3F51B5>o</font>" +
-                "<font color=#08f563>i</font><font color=#f50808>d</font>";
-        textView.setText(Html.fromHtml(text));
-//        etProduct = findViewById(R.id.etProduct);
+//        textView=findViewById(R.id.textView);
+//        String text="<font color=#3F51B5>E</font><font color=#f50808>d</font><font color=#ff6d40>r</font><font color=#3F51B5>o</font>" +
+//                "<font color=#08f563>i</font><font color=#f50808>d</font>";
+//        textView.setText(Html.fromHtml(text));
+////        etProduct = findViewById(R.id.etProduct);
         serachItem=findViewById(R.id.Etsearch);
        // tvList = findViewById(R.id.tvList);
         Random random = new Random();
@@ -122,49 +125,23 @@ MainActivity extends AppCompatActivity
             Toast.makeText(MainActivity.this,
                     "Good to see your Internet is working well!", Toast.LENGTH_SHORT).show();
 
-
-
-
-
-        btnSpeak.setOnClickListener(new View.OnClickListener() {
+        serachItem.setOnSearchListener(new FloatingSearchView.OnSearchListener() {
             @Override
-            public void onClick(View view) {
-                serachItem.setVisibility(View.VISIBLE);
-                Intent intent=new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+            public void onSuggestionClicked(SearchSuggestion searchSuggestion) {
 
-                dataa=serachItem.getText().toString();
-                Toast.makeText(MainActivity.this, "Searching for "+dataa, Toast.LENGTH_SHORT).show();
-                Intent intent1=new Intent(getApplicationContext(),nav2Activity.class);
-                intent1.putExtra("myExtra",dataa);
-                startActivity(intent);
-
-                if(intent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(intent, 10);
-//                    dataa = serachItem.getText().toString();
-//                    Toast.makeText(MainActivity.this, "Searching for " + dataa, Toast.LENGTH_SHORT).show();
-//                    Intent intent1 = new Intent(getApplicationContext(), nav2Activity.class);
-//                    intent1.putExtra("myExtra", dataa);
-//                    startActivity(intent);
-                }
-                else
-                    Toast.makeText(MainActivity.this, "Your Device Don't Support Speech Text", Toast.LENGTH_SHORT).show();
             }
 
-        });
-
-        btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
-                if(serachItem.getText().toString().equals(""))
+            public void onSearchAction(String currentQuery) {
+                if(currentQuery.equals(""))
                 {
-                    revealEditText();
+                    Toast.makeText(MainActivity.this, "Please enter a Product", Toast.LENGTH_SHORT).show();
+                    serachItem.clearQuery();
+                    return;
                 }
                 else
                 {
-                    dataa=serachItem.getText().toString();
+                    dataa=currentQuery;
                     Toast.makeText(MainActivity.this, "Searching for "+dataa, Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(getApplicationContext(),nav2Activity.class);
                     intent.putExtra("myExtra",dataa);
@@ -174,30 +151,80 @@ MainActivity extends AppCompatActivity
             }
         });
 
+//        btnSpeak.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                serachItem.setVisibility(View.VISIBLE);
+//                Intent intent=new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+//                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+//                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+//
+//                dataa=serachItem.getQuery();
+//                Toast.makeText(MainActivity.this, "Searching for "+dataa, Toast.LENGTH_SHORT).show();
+//                Intent intent1=new Intent(getApplicationContext(),nav2Activity.class);
+//                intent1.putExtra("myExtra",dataa);
+//                startActivity(intent);
+//
+//                if(intent.resolveActivity(getPackageManager()) != null) {
+//                    startActivityForResult(intent, 10);
+////                    dataa = serachItem.getText().toString();
+////                    Toast.makeText(MainActivity.this, "Searching for " + dataa, Toast.LENGTH_SHORT).show();
+////                    Intent intent1 = new Intent(getApplicationContext(), nav2Activity.class);
+////                    intent1.putExtra("myExtra", dataa);
+////                    startActivity(intent);
+//                }
+//                else
+//                    Toast.makeText(MainActivity.this, "Your Device Don't Support Speech Text", Toast.LENGTH_SHORT).show();
+//            }
+//
+//        });
 
-        serachItem.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEARCH) {
-                    //performSearch();
-                    if(serachItem.getText().toString().equals(""))
-                    {
-                        revealEditText();
-                    }
-                    else
-                    {
-                        dataa=serachItem.getText().toString();
-                        Toast.makeText(MainActivity.this, "Searching for "+dataa, Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(getApplicationContext(),nav2Activity.class);
-                        intent.putExtra("myExtra",dataa);
-                        startActivity(intent);
 
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
+
+//        btnSearch.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                if(serachItem.getQuery().equals(""))
+//                {
+//                    revealEditText();
+//                }
+//                else
+//                {
+//                    dataa=serachItem.getQuery();
+//                    Toast.makeText(MainActivity.this, "Searching for "+dataa, Toast.LENGTH_SHORT).show();
+//                    Intent intent=new Intent(getApplicationContext(),nav2Activity.class);
+//                    intent.putExtra("myExtra",dataa);
+//                    startActivity(intent);
+//
+//                }
+//            }
+//        });
+
+
+//        serachItem.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+//                if (i == EditorInfo.IME_ACTION_SEARCH) {
+//                    //performSearch();
+//                    if(serachItem.getText().toString().equals(""))
+//                    {
+//                        revealEditText();
+//                    }
+//                    else
+//                    {
+//                        dataa=serachItem.getText().toString();
+//                        Toast.makeText(MainActivity.this, "Searching for "+dataa, Toast.LENGTH_SHORT).show();
+//                        Intent intent=new Intent(getApplicationContext(),nav2Activity.class);
+//                        intent.putExtra("myExtra",dataa);
+//                        startActivity(intent);
+//
+//                    }
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -207,11 +234,13 @@ MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getBackground().setColorFilter(0x80000000, PorterDuff.Mode.MULTIPLY);
 
-
-
+        View headerView = navigationView.getHeaderView(0);
+        headerView.getBackground().setColorFilter(0x80000000, PorterDuff.Mode.MULTIPLY);
 
     }//end of onCreate
+
 
     public void revealEditText(View view) {
         revealEditText();
@@ -263,16 +292,6 @@ MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            String query = data.getStringExtra("title");
-            dataa=query;
-            Toast.makeText(MainActivity.this, "Searching for "+dataa, Toast.LENGTH_SHORT).show();
-            Intent intent=new Intent(getApplicationContext(),nav2Activity.class);
-            intent.putExtra("myExtra",dataa);
-            startActivity(intent);
-
-        }
         switch (requestCode)
         {
             case 10:
@@ -281,7 +300,7 @@ MainActivity extends AppCompatActivity
                 //serachItem.setText(result.get(0));
                 if(data!=null) {
                     ArrayList<String>result =data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    serachItem.setText(result.get(0));
+                    serachItem.setSearchText(result.get(0));
                 }
                 else
                 {
@@ -356,10 +375,12 @@ MainActivity extends AppCompatActivity
              startActivity(intent);
 
         }
-         else if (id == R.id.nav_bookmark) {
-             Intent intent=new Intent(MainActivity.this,bookmark.class);
-             startActivityForResult(intent, 1 );
-
+        else if(id==R.id.nav_logout)
+         {
+             mAuth.signOut();
+             Intent intent=new Intent(getApplicationContext(),AuthActivity.class);
+             startActivity(intent);
+             finish();
          }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -551,7 +572,6 @@ MainActivity extends AppCompatActivity
 //            recyclerView.setLayoutManager(new VegaLayoutManager());
         }
     }
-
 
 
 }

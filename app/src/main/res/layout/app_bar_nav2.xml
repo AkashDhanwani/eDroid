@@ -12,45 +12,61 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_marginLeft="0dp"
+        <com.arlib.floatingsearchview.FloatingSearchView
+            android:id="@+id/Etsearch"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            app:popupTheme="@style/AlertDialog.AppCompat.Light" >
+            android:layout_height="62dp"
+            app:floatingSearch_close_search_on_keyboard_dismiss="true"
+            app:floatingSearch_leftActionMode="showHamburger"
+            app:floatingSearch_searchBarMarginLeft="5dp"
+            app:floatingSearch_searchBarMarginRight="5dp"
+            app:floatingSearch_searchBarMarginTop="5dp"
+            app:floatingSearch_searchHint="Search..."
+            app:floatingSearch_showSearchKey="true"
+            app:floatingSearch_showVoiceInput="true"
+            app:floatingSearch_suggestionsListAnimDuration="250">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="monospace"
-                android:text="@string/edroid"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"/>
+        </com.arlib.floatingsearchview.FloatingSearchView>
 
-            <EditText
-                android:id="@+id/Etsearch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="monospace"
-                android:hint="@string/type"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textSize="10sp"
-                android:textColor="@color/black"/>
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--app:popupTheme="@style/AlertDialog.AppCompat.Light" >-->
 
-            <Button
-                android:id="@+id/btnsearch"
-                android:layout_width="40dp"
-                android:layout_height="32dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/ic_search_black_24dp" />
+            <!--<TextView-->
+                <!--android:id="@+id/textView"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:fontFamily="monospace"-->
+                <!--android:text="@string/edroid"-->
+                <!--android:textSize="15dp"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textColor="@color/black"/>-->
 
 
+            <!--<EditText-->
 
-        </android.support.v7.widget.Toolbar>
+                <!--android:id="@+id/Etsearch"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+
+                <!--android:fontFamily="monospace"-->
+                <!--android:hint="@string/type"-->
+                <!--android:inputType="text"-->
+                <!--android:maxLines="1"-->
+                <!--android:textColor="@color/black"/>-->
+
+            <!--<Button-->
+                <!--android:id="@+id/btnsearch"-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_height="32dp"-->
+                <!--android:layout_marginRight="5dp"-->
+                <!--android:background="@drawable/ic_search_black_24dp" />-->
+
+
+        <!--</android.support.v7.widget.Toolbar>-->
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
