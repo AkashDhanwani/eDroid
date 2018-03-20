@@ -40,7 +40,7 @@ public class DatayugeFragment extends Fragment {
     TextView tvList;
     ProgressBar pb;
     Button btnSearch;
-    String Appid="FwtyhRJJw82K0XEyOdd1JtjKpZXpEYjsy9S";
+    String Appid="Kp0L420x8EpfupDln5J8Q8ygIYv0v1kxdq9";
     View view;
     String query;
     private RecyclerView recyclerView;
@@ -101,7 +101,7 @@ public class DatayugeFragment extends Fragment {
                         String[][] pricestoresurl=new String[4][3];
                         JSONObject f1=data.getJSONObject(i);
                         String pid=f1.getString("product_id");
-                        String jsonstr1 = connection("https://price-api.datayuge.com/api/v1/compare/detail?api_key=FwtyhRJJw82K0XEyOdd1JtjKpZXpEYjsy9S&id="+pid);
+                        String jsonstr1 = connection("https://price-api.datayuge.com/api/v1/compare/detail?api_key=Kp0L420x8EpfupDln5J8Q8ygIYv0v1kxdq9&id="+pid);
                         JSONObject jsonObject1=new JSONObject(jsonstr1);
                         JSONObject data1=jsonObject1.getJSONObject("data");
 
