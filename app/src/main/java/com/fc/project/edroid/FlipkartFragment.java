@@ -55,18 +55,23 @@ public class FlipkartFragment extends Fragment {
          recyclerView.setVisibility(view.GONE);
          recyclerView.setLayoutManager(new VegaLayoutManager());
 
+
          final String product = (String) query;
          final int[] i = {0};
         callpages(product);
 
+
+
          recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
              @Override
              public void onLoadMore() {
+
                 i[0] = i[0] + 1;
                  callpages(product+" "+Integer.toString(i[0]));
 
              }
          });
+
 
 
 

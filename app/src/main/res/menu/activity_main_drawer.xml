@@ -19,7 +19,8 @@
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="@string/changepass" />
+            android:title="@string/changepass"
+            />
         <!--<item-->
         <!--android:id="@+id/nav_slideshow"-->
         <!--android:icon="@drawable/common_google_signin_btn_icon_dark"-->

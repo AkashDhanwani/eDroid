@@ -1,6 +1,7 @@
 package com.fc.project.edroid;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -21,6 +22,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.arlib.floatingsearchview.FloatingSearchView;
+import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class nav2Activity extends AppCompatActivity
@@ -28,7 +31,8 @@ public class nav2Activity extends AppCompatActivity
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager viewPager;
     Button btnSearch;
-    EditText etsearch;
+    //EditText etsearch;
+    FloatingSearchView etsearch;
     String query;
     FirebaseAuth mAuth;
     EbayFragment ebayFragment;
@@ -41,7 +45,7 @@ public class nav2Activity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-       btnSearch=findViewById(R.id.btnsearch);
+      // btnSearch=findViewById(R.id.btnsearch);
        etsearch=findViewById(R.id.Etsearch);
         setSupportActionBar(toolbar);
         viewPager=(ViewPager)findViewById(R.id.viewpager);
@@ -58,34 +62,59 @@ public class nav2Activity extends AppCompatActivity
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+       etsearch.attachNavigationDrawerToMenuButton(drawer);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        query=etsearch.getText().toString();
+        navigationView.getBackground().setColorFilter(0x80000000, PorterDuff.Mode.MULTIPLY);
+
+        View headerView = navigationView.getHeaderView(0);
+        headerView.getBackground().setColorFilter(0x80000000, PorterDuff.Mode.MULTIPLY);
+
+        query=etsearch.getQuery();
         Intent myIntent = getIntent();
         if (myIntent.hasExtra("myExtra")){
             query=myIntent.getStringExtra("myExtra");
-            etsearch.setText(query);
+            etsearch.setSearchText(query);
         }
             viewPager.setOffscreenPageLimit(4);
 
-            btnSearch.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    query=etsearch.getText().toString();
-                    if(!query.equals("")) {
-                        flipkartFragment.refresh(query);
-                        amazonFragment.refresh(query);
-                        ebayFragment.refresh(query);
-                        datayugeFragment.refresh(query);
-                        Toast.makeText(nav2Activity.this, "Searching for " + query, Toast.LENGTH_SHORT).show();
-                    }
+        etsearch.setOnSearchListener(new FloatingSearchView.OnSearchListener() {
+            @Override
+            public void onSuggestionClicked(SearchSuggestion searchSuggestion) {
+
+            }
+
+            @Override
+            public void onSearchAction(String currentQuery) {
+                query=etsearch.getQuery();
+                if(!query.equals("")) {
+                    flipkartFragment.refresh(query);
+                    amazonFragment.refresh(query);
+                    ebayFragment.refresh(query);
+                    datayugeFragment.refresh(query);
+                    Toast.makeText(nav2Activity.this, "Searching for " + query, Toast.LENGTH_SHORT).show();
                 }
-            });
+            }
+        });
+
+//            btnSearch.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    query=etsearch.getQuery();
+//                    if(!query.equals("")) {
+//                        flipkartFragment.refresh(query);
+//                        amazonFragment.refresh(query);
+//                        ebayFragment.refresh(query);
+//                        datayugeFragment.refresh(query);
+//                        Toast.makeText(nav2Activity.this, "Searching for " + query, Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
         }
     @Override
     public void onBackPressed() {

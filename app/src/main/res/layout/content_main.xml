@@ -9,63 +9,62 @@
     tools:context="com.fc.project.edroid.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <LinearLayout
-        android:id="@+id/llll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/banner"
-        android:orientation="horizontal">
+    <!--<LinearLayout-->
+        <!--android:id="@+id/llll"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:background="@drawable/banner"-->
+        <!--android:orientation="horizontal">-->
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="monospace"
-            android:text="@string/edroid"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+        <!--<TextView-->
+            <!--android:id="@+id/textView"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:fontFamily="monospace"-->
+            <!--android:text="@string/edroid"-->
+            <!--android:textSize="15sp"-->
+            <!--android:textStyle="bold" />-->
 
 
-        <EditText
-            android:id="@+id/Etsearch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/edit"
-            android:fontFamily="monospace"
-            android:hint="@string/type"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:maxLines="1"
-            android:onClick="revealEditText"
-            android:textSize="15sp"
-            android:visibility="visible" />
+        <!--&lt;!&ndash;<EditText&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/Etsearch"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginLeft="2dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:background="@drawable/edit"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:fontFamily="monospace"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:hint="@string/type"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:imeOptions="actionSearch"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:inputType="text"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:maxLines="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:onClick="revealEditText"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textSize="15sp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:visibility="visible" />&ndash;&gt;-->
 
-        <Button
-            android:id="@+id/btnsearch"
-            android:layout_width="40dp"
-            android:layout_height="32dp"
+        <!--<Button-->
+            <!--android:id="@+id/btnsearch"-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="32dp"-->
 
-            android:background="@drawable/ic_search_black_24dp" />
+            <!--android:background="@drawable/ic_search_black_24dp" />-->
 
-        <Button
-            android:id="@+id/btnspeak"
-            android:layout_width="40dp"
-            android:layout_height="32dp"
-            android:layout_marginLeft="7dp"
-            android:background="@drawable/ic_keyboard_voice" />
-    </LinearLayout>
+        <!--<Button-->
+            <!--android:id="@+id/btnspeak"-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="32dp"-->
+            <!--android:layout_marginLeft="7dp"-->
+            <!--android:background="@drawable/ic_keyboard_voice" />-->
+    <!--</LinearLayout>-->
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_below="@+id/llll"
         android:layout_margin="2dp"
         android:background="@drawable/banner1"
         android:padding="10dp">

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ab5de9</color>
-    <color name="colorPrimaryDark">#9d4adf</color>
+    <color name="colorPrimary">#ec407a</color>
+    <color name="colorPrimaryDark">#ec407a</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorlightbg">#f9e3ea</color>
-
+    <color name="white">#FFFFFF</color>
     <color name="btnPressed">#4adfd8</color>
     <color name="btn">#f74848</color>
     <color name="btnNotPressed">#019e1b</color>
     <color name="offerbg">#b9e4c0</color>
     <color name="offercolor">#251623</color>
     <color name="offercolorTitle">#9d4adf</color>
+    <color name="background_overlay">#7f333639</color>
 </resources>
 <!-- <color name="colorPrimaryDark">#9d4adf</color>-->
