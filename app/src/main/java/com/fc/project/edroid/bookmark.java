@@ -37,6 +37,7 @@ public class bookmark extends AppCompatActivity {
 
             }
         });
+        /*
         lvbm.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override
             public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id)
@@ -49,6 +50,7 @@ public class bookmark extends AppCompatActivity {
             return true;
             }
         });
+        */
     }
 
 
