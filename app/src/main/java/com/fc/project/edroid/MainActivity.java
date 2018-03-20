@@ -289,28 +289,28 @@ MainActivity extends AppCompatActivity
         anim.start();
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        switch (requestCode)
-//        {
-//            case 10:
-//
-//                //ArrayList<String>result =data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-//                //serachItem.setText(result.get(0));
-//                if(data!=null) {
-//                    ArrayList<String>result =data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-//                    serachItem.setsetText(result.get(0));
-//                }
-//                else
-//                {
-//                    Toast.makeText(this, "empty", Toast.LENGTH_SHORT).show();
-//                }
-//                //Toast.makeText(this, "welcome"+serachItem.getText().toString(), Toast.LENGTH_SHORT).show();
-//
-//                break;
-//        }
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode)
+        {
+            case 10:
+
+                //ArrayList<String>result =data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                //serachItem.setText(result.get(0));
+                if(data!=null) {
+                    ArrayList<String>result =data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    serachItem.setSearchText(result.get(0));
+                }
+                else
+                {
+                    Toast.makeText(this, "empty", Toast.LENGTH_SHORT).show();
+                }
+                //Toast.makeText(this, "welcome"+serachItem.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                break;
+        }
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
