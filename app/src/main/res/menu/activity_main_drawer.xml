@@ -21,11 +21,6 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/changepass"
             />
-        <item
-            android:id="@+id/nav_bookmark"
-            android:icon="@drawable/bookmark"
-            android:title="Bookmark"
-            />
         <!--<item-->
         <!--android:id="@+id/nav_slideshow"-->
         <!--android:icon="@drawable/common_google_signin_btn_icon_dark"-->
@@ -47,7 +42,11 @@
                 android:icon="@drawable/ic_block_black_24dp"
                 android:title="@string/logout"
                 />
-
+            <item
+                android:id="@+id/nav_bookmark"
+                android:icon="@drawable/ic_star_black_24dp"
+                android:title="Bookmark"
+                />
         </menu>
     </item>
 
