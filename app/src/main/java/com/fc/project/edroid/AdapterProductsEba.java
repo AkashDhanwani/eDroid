@@ -15,7 +15,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -30,7 +32,7 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.data = data;
-        dbh=new MyDatabaseHelper(context);
+        dbh=MyDatabaseHelper.getInstance(context);
     }
 
     @Override
@@ -56,6 +58,17 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
         Glide.with(context).load(products.getImgUrl()).into(myHolder.EbayprooImg);
         myHolder.produrl=products.getProdUrl();
 
+
+        ArrayList<String> marksbook=new ArrayList<String>(dbh.getAllbookmark());
+        Iterator<String> itc=marksbook.iterator();
+        while(itc.hasNext()){
+            if(itc.next().compareTo(myHolder.title)==1){
+                flag=0;
+                myHolder.btn.setBackgroundResource(R.drawable.ic_star_black_24dp);
+                Toast.makeText(context.getApplicationContext(), "this is working", Toast.LENGTH_SHORT).show();
+                break;
+            }
+        }
 
 
     }
@@ -95,7 +108,7 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
                     else
                     {
                         btn.setBackgroundResource(R.drawable.ic_star_border_black_24dp);
-                        //Toast.makeText(context.getApplicationContext(), "cancel bookmark", Toast.LENGTH_SHORT).show();
+                        dbh.delBookmark(title);
                         flag=1;
                     }
                 }
@@ -103,12 +116,7 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Uri uri = Uri.parse(produrl); // missing 'http://' will cause crashed
-                    /*Bundle bundle=new Bundle();
-                    bundle.putString("title", title);
-                    bundle.putString("produrl",produrl);
-                    bundle.putString("imgurl",imgurl);
-                //    bundle.putString("desc",desc); */
+                    Uri uri = Uri.parse(produrl);
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     context.startActivity(intent);
                 }

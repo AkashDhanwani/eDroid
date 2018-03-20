@@ -16,7 +16,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -32,7 +34,7 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.data = data;
-        dbh=new MyDatabaseHelper(context);
+        dbh=MyDatabaseHelper.getInstance(context);
 
     }
 
@@ -118,6 +120,17 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
 
 
+        ArrayList<String> marksbook=new ArrayList<String>(dbh.getAllbookmark());
+        Iterator<String> itc=marksbook.iterator();
+        while(itc.hasNext()){
+            if(itc.next().compareTo(myHolder.title)==1){
+                flag=0;
+                myHolder.btn.setBackgroundResource(R.drawable.ic_star_black_24dp);
+                Toast.makeText(context.getApplicationContext(), "this is working", Toast.LENGTH_SHORT).show();
+                break;
+            }
+        }
+
     }
 
     private void removeAt(final int adapterPosition, final int position) {
@@ -171,6 +184,7 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
                     {
                         btn.setBackgroundResource(R.drawable.ic_star_border_black_24dp);
                    //     Toast.makeText(context.getApplicationContext(), "cancel bookmark", Toast.LENGTH_SHORT).show();
+                        dbh.delBookmark(title);
                         flag=1;
                     }
                 }

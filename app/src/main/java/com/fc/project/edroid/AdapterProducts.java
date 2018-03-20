@@ -15,8 +15,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by LakhwaniPc on 18-02-2018.
@@ -40,7 +43,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.context = context;
         this.inflater =LayoutInflater.from(context);
         this.data=data;
-        dbh=new MyDatabaseHelper(context);
+        dbh=MyDatabaseHelper.getInstance(context);
 
     }
 
@@ -71,6 +74,18 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
         myHolder.desc=products.getDesc();
         myHolder.specs=products.getSpecs();
 
+        ArrayList<String> marksbook=new ArrayList<String>(dbh.getAllbookmark());
+        Iterator<String> itc=marksbook.iterator();
+        while(itc.hasNext()){
+           if(itc.next().compareTo(myHolder.title)==0){
+                flag=0;
+                myHolder.btnBookMark.setBackgroundResource(R.drawable.ic_star_black_24dp);
+                Toast.makeText(context.getApplicationContext(), "this is working", Toast.LENGTH_SHORT).show();
+                break;
+            }
+        }
+
+
     }
 
     @Override
@@ -82,7 +97,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
     {
         String produrl,imgurl,title,desc;
         String[] specs=new String[5];
-        ImageView imageView,FlipkartprooImg;
+        ImageView FlipkartprooImg;
         Button btnBookMark;
         TextView proDesc,proTitle,FlipkartproTitlee,FlipkartproDescc,FlipkartproPrice,FlipkartproSellingPrice,FlipkartproInStock;
         public MyHolder(View itemView) {
@@ -98,22 +113,23 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
             FlipkartproPrice.setPaintFlags(FlipkartproPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);     //?
             btnBookMark=itemView.findViewById(R.id.btnBookMark);
 
+
          //   FlipkartproInStock=itemView.findViewById(R.id.FlipkartproInStock);
             btnBookMark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(flag==1)
                     {
-                        //button.setBackgroundColor(Color.CYAN);
                         btnBookMark.setBackgroundResource(R.drawable.ic_star_black_24dp);
-                        Toast.makeText(context.getApplicationContext(), "set bookmark", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context.getApplicationContext(), "Bookmark set", Toast.LENGTH_SHORT).show();
                         dbh.addBookmark(title);
                         flag=0;
                     }
                     else
                     {
                         btnBookMark.setBackgroundResource(R.drawable.ic_star_border_black_24dp);
-                     //   Toast.makeText(context.getApplicationContext(), "cancel bookmark", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context.getApplicationContext(), "Bookmark delete", Toast.LENGTH_SHORT).show();
+                        dbh.delBookmark(title);
                         flag=1;
                     }
                 }

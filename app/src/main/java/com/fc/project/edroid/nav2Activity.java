@@ -52,7 +52,7 @@ public class nav2Activity extends AppCompatActivity
 //        int page = getIntent().getIntExtra("One", defaultValue);
 //        viewPager.setCurrentItem(page);
 
-        final MyDatabaseHelper dbh=new MyDatabaseHelper(this);
+        final MyDatabaseHelper dbh=MyDatabaseHelper.getInstance(this);
 
 
         TabLayout tabLayout=(TabLayout)findViewById(R.id.tabs);

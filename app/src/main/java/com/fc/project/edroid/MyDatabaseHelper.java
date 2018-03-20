@@ -12,11 +12,25 @@ import java.util.ArrayList;
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     Context context;
     SQLiteDatabase db;
+    private static MyDatabaseHelper mInstance = null;
+
+    public static MyDatabaseHelper getInstance(Context ctx) {
+
+        if (mInstance == null) {
+            mInstance = new MyDatabaseHelper(ctx.getApplicationContext());
+        }
+        return mInstance;
+    }
+    private MyDatabaseHelper(Context ctx) {
+        super(ctx, "OurDatabase", null, 1);
+        this.context = ctx;
+    }
+    /*
     public MyDatabaseHelper(Context context) {
         super(context,"OurDatabase",null,1);
         this.context = context;
         db= this.getWritableDatabase();
-    }
+    }*/
 
 
     @Override
@@ -32,7 +46,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void addBookmark(String title) {
-
+        db= this.getWritableDatabase();
         ContentValues values=new ContentValues();
         values.put("title",title);
         long rid= db.insert("bookmark",null,values);
@@ -40,12 +54,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Insert issue", Toast.LENGTH_SHORT).show();
         }
         else Toast.makeText(context, "Insert Successful", Toast.LENGTH_SHORT).show();
-
+        db.close();
 
 
     }
 
     public ArrayList getAllbookmark() {
+        db= this.getWritableDatabase();
         Cursor cursor=db.query("bookmark",null,null,null,null,null,null,null);
         ArrayList<String> bms=new ArrayList<>();
         cursor.moveToFirst();
@@ -57,30 +72,19 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             }while(cursor.moveToNext());
         }
         else bms.add("No Records");
+        cursor.close();
+        db.close();
         return bms;
     }
 
     public void delBookmark(String title) {
-        String sql = "DELETE from bookmark where title=?"+title;
-        db.execSQL(sql);
-//        SQLiteDatabase db=this.getWritableDatabase();
-//        db.delete(Constants.TABLE_NAME,Constants.KEY_TITLE + " = ?",new String[]{title});
-//        db.close();
-////        if(rid<0)
-//        {
-//            Toast.makeText(context, "delelte issue", Toast.LENGTH_SHORT).show();
-//        }
-//        else
-//        {
-//                  Toast.makeText(context, ""+rid+" rows deleted", Toast.LENGTH_SHORT).show();
-//        }
-
-//        long rid=db.delete("bookmark","title=?"+title,null);
-//        if(rid<0){
-//            Toast.makeText(context, "delelte issue", Toast.LENGTH_SHORT).show();
-//        }
-//        else Toast.makeText(context, ""+rid+" rows deleted", Toast.LENGTH_SHORT).show();
-
+        db= this.getWritableDatabase();
+     long rid=db.delete("bookmark","title=\'"+title+"\'",null);
+        if(rid==0){
+            Toast.makeText(context, "delelte issue", Toast.LENGTH_SHORT).show();
+        }
+        else Toast.makeText(context, ""+rid+" rows deleted", Toast.LENGTH_SHORT).show();
+        db.close();
     }
 }
 

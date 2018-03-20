@@ -9,11 +9,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import static android.widget.AdapterView.*;
 
 public class bookmark extends AppCompatActivity {
     ListView lvbm;
+    ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +23,8 @@ public class bookmark extends AppCompatActivity {
         setContentView(R.layout.activity_bookmark);
         lvbm=findViewById(R.id.lvbm);
 
-        final MyDatabaseHelper dbh=new MyDatabaseHelper(this);
-         ArrayAdapter adapter=new ArrayAdapter(bookmark.this,android.R.layout.simple_list_item_1,dbh.getAllbookmark());
+        final MyDatabaseHelper dbh=MyDatabaseHelper.getInstance(this);
+         adapter=new ArrayAdapter(bookmark.this,android.R.layout.simple_list_item_1,dbh.getAllbookmark());
         lvbm.setAdapter(adapter);
         lvbm.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -39,9 +41,11 @@ public class bookmark extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id)
             {
-            dbh.delBookmark((String) lvbm.getItemAtPosition(pos));
-                ArrayAdapter adapter=new ArrayAdapter(bookmark.this,android.R.layout.simple_list_item_1,dbh.getAllbookmark());
-                lvbm.setAdapter(adapter);
+                String title= (String) adapter.getItem(pos);
+                Toast.makeText(bookmark.this, title, Toast.LENGTH_SHORT).show();
+                dbh.delBookmark(title);
+                adapter.remove(title);
+                adapter.notifyDataSetChanged();
             return true;
             }
         });
