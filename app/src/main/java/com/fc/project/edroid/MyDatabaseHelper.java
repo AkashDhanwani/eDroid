@@ -51,7 +51,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         values.put("title",title);
         long rid= db.insert("bookmark",null,values);
         if(rid<0){
-            Toast.makeText(context, "Insert issue", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Insert issue!Product might be bookmared!", Toast.LENGTH_SHORT).show();
         }
         else Toast.makeText(context, "Insert Successful", Toast.LENGTH_SHORT).show();
         db.close();

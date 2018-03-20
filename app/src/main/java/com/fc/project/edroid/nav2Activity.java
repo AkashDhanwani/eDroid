@@ -14,11 +14,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -78,6 +81,7 @@ public class nav2Activity extends AppCompatActivity
             btnSearch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     query=etsearch.getText().toString();
                     if(!query.equals("")) {
                         flipkartFragment.refresh(query);
@@ -88,6 +92,25 @@ public class nav2Activity extends AppCompatActivity
                     }
                 }
             });
+
+//            btnSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//                @Override
+//                public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+//                    if(i== EditorInfo.IME_ACTION_SEARCH)
+//                    {
+//                        query=etsearch.getText().toString();
+//                        if(!query.equals("")) {
+//                            flipkartFragment.refresh(query);
+//                            amazonFragment.refresh(query);
+//                            ebayFragment.refresh(query);
+//                            datayugeFragment.refresh(query);
+//                            Toast.makeText(nav2Activity.this, "Searching for " + query, Toast.LENGTH_SHORT).show();
+//                        }
+//                        return true;
+//                    }
+//                    return false;
+//                }
+//            });
         }
     @Override
     public void onBackPressed() {

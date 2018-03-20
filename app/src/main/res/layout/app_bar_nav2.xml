@@ -26,21 +26,19 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
                 android:text="@string/edroid"
-                android:textSize="15dp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"/>
 
-
             <EditText
-
                 android:id="@+id/Etsearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:fontFamily="monospace"
                 android:hint="@string/type"
                 android:inputType="text"
                 android:maxLines="1"
+                android:textSize="10sp"
                 android:textColor="@color/black"/>
 
             <Button
