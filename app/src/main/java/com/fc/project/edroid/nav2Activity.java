@@ -193,7 +193,6 @@ public class nav2Activity extends AppCompatActivity
          else if (id == R.id.nav_bookmark) {
              Intent intent=new Intent(nav2Activity.this,bookmark.class);
              startActivityForResult(intent, 1 );
-             // startActivity(intent);
 
          }
         else if(id==R.id.nav_logout)

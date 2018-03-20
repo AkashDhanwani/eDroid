@@ -97,7 +97,7 @@ ProgressBar pb;
         String[] producttemp = query.toString().split(" ");
         if(producttemp.length==1) product=producttemp[0];
         else
-            product= producttemp[producttemp.length-1]+" "+producttemp[producttemp.length-2];
+            product= producttemp[0]+" "+producttemp[1];
 
 
 

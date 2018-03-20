@@ -30,6 +30,8 @@ public class bookmark extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedFromList = (String) lvbm.getItemAtPosition(i);
+                  selectedFromList = selectedFromList.substring(0, selectedFromList.length() - 1);
+
                 Intent replyIntent = new Intent();
                 replyIntent.putExtra("title", selectedFromList);
                 setResult(RESULT_OK, replyIntent);
@@ -37,20 +39,21 @@ public class bookmark extends AppCompatActivity {
 
             }
         });
-        /*
+
         lvbm.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override
             public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id)
             {
-                String title= (String) adapter.getItem(pos);
+                String title= (String)lvbm.getItemAtPosition(pos);
+                String title1= title.substring(0, title.length() - 1);
                 Toast.makeText(bookmark.this, title, Toast.LENGTH_SHORT).show();
-                dbh.delBookmark(title);
+               dbh.delBookmark(title1);
                 adapter.remove(title);
                 adapter.notifyDataSetChanged();
             return true;
             }
         });
-        */
+
     }
 
 

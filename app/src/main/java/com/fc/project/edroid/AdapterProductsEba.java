@@ -62,7 +62,9 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
         ArrayList<String> marksbook=new ArrayList<String>(dbh.getAllbookmark());
         Iterator<String> itc=marksbook.iterator();
         while(itc.hasNext()){
-            if(itc.next().compareTo(myHolder.title)==1){
+            String abc=itc.next();
+            abc = abc.substring(0, abc.length() - 1);
+            if(abc.equals(myHolder.title)){
                 flag=0;
                 myHolder.btn.setBackgroundResource(R.drawable.ic_star_black_24dp);
                 Toast.makeText(context.getApplicationContext(), "this is working", Toast.LENGTH_SHORT).show();

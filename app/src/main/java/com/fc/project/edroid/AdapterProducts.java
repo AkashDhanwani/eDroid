@@ -79,7 +79,9 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ArrayList<String> marksbook=new ArrayList<String>(dbh.getAllbookmark());
         Iterator<String> itc=marksbook.iterator();
         while(itc.hasNext()){
-           if(itc.next().compareTo(myHolder.title)==0){
+            String abc=itc.next();
+            abc = abc.substring(0, abc.length() - 1);
+           if(abc.equals(myHolder.title)){
                 flag=0;
                 myHolder.btnBookMark.setBackgroundResource(R.drawable.ic_star_black_24dp);
                 Toast.makeText(context.getApplicationContext(), "this is working", Toast.LENGTH_SHORT).show();
