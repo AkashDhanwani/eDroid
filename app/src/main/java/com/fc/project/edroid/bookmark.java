@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import static android.widget.AdapterView.*;
@@ -18,6 +20,7 @@ public class bookmark extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookmark);
         lvbm=findViewById(R.id.lvbm);
+
         final MyDatabaseHelper dbh=new MyDatabaseHelper(this);
          ArrayAdapter adapter=new ArrayAdapter(bookmark.this,android.R.layout.simple_list_item_1,dbh.getAllbookmark());
         lvbm.setAdapter(adapter);
@@ -43,4 +46,6 @@ public class bookmark extends AppCompatActivity {
             }
         });
     }
+
+
 }

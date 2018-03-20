@@ -61,14 +61,26 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void delBookmark(String title) {
-        String sql = "delete from bookmark where title=\'"+title+"\'";
+        String sql = "DELETE from bookmark where title=?"+title;
         db.execSQL(sql);
-        /*long rid=db.delete("bookmark","title='"+title+"'",null);
-        if(rid<0){
-            Toast.makeText(context, "delelte issue", Toast.LENGTH_SHORT).show();
-        }
-        else Toast.makeText(context, ""+rid+" rows deleted", Toast.LENGTH_SHORT).show();
-*/
+//        SQLiteDatabase db=this.getWritableDatabase();
+//        db.delete(Constants.TABLE_NAME,Constants.KEY_TITLE + " = ?",new String[]{title});
+//        db.close();
+////        if(rid<0)
+//        {
+//            Toast.makeText(context, "delelte issue", Toast.LENGTH_SHORT).show();
+//        }
+//        else
+//        {
+//                  Toast.makeText(context, ""+rid+" rows deleted", Toast.LENGTH_SHORT).show();
+//        }
+
+//        long rid=db.delete("bookmark","title=?"+title,null);
+//        if(rid<0){
+//            Toast.makeText(context, "delelte issue", Toast.LENGTH_SHORT).show();
+//        }
+//        else Toast.makeText(context, ""+rid+" rows deleted", Toast.LENGTH_SHORT).show();
+
     }
 }
 
