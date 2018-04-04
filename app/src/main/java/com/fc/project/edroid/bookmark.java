@@ -56,10 +56,11 @@ public class bookmark extends AppCompatActivity {
                 String selectedFromList = (String) lvbm.getItemAtPosition(i);
                   selectedFromList = selectedFromList.substring(0, selectedFromList.length() - 1);
 
-                Intent replyIntent = new Intent();
+                Intent replyIntent = new Intent(bookmark.this,bookmarkcontent.class);
                 replyIntent.putExtra("title", selectedFromList);
-                setResult(RESULT_OK, replyIntent);
-                finish();
+                startActivity(replyIntent);
+                //setResult(RESULT_OK, replyIntent);
+                //finish();
 
             }
         });
