@@ -37,7 +37,7 @@
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".DetailInfoActivity" />
         <activity android:name=".Disclaimer" />
-        <activity android:name=".bookmark"></activity>
+        <activity android:name=".bookmark" />
     </application>
 
 </manifest>
