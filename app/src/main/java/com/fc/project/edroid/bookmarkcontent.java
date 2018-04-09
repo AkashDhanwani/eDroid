@@ -30,7 +30,7 @@ public class bookmarkcontent extends AppCompatActivity {
     TextView tvTitle,tvFlipkart,tvAmazon,tvEbay;
     String title;
     EditText ettest;
-    String Appid="lPDqZB9xFmxiEPLAzbJWgjkqzMgZsYy4FQq";
+    String Appid="antfjRhXLpFSSCH0iVYGq0wBoG5hj6wKBTE";
 
 
     @Override
@@ -47,8 +47,8 @@ public class bookmarkcontent extends AppCompatActivity {
         Intent intent=getIntent();
         title=intent.getStringExtra("title");
         tvTitle.setText(title);
-        title = title.replaceAll("\\p{P}","");
-   //     ettest.setText(title);
+  //  title = title.replaceAll("\\p{P}","");
+  //     ettest.setText(title);
 
         Task1 t1 = new Task1();
         t1.execute("http://price-api.datayuge.com/api/v1/compare/search?product="+title+"&api_key="+Appid);
@@ -75,7 +75,7 @@ public class bookmarkcontent extends AppCompatActivity {
                      //   String[][] pricestoresurl=new String[4][3];
                         JSONObject f1=data.getJSONObject(0);
                         String pid=f1.getString("product_id");
-                        String jsonstr1 = connection("https://price-api.datayuge.com/api/v1/compare/detail?api_key=lPDqZB9xFmxiEPLAzbJWgjkqzMgZsYy4FQq&id="+pid);
+                        String jsonstr1 = connection("https://price-api.datayuge.com/api/v1/compare/detail?api_key=antfjRhXLpFSSCH0iVYGq0wBoG5hj6wKBTE&id="+pid);
                         JSONObject jsonObject1=new JSONObject(jsonstr1);
                         JSONObject data1=jsonObject1.getJSONObject("data");
 
