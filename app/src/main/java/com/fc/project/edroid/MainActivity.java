@@ -402,7 +402,8 @@ MainActivity extends AppCompatActivity
          }
          else if (id == R.id.nav_bookmark) {
              Intent intent=new Intent(MainActivity.this,bookmark.class);
-             startActivityForResult(intent, 1 );
+           //  startActivityForResult(intent, 1 );
+             startActivity(intent);
 
          }
 
