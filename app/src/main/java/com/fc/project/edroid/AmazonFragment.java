@@ -104,7 +104,7 @@ ProgressBar pb;
         i=1;
                 callPages(i,product);
 
-            recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
+/*            recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
                 @Override
                 public void onLoadMore() {
 
@@ -113,7 +113,7 @@ ProgressBar pb;
                 }
             });
 
-
+*/
         return view;
     }
 

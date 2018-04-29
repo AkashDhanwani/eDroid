@@ -127,7 +127,6 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
             abc = abc.substring(0, abc.length() - 1);
             if(abc.equals(myHolder.title)){     flag=0;
                 myHolder.btn.setBackgroundResource(R.drawable.ic_star_black_24dp);
-                Toast.makeText(context.getApplicationContext(), "this is working", Toast.LENGTH_SHORT).show();
                 break;
             }
         }
