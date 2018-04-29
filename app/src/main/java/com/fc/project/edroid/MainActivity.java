@@ -1,8 +1,10 @@
 package com.fc.project.edroid;
 
 import android.animation.Animator;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -10,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -79,7 +82,6 @@ MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -105,11 +107,6 @@ MainActivity extends AppCompatActivity
 
         //productImg=findViewById(R.id.imageView);
 
-        Task1 t1 = new Task1();
-        Task2 t2 =new Task2();
-        t1.execute("https://affiliate-api.flipkart.net/affiliate/offers/v1/dotd/json");
-        t2.execute("https://affiliate-api.flipkart.net/affiliate/offers/v1/all/json");
-
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -119,11 +116,23 @@ MainActivity extends AppCompatActivity
         if (!(networkInfo != null && networkInfo.isConnected())) {
             Toast.makeText(MainActivity.this, "Please Check Your network", Toast.LENGTH_SHORT).show();
             btnSearch.setEnabled(false);
+//            Snackbar.make(, "No Internet Connection.", Snackbar.LENGTH_INDEFINITE)
+//                    .setAction("Settings", new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//                            //startActivityForResult(new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS), 0);
+//                        }
+//                    }).setActionTextColor(Color.WHITE).setActionTextColor(Color.RED)
+//                    .show();
 
-
-        } else
+        } else {
             Toast.makeText(MainActivity.this,
                     "Good to see your Internet is working well!", Toast.LENGTH_SHORT).show();
+            Task1 t1 = new Task1();
+            Task2 t2 = new Task2();
+            t1.execute("https://affiliate-api.flipkart.net/affiliate/offers/v1/dotd/json");
+            t2.execute("https://affiliate-api.flipkart.net/affiliate/offers/v1/all/json");
+        }
 
         serachItem.setOnSearchListener(new FloatingSearchView.OnSearchListener() {
             @Override

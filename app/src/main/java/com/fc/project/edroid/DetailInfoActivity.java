@@ -37,7 +37,6 @@ Uri uri;
             if(specs[i]!=null)
             tvDesc.append("* "+specs[i]+"\n\n");
         }
-
         Glide.with(this).load(bundle.getString("imgurl")).into(ivimg);
         //final Uri link= Uri.parse(bundle.getString("produrl"));
             final String link=bundle.getString("produrl");
