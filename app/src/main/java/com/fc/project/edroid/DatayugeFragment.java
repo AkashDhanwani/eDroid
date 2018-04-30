@@ -40,7 +40,7 @@ public class DatayugeFragment extends Fragment {
     TextView tvList;
     ProgressBar pb;
     Button btnSearch;
-    String Appid="antfjRhXLpFSSCH0iVYGq0wBoG5hj6wKBTE";
+    String Appid="H3jyQd8owEXnHW32UBXXMUXgpWMr4m9QyHb";
     View view;
     String query;
     private RecyclerView recyclerView;
@@ -98,18 +98,19 @@ public class DatayugeFragment extends Fragment {
                     for(int i=0;i<10;i++){
                         //for products
                         prodetails="";
-                        String[][] pricestoresurl=new String[4][3];
+//                        String[][] pricestoresurl=new String[4][3];
                         JSONObject f1=data.getJSONObject(i);
-                        String pid=f1.getString("product_id");
-                        String jsonstr1 = connection("https://price-api.datayuge.com/api/v1/compare/detail?api_key=antfjRhXLpFSSCH0iVYGq0wBoG5hj6wKBTE&id="+pid);
-                        JSONObject jsonObject1=new JSONObject(jsonstr1);
-                        JSONObject data1=jsonObject1.getJSONObject("data");
+                        //String pid=f1.getString("product_id");
+  //                      String jsonstr1 = connection("https://price-api.datayuge.com/api/v1/compare/detail?api_key=antfjRhXLpFSSCH0iVYGq0wBoG5hj6wKBTE&id="+pid);
+    //                    JSONObject jsonObject1=new JSONObject(jsonstr1);
+      //                  JSONObject data1=jsonObject1.getJSONObject("data");
 
                         ProductsRes products=new ProductsRes();
                         products.title=f1.getString("product_title");
                         products.imgurl=f1.getString("product_image");
-                        JSONArray stores=data1.getJSONArray("stores");
-                        int n=0;
+                        products.pid=f1.getString("product_id");
+        //                JSONArray stores=data1.getJSONArray("stores");
+          /*              int n=0;
                         for(int j=4;j<stores.length();j++){
                             //for different stores
                             JSONObject allstores=stores.getJSONObject(j);   // 0 1 2 3 4
@@ -124,13 +125,13 @@ public class DatayugeFragment extends Fragment {
                               n++;
                             }
                             products.prods=pricestoresurl;
-                        }
-                        for(int j=0;j<n;j++){
-                            if(pricestoresurl[j]==null){}
-                            else{ data123.add(products); break; }
-                        }
+                        }*/
+                        //for(int j=0;j<n;j++){
+                          //  if(pricestoresurl[j]==null){}
+                            //else{ data123.add(products); break; }
+                        //}
 
-
+                        data123.add(products);
 
                     }
                 } catch (JSONException e) {

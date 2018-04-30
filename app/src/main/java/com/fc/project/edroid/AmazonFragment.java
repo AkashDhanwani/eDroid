@@ -218,16 +218,16 @@ ProgressBar pb;
                 Document document = builder.parse(new InputSource(new StringReader(jsonstr)));
                 //everything in xml is a node so we create nodes for tags
                     // then use the attribute of data which we want to extract
-
+              //  NodeList nList2=null;
                 NodeList nList = document.getElementsByTagName("Item");
-                NodeList nList2 = document.getElementsByTagName("LargeImage");
+
                 NodeList nList3 = document.getElementsByTagName("OfferSummary");
                 NodeList nList4 = document.getElementsByTagName("ItemAttributes");
 
                //for multiple elements use for loop
                 for(int i=0;i<nList.getLength();i++) {
                     Node node = nList.item(i);
-                    Node nodeimage=nList2.item(i);
+                   // Node nodeimage=nList2.item(i);
                     Node nodeprice=nList3.item(i);
                     Node nodespecs=nList4.item(i);
 
@@ -236,7 +236,8 @@ ProgressBar pb;
                         Element element2 = (Element) node;
                         Element element5 = (Element) nodespecs;
                         NodeList featurelist = element5.getElementsByTagName("Feature");
-
+                        NodeList nList2 = element2.getElementsByTagName("LargeImage");
+                        Node nodeimage=nList2.item(0);
                         for(int j=0;j<featurelist.getLength() && j<4 ;j++){
                             products.specs[j]=getValue("Feature",element5, j);
                         }

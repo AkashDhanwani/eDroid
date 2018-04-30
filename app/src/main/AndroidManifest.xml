@@ -38,7 +38,8 @@
         <activity android:name=".DetailInfoActivity" />
         <activity android:name=".Disclaimer" />
         <activity android:name=".bookmark" />
-        <activity android:name=".bookmarkcontent"></activity>
+        <activity android:name=".bookmarkcontent" />
+        <activity android:name=".datayuge_detail"></activity>
     </application>
 
 </manifest>
