@@ -2,6 +2,7 @@ package com.fc.project.edroid;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,10 @@ public class bookmark extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookmark);
+
+        int orientaton = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+        setRequestedOrientation(orientaton);
+
         lvbm=findViewById(R.id.lvbm);
         SharedPreferences sharedPreferences=getSharedPreferences("firstTime",0);
         boolean first=sharedPreferences.getBoolean("pehliBaar",false);

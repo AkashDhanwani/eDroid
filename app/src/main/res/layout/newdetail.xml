@@ -49,7 +49,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="2dp"
         android:orientation="horizontal"
-        android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout"
+        android:weightSum="3">
         <Button
             android:id="@+id/btnBuy"
             android:text="@string/buy"
@@ -58,16 +59,27 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
 
         <Button
             android:id="@+id/btnShare"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/button_file"
             android:text="@string/share"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_weight="1" />
+        <Button
+        android:id="@+id/btncompare12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/button_file"
+        android:text="Compare Specs"
+        android:textStyle="bold"
+        android:layout_weight="1"/>
     </LinearLayout>
 
     <View

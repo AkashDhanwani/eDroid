@@ -1,6 +1,7 @@
 package com.fc.project.edroid;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
@@ -37,6 +38,10 @@ public class bookmarkcontent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookmarkcontent);
+
+        int orientaton = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+        setRequestedOrientation(orientaton);
+
         tvTitle=findViewById(R.id.tvTitle);
         tvFlipkart=findViewById(R.id.tvFlipkart);
         tvAmazon=findViewById(R.id.tvAmazon);

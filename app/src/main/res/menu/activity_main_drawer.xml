@@ -47,6 +47,10 @@
                 android:icon="@drawable/ic_star_black_24dp"
                 android:title="Bookmark"
                 />
+            <item
+                android:id="@+id/nav_compare"
+                android:title="Compare Specs"
+                />
         </menu>
     </item>
 

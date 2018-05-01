@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.ConnectivityManager;
@@ -84,6 +85,10 @@ MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        int orientaton = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+        setRequestedOrientation(orientaton);
+
 
 //TODO extract (categorySpeciificInfoV1,detailedSpecs)
         //TODO handle nullPointerEXception
@@ -405,6 +410,10 @@ MainActivity extends AppCompatActivity
            //  startActivityForResult(intent, 1 );
              startActivity(intent);
 
+         }
+         else if(id == R.id.nav_compare){
+             Intent intent = new Intent(MainActivity.this, Spec_Compare.class);
+             startActivity(intent);
          }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

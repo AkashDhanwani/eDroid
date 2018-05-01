@@ -1,6 +1,7 @@
 package com.fc.project.edroid;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
@@ -45,7 +46,11 @@ public class nav2Activity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-      // btnSearch=findViewById(R.id.btnsearch);
+
+        int orientaton = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+        setRequestedOrientation(orientaton);
+
+        // btnSearch=findViewById(R.id.btnsearch);
        etsearch=findViewById(R.id.Etsearch);
         setSupportActionBar(toolbar);
         viewPager=(ViewPager)findViewById(R.id.viewpager);
@@ -201,6 +206,10 @@ public class nav2Activity extends AppCompatActivity
              Intent intent=new Intent(getApplicationContext(),AuthActivity.class);
              startActivity(intent);
              finish();
+         }
+         else if(id == R.id.nav_compare){
+             Intent intent = new Intent(nav2Activity.this, Spec_Compare.class);
+             startActivity(intent);
          }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

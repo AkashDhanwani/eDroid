@@ -129,9 +129,6 @@ public class DatayugeFragment extends Fragment {
                             if(pricestoresurl[j]==null){}
                             else{ data123.add(products); break; }
                         }
-
-
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

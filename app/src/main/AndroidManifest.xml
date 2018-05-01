@@ -39,6 +39,7 @@
         <activity android:name=".Disclaimer" />
         <activity android:name=".bookmark" />
         <activity android:name=".bookmarkcontent"></activity>
+        <activity android:name=".Spec_Compare"></activity>
     </application>
 
 </manifest>
