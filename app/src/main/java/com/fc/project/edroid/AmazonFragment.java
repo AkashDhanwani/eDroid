@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,17 +95,18 @@ ProgressBar pb;
             e.printStackTrace();
         }
 
-        String[] producttemp = query.toString().split(" ");
+       /* String[] producttemp = query.toString().split(" ");
         if(producttemp.length==1) product=producttemp[0];
         else
             product= producttemp[0]+" "+producttemp[1];
-
+        */
+       product=query.toString();
 
 
         i=1;
                 callPages(i,product);
 
-            recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
+/*            recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
                 @Override
                 public void onLoadMore() {
 
@@ -113,7 +115,7 @@ ProgressBar pb;
                 }
             });
 
-
+*/
         return view;
     }
 
@@ -140,7 +142,7 @@ ProgressBar pb;
 
         // the purpose of the signed class used above is to get the signed url
         requestUrl = helper.sign(params);
-
+        Log.d("abc",requestUrl);
         Task1 t1 = new Task1();
         t1.execute(requestUrl);
     }
@@ -156,12 +158,8 @@ ProgressBar pb;
         data.clear();
         recyclerView.setVisibility(view.GONE);
         pb.setVisibility(view.VISIBLE);
-        String[] producttemp = query.toString().split(" ");
-        if(producttemp.length==1) product=producttemp[0];
-        else
-        product= producttemp[producttemp.length-1]+" "+producttemp[producttemp.length-2];
 
-        callPages(i,product);
+        callPages(i,query);
 
 
     }
@@ -220,16 +218,16 @@ ProgressBar pb;
                 Document document = builder.parse(new InputSource(new StringReader(jsonstr)));
                 //everything in xml is a node so we create nodes for tags
                     // then use the attribute of data which we want to extract
-
+              //  NodeList nList2=null;
                 NodeList nList = document.getElementsByTagName("Item");
-                NodeList nList2 = document.getElementsByTagName("LargeImage");
+
                 NodeList nList3 = document.getElementsByTagName("OfferSummary");
                 NodeList nList4 = document.getElementsByTagName("ItemAttributes");
 
                //for multiple elements use for loop
                 for(int i=0;i<nList.getLength();i++) {
                     Node node = nList.item(i);
-                    Node nodeimage=nList2.item(i);
+                   // Node nodeimage=nList2.item(i);
                     Node nodeprice=nList3.item(i);
                     Node nodespecs=nList4.item(i);
 
@@ -238,7 +236,8 @@ ProgressBar pb;
                         Element element2 = (Element) node;
                         Element element5 = (Element) nodespecs;
                         NodeList featurelist = element5.getElementsByTagName("Feature");
-
+                        NodeList nList2 = element2.getElementsByTagName("LargeImage");
+                        Node nodeimage=nList2.item(0);
                         for(int j=0;j<featurelist.getLength() && j<4 ;j++){
                             products.specs[j]=getValue("Feature",element5, j);
                         }
@@ -289,11 +288,12 @@ ProgressBar pb;
         }
     }
     private static String getValue(String tag, Element element, int i) {
+        if(element!=null){
         if (element.getElementsByTagName(tag).item(i).hasChildNodes()) {
             NodeList nodeList = element.getElementsByTagName(tag).item(i).getChildNodes();
             Node node = nodeList.item(0);
             return node.getNodeValue();
-        }
+        } }
         return null;
     }
 }

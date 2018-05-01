@@ -79,6 +79,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     public void delBookmark(String title) {
         db= this.getWritableDatabase();
+        title= title.replace("\'","\'\'");
      long rid=db.delete("bookmark","title=\'"+title+"\'",null);
         if(rid==0){
             Toast.makeText(context, "delelte issue", Toast.LENGTH_SHORT).show();

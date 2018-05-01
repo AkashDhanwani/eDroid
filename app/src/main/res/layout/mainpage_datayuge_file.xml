@@ -40,86 +40,25 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <LinearLayout
-                android:id="@+id/lldatayuge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/datayugeprooImg"
-                android:layout_below="@id/datayugeproTitlee">
-
-                <Button
-                    android:id="@+id/button1"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:autoSizeTextType="uniform"
-
-                    android:layout_alignStart="@+id/datayugeproTitlee"
-                    android:layout_below="@+id/datayugeproTitlee"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/button2"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@id/button1"
-                    android:layout_marginLeft="1dp"
-                    android:layout_toRightOf="@id/button1"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@id/datayugeprooImg"
-        android:layout_below="@id/lldatayuge">
-
-        <Button
-            android:id="@+id/button3"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_alignStart="@id/datayugeproTitlee"
-            android:layout_below="@+id/button1"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/button4"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_below="@+id/button2"
-            android:layout_marginLeft="1dp"
-            android:layout_toRightOf="@id/button3"
-            android:layout_weight="1" />
-
-            </LinearLayout>
-
             <TextView
 
+                android:id="@+id/tt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/lldatayuge"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="8dp"
-                android:layout_toRightOf="@+id/datayugeprooImg"
+                android:layout_alignBottom="@+id/datayugeprooImg"
+                android:layout_alignStart="@+id/datayugeproTitlee"
                 android:padding="3dp"
-                android:id="@+id/tt"
                 android:text="@string/setb"
                 android:textSize="13dp" />
+
             <Button
                 android:id="@+id/btnDatayugeBookMark"
-                android:layout_marginLeft="20dp"
-                android:layout_below="@+id/lldatayuge"
-                android:layout_toRightOf="@+id/tt"
                 android:layout_width="30dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/ic_star_border_black_24dp"
-                android:layout_height="30dp" />
+                android:layout_height="30dp"
+                android:layout_alignBottom="@+id/tt"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="31dp"
+                android:background="@drawable/ic_star_border_black_24dp" />
         </RelativeLayout>
 
 

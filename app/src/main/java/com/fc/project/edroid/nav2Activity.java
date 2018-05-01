@@ -103,7 +103,7 @@ public class nav2Activity extends AppCompatActivity
                     flipkartFragment.refresh(query);
                     amazonFragment.refresh(query);
                     ebayFragment.refresh(query);
-                    datayugeFragment.refresh(query);
+                   datayugeFragment.refresh(query);
                     Toast.makeText(nav2Activity.this, "Searching for " + query, Toast.LENGTH_SHORT).show();
                 }
             }

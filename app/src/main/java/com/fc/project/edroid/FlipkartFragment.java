@@ -61,7 +61,7 @@ public class FlipkartFragment extends Fragment {
         callpages(product);
 
 
-
+/*
          recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
              @Override
              public void onLoadMore() {
@@ -72,7 +72,7 @@ public class FlipkartFragment extends Fragment {
              }
          });
 
-
+*/
 
 
          return view;
@@ -91,7 +91,7 @@ public class FlipkartFragment extends Fragment {
         final String product = query;
         callpages(product);
         Toast.makeText(getActivity(), "This is refresh method", Toast.LENGTH_SHORT).show();
-        final int[] i = {0};
+        /*final int[] i = {0};
         recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
             @Override
             public void onLoadMore() {
@@ -100,7 +100,7 @@ public class FlipkartFragment extends Fragment {
 
             }
         });
-
+*/
 
     }
 

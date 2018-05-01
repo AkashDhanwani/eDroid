@@ -84,7 +84,6 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
            if(abc.equals(myHolder.title)){
                 flag=0;
                 myHolder.btnBookMark.setBackgroundResource(R.drawable.ic_star_black_24dp);
-                Toast.makeText(context.getApplicationContext(), "this is working", Toast.LENGTH_SHORT).show();
                 break;
             }
         }

@@ -40,6 +40,7 @@
         <activity android:name=".bookmark" />
         <activity android:name=".bookmarkcontent"></activity>
         <activity android:name=".Spec_Compare"></activity>
+        <activity android:name=".datayuge_detail"></activity>
     </application>
 
 </manifest>

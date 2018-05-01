@@ -4,15 +4,15 @@ public class ProductsRes {
 
     public String title;
     public String imgurl;
-    public String prods[][];
+    public String pid;
     public ProductsRes() {
 
     }
 
-    public ProductsRes(String title, String imgurl, String[][] prods) {
+    public ProductsRes(String title, String imgurl, String pid) {
         this.title = title;
         this.imgurl = imgurl;
-        this.prods = prods;
+        this.pid = pid;
     }
 
     public String getTitle() {
@@ -31,11 +31,8 @@ public class ProductsRes {
         this.imgurl = imgurl;
     }
 
-    public String[][] getProds() {
-        return prods;
+    public String getPid() {
+        return pid;
     }
 
-    public void setProds(String produrl) {
-        this.prods = prods;
-    }
     }

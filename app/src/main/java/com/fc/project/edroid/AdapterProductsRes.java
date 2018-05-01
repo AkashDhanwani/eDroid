@@ -3,6 +3,7 @@ package com.fc.project.edroid;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.widget.RecyclerView;
@@ -50,14 +51,28 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         AdapterProductsRes.MyHolder myHolder=(AdapterProductsRes.MyHolder)holder;
-        ProductsRes products=data.get(myHolder.getAdapterPosition());
+        final ProductsRes products=data.get(myHolder.getAdapterPosition());
         myHolder.datayugeproTitlee.setText(products.getTitle());
         myHolder.title=products.getTitle();
-        String[] storename=new String[4];
-        String[] price=new String[4];
-        final String[] produrl=new String[4];
+       // String[] storename=new String[4];
+       // String[] price=new String[4];
+        //final String[] produrl=new String[4];
         Glide.with(context).load(products.getImgUrl()).into(myHolder.datayugeprooImg);
-        myHolder.storepriceurl=products.getProds();
+
+        myHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle=new Bundle();
+                bundle.putString("title",products.getTitle());
+                bundle.putString("img",products.getImgUrl());
+                bundle.putString("pid",products.getPid());
+                Intent intent = new Intent(context, datayuge_detail.class);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+
+            }
+        });
+       /* myHolder.storepriceurl=products.getProds();
         for(int i=0;i<4;i++){
         storename[i]=myHolder.storepriceurl[i][0];
         price[i]=myHolder.storepriceurl[i][1];
@@ -127,11 +142,10 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
             abc = abc.substring(0, abc.length() - 1);
             if(abc.equals(myHolder.title)){     flag=0;
                 myHolder.btn.setBackgroundResource(R.drawable.ic_star_black_24dp);
-                Toast.makeText(context.getApplicationContext(), "this is working", Toast.LENGTH_SHORT).show();
                 break;
             }
         }
-
+*/
     }
 
     private void removeAt(final int adapterPosition, final int position) {
@@ -158,15 +172,15 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         ImageView datayugeprooImg;
         String title;
-        String[][] storepriceurl=new String[4][3];
+  //      String[][] storepriceurl=new String[4][3];
         TextView datayugeproTitlee;
         Button button1,button2,button3,button4,btn;
         public MyHolder(View itemView) {
             super(itemView);
-            button1=itemView.findViewById(R.id.button1);
-            button2=itemView.findViewById(R.id.button2);
-            button3=itemView.findViewById(R.id.button3);
-            button4=itemView.findViewById(R.id.button4);
+         //   button1=itemView.findViewById(R.id.button1);
+          //  button2=itemView.findViewById(R.id.button2);
+          //  button3=itemView.findViewById(R.id.button3);
+          //  button4=itemView.findViewById(R.id.button4);
             datayugeprooImg=itemView.findViewById(R.id.datayugeprooImg);
             datayugeproTitlee=itemView.findViewById(R.id.datayugeproTitlee);
             btn=itemView.findViewById(R.id.btnDatayugeBookMark);
@@ -190,17 +204,13 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
                     }
                 }
             });
-            //EbayproPrice=itemView.findViewById(R.id.EbayproPrice);
-/*
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Uri uri = Uri.parse(produrl); // missing 'http://' will cause crashed
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    context.startActivity(intent);
+                    Bundle bundle=new Bundle();
+
                 }
             });
-*/
 
         }
     }
