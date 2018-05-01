@@ -10,9 +10,10 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/ettest"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="86dp"
+        android:layout_marginTop="35dp"
+        android:fontFamily="serif"
         android:text="TextView" />
 
     <TextView
@@ -20,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/tvTitle"
+        android:fontFamily="serif"
         android:layout_below="@+id/tvTitle"
         android:layout_marginTop="64dp"
         android:text="TextView" />
@@ -29,6 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/tvFlipkart"
+        android:fontFamily="serif"
         android:layout_below="@+id/tvFlipkart"
         android:layout_marginTop="61dp"
         android:text="TextView" />
@@ -40,6 +43,7 @@
         android:layout_alignEnd="@+id/tvAmazon"
         android:layout_below="@+id/tvAmazon"
         android:layout_marginTop="80dp"
+        android:fontFamily="serif"
         android:text="TextView" />
 
     <EditText
@@ -48,8 +52,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="111dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name" />
+
 </RelativeLayout>

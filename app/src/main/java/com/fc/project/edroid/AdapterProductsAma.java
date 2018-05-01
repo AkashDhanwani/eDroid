@@ -15,8 +15,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class AdapterProductsAma extends RecyclerView.Adapter<RecyclerView.ViewHo
     private LayoutInflater inflater;
     List<ProductsAma> data= Collections.emptyList();
     final MyDatabaseHelper dbh;
+    String amPrice;
 
     public AdapterProductsAma(Context context, List<ProductsAma>data) {
         this.context = context;
@@ -50,6 +53,7 @@ public class AdapterProductsAma extends RecyclerView.Adapter<RecyclerView.ViewHo
         MyHolder myHolder=(MyHolder)holder;
         //  current=data.get(position);
         ProductsAma products=data.get(position);
+        amPrice = products.getPrice();
         myHolder.AmazonproTitlee.setText(products.getTitle());
         //myHolder.AmazonproDescc.setText(products.getDesc());
         myHolder.AmazonproPrice.setText("\u20B9"+products.getPrice());
@@ -102,12 +106,15 @@ public class AdapterProductsAma extends RecyclerView.Adapter<RecyclerView.ViewHo
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                    Date date = new Date();
+                    String dat = formatter.format(date);
                     if(flag==1)
                     {
                         //button.setBackgroundColor(Color.CYAN);
                         btn.setBackgroundResource(R.drawable.ic_star_black_24dp);
                         Toast.makeText(context.getApplicationContext(), "set bookmark", Toast.LENGTH_SHORT).show();
-                        dbh.addBookmark(title);
+                        dbh.addBookmark(title,dat, "Amazon", amPrice);
                         flag=0;
                     }
                     else

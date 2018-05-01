@@ -17,8 +17,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -187,12 +189,15 @@ public class AdapterProductsRes extends RecyclerView.Adapter<RecyclerView.ViewHo
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                    Date date = new Date();
+                    String dat = formatter.format(date);
                     if(flag==1)
                     {
                         //button.setBackgroundColor(Color.CYAN);
                         btn.setBackgroundResource(R.drawable.ic_star_black_24dp);
                         Toast.makeText(context.getApplicationContext(), "set bookmark", Toast.LENGTH_SHORT).show();
-                        dbh.addBookmark(title);
+                        dbh.addBookmark(title, dat, "Others Tab", "Variable Price");
                         flag=0;
                     }
                     else

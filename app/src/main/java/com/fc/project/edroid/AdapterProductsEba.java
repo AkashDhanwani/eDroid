@@ -15,8 +15,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -26,13 +28,15 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
     private Context context;
     private LayoutInflater inflater;
     List<ProductsEba> data = Collections.emptyList();
-    int flag=1;
+    int flag = 1;
     final MyDatabaseHelper dbh;
+    String ebPrice;
+
     public AdapterProductsEba(Context context, List<ProductsEba> data) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.data = data;
-        dbh=MyDatabaseHelper.getInstance(context);
+        dbh = MyDatabaseHelper.getInstance(context);
     }
 
     @Override
@@ -47,25 +51,26 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
 
-        AdapterProductsEba.MyHolder myHolder=(AdapterProductsEba.MyHolder)holder;
-        ProductsEba products=data.get(position);
+        AdapterProductsEba.MyHolder myHolder = (AdapterProductsEba.MyHolder) holder;
+        ProductsEba products = data.get(position);
+        ebPrice = products.getPrice();
         myHolder.EbayproTitlee.setText(products.getTitle());
-        myHolder.title=products.getTitle();
+        myHolder.title = products.getTitle();
         //myHolder.AmazonproDescc.setText(products.getDesc());
-        myHolder.EbayproPrice.setText("\u20B9"+products.getPrice());
+        myHolder.EbayproPrice.setText("\u20B9" + products.getPrice());
         //myHolder.AmazonproSellingPrice.setText("\u20B9"+products.getFlipkartSellingPrice());
         // myHolder.FlipkartproInStock.setText(products.getInStock());
         Glide.with(context).load(products.getImgUrl()).into(myHolder.EbayprooImg);
-        myHolder.produrl=products.getProdUrl();
+        myHolder.produrl = products.getProdUrl();
 
 
-        ArrayList<String> marksbook=new ArrayList<String>(dbh.getAllbookmark());
-        Iterator<String> itc=marksbook.iterator();
-        while(itc.hasNext()){
-            String abc=itc.next();
+        ArrayList<String> marksbook = new ArrayList<String>(dbh.getAllbookmark());
+        Iterator<String> itc = marksbook.iterator();
+        while (itc.hasNext()) {
+            String abc = itc.next();
             abc = abc.substring(0, abc.length() - 1);
-            if(abc.equals(myHolder.title)){
-                flag=0;
+            if (abc.equals(myHolder.title)) {
+                flag = 0;
                 myHolder.btn.setBackgroundResource(R.drawable.ic_star_black_24dp);
 
                 break;
@@ -76,42 +81,41 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
 
-
     @Override
     public int getItemCount() {
         return data.size();
     }
 
-    class MyHolder extends RecyclerView.ViewHolder
-    {
+    class MyHolder extends RecyclerView.ViewHolder {
 
         ImageView EbayprooImg;
         String produrl;
         String title;
-        TextView EbayproTitlee,EbayproPrice;
+        TextView EbayproTitlee, EbayproPrice;
         Button btn;
+
         public MyHolder(View itemView) {
             super(itemView);
-            EbayprooImg=itemView.findViewById(R.id.EbayprooImg);
-            EbayproTitlee=itemView.findViewById(R.id.EbayproTitlee);
-            EbayproPrice=itemView.findViewById(R.id.EbayproPrice);
-            btn=itemView.findViewById(R.id.btnEbayBookMark);
+            EbayprooImg = itemView.findViewById(R.id.EbayprooImg);
+            EbayproTitlee = itemView.findViewById(R.id.EbayproTitlee);
+            EbayproPrice = itemView.findViewById(R.id.EbayproPrice);
+            btn = itemView.findViewById(R.id.btnEbayBookMark);
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(flag==1)
-                    {
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                    Date date = new Date();
+                    String dat = formatter.format(date);
+                    if (flag == 1) {
                         //button.setBackgroundColor(Color.CYAN);
                         btn.setBackgroundResource(R.drawable.ic_star_black_24dp);
                         Toast.makeText(context.getApplicationContext(), "set bookmark", Toast.LENGTH_SHORT).show();
-                        dbh.addBookmark(title);
-                        flag=0;
-                    }
-                    else
-                    {
+                        dbh.addBookmark(title, dat, "eBay", ebPrice);
+                        flag = 0;
+                    } else {
                         btn.setBackgroundResource(R.drawable.ic_star_border_black_24dp);
                         dbh.delBookmark(title);
-                        flag=1;
+                        flag = 1;
                     }
                 }
             });
@@ -125,12 +129,6 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
             });
 
 
-
         }
     }
-
-
-
-
-
 }

@@ -1,9 +1,5 @@
 package com.fc.project.edroid;
 
-/**
- * Created by LakhwaniPc on 18-02-2018.
- */
-
 public class ImageModel {
     private int image_drawable;
 

@@ -35,10 +35,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 public class bookmarkcontent extends AppCompatActivity {
-    TextView tvTitle,tvFlipkart,tvAmazon,tvEbay;
-    String title,title1;
+    TextView tvTitle, tvFlipkart, tvAmazon, tvEbay, tvDate;
+    String title, title1;
     EditText ettest;
-    String Appid="antfjRhXLpFSSCH0iVYGq0wBoG5hj6wKBTE";
+    String Appid = "antfjRhXLpFSSCH0iVYGq0wBoG5hj6wKBTE";
     SignedRequestsHelper helper;
     String requestUrl = null;
 
@@ -60,12 +60,12 @@ public class bookmarkcontent extends AppCompatActivity {
         int orientaton = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
         setRequestedOrientation(orientaton);
 
-        tvTitle=findViewById(R.id.tvTitle);
-        tvFlipkart=findViewById(R.id.tvFlipkart);
-        tvAmazon=findViewById(R.id.tvAmazon);
-        tvEbay=findViewById(R.id.tvEbay);
-        ettest=findViewById(R.id.ettest);
-
+        tvTitle = findViewById(R.id.tvTitle);
+        tvFlipkart = findViewById(R.id.tvFlipkart);
+        tvAmazon = findViewById(R.id.tvAmazon);
+        tvEbay = findViewById(R.id.tvEbay);
+        ettest = findViewById(R.id.ettest);
+        tvDate = findViewById(R.id.tvDate);
 
 
         try {
@@ -75,11 +75,11 @@ public class bookmarkcontent extends AppCompatActivity {
         }
 
 
-        Intent intent=getIntent();
-        title=intent.getStringExtra("title");
+        Intent intent = getIntent();
+        title = intent.getStringExtra("title");
         tvTitle.setText(title);
-    title1 = title.replaceAll("\\p{P}","");
-  //     ettest.setText(title);
+        title1 = title.replaceAll("\\p{P}", "");
+        //     ettest.setText(title);
 
 
         Map<String, String> params = new HashMap<String, String>();
@@ -105,16 +105,15 @@ public class bookmarkcontent extends AppCompatActivity {
 
     }
 
-    class Task1 extends AsyncTask<String, Void, Bundle>
-    {
+    class Task1 extends AsyncTask<String, Void, Bundle> {
 
 
-        String jsonstr="";
-        String line= "";
-        String resultSet=null;
-        String[] specs=new String[5];
-        Bundle bundle=new Bundle();
-        String fksp,ttfk;
+        String jsonstr = "";
+        String line = "";
+        String resultSet = null;
+        String[] specs = new String[5];
+        Bundle bundle = new Bundle();
+        String fksp, ttfk;
 
         @Override
         protected Bundle doInBackground(String... strings) {
@@ -132,22 +131,21 @@ public class bookmarkcontent extends AppCompatActivity {
 //                List<Products> data=new ArrayList<>();
 
 
-                while ((line = br.readLine()) != null)
-                {
-                    jsonstr+=line +"\n";
+                while ((line = br.readLine()) != null) {
+                    jsonstr += line + "\n";
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if(jsonstr!=null){
-                try{
-                    JSONObject jsonObject=new JSONObject(jsonstr);
-                    JSONArray array=jsonObject.getJSONArray("products");
-                    for(int i=0;i<10;i++) {
+            if (jsonstr != null) {
+                try {
+                    JSONObject jsonObject = new JSONObject(jsonstr);
+                    JSONArray array = jsonObject.getJSONArray("products");
+                    for (int i = 0; i < 10; i++) {
                         //Public  List<Products> data=new ArrayList<>();
-                       // Products products=new Products();
+                        // Products products=new Products();
                         JSONObject firstarray = array.getJSONObject(i);
                         JSONObject quote = firstarray.getJSONObject("productBaseInfoV1");
                         //JSONObject specs1 = firstarray.getJSONObject("categorySpecificInfoV1");
@@ -158,19 +156,19 @@ public class bookmarkcontent extends AppCompatActivity {
                         }*/
                         //JSONObject quote1=quote.getJSONObject("imageUrls");
                         //JSONObject quote2=quote.getJSONObject("maximumRetailPrice");
-                        JSONObject quote3=quote.getJSONObject("flipkartSpecialPrice");
+                        JSONObject quote3 = quote.getJSONObject("flipkartSpecialPrice");
                         // JSONObject quote4=quote.getJSONObject("inStock");
                         //  JSONObject quote1=secondArray.getJSONObject("imageUrls");
-                        if(resultSet==null && title.equals(quote.getString("title"))) {
+                        if (resultSet == null && title.equals(quote.getString("title"))) {
                             //    resultSet=quote.getString("title");
                             //products.title = quote.getString("title");
                             //products.produrl=quote.getString("productUrl");
                             //products.desc=quote.getString("productDescription");
                             //products.imgUrl=quote1.getString("400x400");
                             //products.price=quote2.getString("amount");
-                            bundle.putString("title",quote.getString("title"));
+                            bundle.putString("title", quote.getString("title"));
                             //ttfk=quote.getString("title");
-                            bundle.putString("price",quote3.getString("amount"));
+                            bundle.putString("price", quote3.getString("amount"));
                             //fksp = quote3.getString("amount");
                             //products.inStock=quote4.getString("amount");
                             //data.add(products);
@@ -187,24 +185,22 @@ public class bookmarkcontent extends AppCompatActivity {
         @Override
         protected void onPostExecute(Bundle s) {
             super.onPostExecute(s);
-            tvFlipkart.setText("Flipkart price: "+s.getString("price"));
-          //  ettest.setText(s.getString("title"));
+            tvFlipkart.setText("Flipkart price: " + s.getString("price"));
+            //  ettest.setText(s.getString("title"));
 
         }
     }
 
 
+    class Task2 extends AsyncTask<String, Void, Bundle> {
+        String jsonstr = "";
+        String line = "";
+        String title = "";
+        String produrl = "";
+        String imgurl = "";
+        String resultSet = "";
+        Bundle bundle = new Bundle();
 
-
-    class Task2 extends AsyncTask<String, Void, Bundle>
-    {
-        String jsonstr="";
-        String line= "";
-        String title="";
-        String produrl="";
-        String imgurl="";
-        String resultSet="";
-        Bundle bundle=new Bundle();
         @Override
         protected Bundle doInBackground(String... strings) {
             try {
@@ -214,9 +210,8 @@ public class bookmarkcontent extends AppCompatActivity {
                 connection.connect();
                 InputStream is = connection.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                while ((line = br.readLine()) != null)
-                {
-                    jsonstr+=line +"\n";
+                while ((line = br.readLine()) != null) {
+                    jsonstr += line + "\n";
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -234,7 +229,7 @@ public class bookmarkcontent extends AppCompatActivity {
 
 
                 e.printStackTrace();
-            }catch (IOException e) {
+            } catch (IOException e) {
                 //Toast.makeText(MainActivity.this,
                 //      "Connection IOException", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
@@ -254,31 +249,31 @@ public class bookmarkcontent extends AppCompatActivity {
                 NodeList nList4 = document.getElementsByTagName("ItemAttributes");
 
                 //for multiple elements use for loop
-                for(int i=0;i<nList.getLength();i++) {
+                for (int i = 0; i < nList.getLength(); i++) {
                     Node node = nList.item(i);
-                    Node nodeimage=nList2.item(i);
-                    Node nodeprice=nList3.item(i);
-                    Node nodespecs=nList4.item(i);
+                    Node nodeimage = nList2.item(i);
+                    Node nodeprice = nList3.item(i);
+                    Node nodespecs = nList4.item(i);
 
-                  //  ProductsAma products=new ProductsAma();
+                    //  ProductsAma products=new ProductsAma();
                     if (node.getNodeType() == Node.ELEMENT_NODE) {
                         Element element2 = (Element) node;
                         Element element5 = (Element) nodespecs;
                         NodeList featurelist = element5.getElementsByTagName("Feature");
 
-                       // for(int j=0;j<featurelist.getLength() && j<4 ;j++){
-                         //   products.specs[j]=getValue("Feature",element5, j);
-                      //  }
+                        // for(int j=0;j<featurelist.getLength() && j<4 ;j++){
+                        //   products.specs[j]=getValue("Feature",element5, j);
+                        //  }
                         Element element3 = (Element) nodeimage;
                         Element element4 = (Element) nodeprice;
-                       // products.title=getValue("Title",element2, 0);
-                       // if(title.equals(getValue("Title",element2, 0))){
-                       bundle.putString("title",getValue("Title",element2, 0));
-                        bundle.putString("price",getValue("FormattedPrice",element4, 0));
+                        // products.title=getValue("Title",element2, 0);
+                        // if(title.equals(getValue("Title",element2, 0))){
+                        bundle.putString("title", getValue("Title", element2, 0));
+                        bundle.putString("price", getValue("FormattedPrice", element4, 0));
 
-                      //  products.price=getValue("FormattedPrice",element4, 0);
-                       // products.produrl=getValue("DetailPageURL",element2, 0);
-                       // products.imgurl=getValue("URL",element3, 0);
+                        //  products.price=getValue("FormattedPrice",element4, 0);
+                        // products.produrl=getValue("DetailPageURL",element2, 0);
+                        // products.imgurl=getValue("URL",element3, 0);
 
                         //getValue() is method defined in the end which passes the attribute and return data that we want
                         //resultSet=resultSet+"\n\n\tTitle: "+title+"\n\tprice: "+price+"\n\tproduct url :"+produrl+"\n\timage url :"+imgurl;
@@ -299,13 +294,12 @@ public class bookmarkcontent extends AppCompatActivity {
         }
 
 
-
         @Override
         protected void onPostExecute(Bundle s) {
             super.onPostExecute(s);
             //tvList.setText(s);
-            String text=s.getString("title");
-            tvAmazon.setText(text+" : "+s.getString("price"));
+            String text = s.getString("title");
+            tvAmazon.setText(text + " : " + s.getString("price"));
             ettest.setText(text);
             //recyclerView.setLayoutManager(new VegaLayoutManager());
          /*   adapterProducts=new AdapterProductsAma(getActivity(),data);
@@ -322,6 +316,7 @@ public class bookmarkcontent extends AppCompatActivity {
 
         }
     }
+
     private static String getValue(String tag, Element element, int i) {
         if (element.getElementsByTagName(tag).item(i).hasChildNodes()) {
             NodeList nodeList = element.getElementsByTagName(tag).item(i).getChildNodes();
@@ -330,9 +325,6 @@ public class bookmarkcontent extends AppCompatActivity {
         }
         return null;
     }
-
-
-
 
 
 }
