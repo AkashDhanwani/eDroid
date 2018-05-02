@@ -30,7 +30,6 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
     List<ProductsEba> data = Collections.emptyList();
     int flag = 1;
     final MyDatabaseHelper dbh;
-    String ebPrice;
 
     public AdapterProductsEba(Context context, List<ProductsEba> data) {
         this.context = context;
@@ -53,7 +52,7 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         AdapterProductsEba.MyHolder myHolder = (AdapterProductsEba.MyHolder) holder;
         ProductsEba products = data.get(position);
-        ebPrice = products.getPrice();
+        myHolder.ebPrice = products.getPrice();
         myHolder.EbayproTitlee.setText(products.getTitle());
         myHolder.title = products.getTitle();
         //myHolder.AmazonproDescc.setText(products.getDesc());
@@ -90,7 +89,7 @@ public class AdapterProductsEba extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         ImageView EbayprooImg;
         String produrl;
-        String title;
+        String title, ebPrice;
         TextView EbayproTitlee, EbayproPrice;
         Button btn;
 
