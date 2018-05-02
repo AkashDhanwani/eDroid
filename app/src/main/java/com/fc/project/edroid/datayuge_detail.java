@@ -34,6 +34,7 @@ public class datayuge_detail extends AppCompatActivity {
     Button button1,button2,button3,button4;
     ImageView ivimg;
     TextView tvTitle;
+    int flag=0;
     String appid="H3jyQd8owEXnHW32UBXXMUXgpWMr4m9QyHb";
 
     @Override
@@ -160,6 +161,7 @@ public class datayuge_detail extends AppCompatActivity {
                         Uri uri = Uri.parse(produrl[0]);
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
+                        flag=1;
                     }
                 });
 
@@ -174,6 +176,7 @@ public class datayuge_detail extends AppCompatActivity {
                         Uri uri = Uri.parse(produrl[1]);
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
+                        flag=1;
                     }
                 });
 
@@ -187,6 +190,7 @@ public class datayuge_detail extends AppCompatActivity {
                         Uri uri = Uri.parse(produrl[2]);
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
+                        flag=1;
                     }
                 });
 
@@ -200,10 +204,12 @@ public class datayuge_detail extends AppCompatActivity {
                         Uri uri = Uri.parse(produrl[3]);
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
+                        flag=1;
                     }
                 });
 
             }
+            if(flag==0) Toast.makeText(datayuge_detail.this, "Product not available in other stores, Check in Amazon,Flipkart and Ebay",Toast.LENGTH_LONG).show();
 
 
         }
