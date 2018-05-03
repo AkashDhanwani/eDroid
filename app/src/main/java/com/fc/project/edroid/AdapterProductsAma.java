@@ -29,7 +29,6 @@ public class AdapterProductsAma extends RecyclerView.Adapter<RecyclerView.ViewHo
     private LayoutInflater inflater;
     List<ProductsAma> data= Collections.emptyList();
     final MyDatabaseHelper dbh;
-    String amPrice;
 
     public AdapterProductsAma(Context context, List<ProductsAma>data) {
         this.context = context;
@@ -53,7 +52,7 @@ public class AdapterProductsAma extends RecyclerView.Adapter<RecyclerView.ViewHo
         MyHolder myHolder=(MyHolder)holder;
         //  current=data.get(position);
         ProductsAma products=data.get(position);
-        amPrice = products.getPrice();
+        myHolder.amPrice = products.getPrice();
         myHolder.AmazonproTitlee.setText(products.getTitle());
         //myHolder.AmazonproDescc.setText(products.getDesc());
         myHolder.AmazonproPrice.setText("\u20B9"+products.getPrice());
@@ -90,7 +89,7 @@ public class AdapterProductsAma extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         ImageView imageView,AmazonprooImg;
         String[] specs=new String[5];
-        String title,imgurl,desc,produrl;
+        String title,imgurl,desc,produrl, amPrice;
         Button btn;
         TextView proDesc,proTitle,AmazonproTitlee,AmazonproDescc,AmazonproPrice,AmazonproSellingPrice,FlipkartproInStock;
         public MyHolder(View itemView) {

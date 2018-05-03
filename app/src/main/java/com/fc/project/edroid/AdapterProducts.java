@@ -34,7 +34,6 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
     Products current;
     int currentpos = 0;
     int flag = 1;
-    String fpPrice;
     final MyDatabaseHelper dbh;
 
     public AdapterProducts(Context context, List<Products> data) {
@@ -61,7 +60,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
         MyHolder myHolder = (MyHolder) holder;
         //  current=data.get(position);
         Products products = data.get(position);
-        fpPrice = products.getFlipkartSellingPrice();
+        myHolder.fpPrice = products.getFlipkartSellingPrice();
         myHolder.FlipkartproTitlee.setText(products.getTitle());
         myHolder.FlipkartproPrice.setText("\u20B9" + products.getPrice());
         myHolder.FlipkartproSellingPrice.setText("\u20B9" + products.getFlipkartSellingPrice());
@@ -94,7 +93,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     class MyHolder extends RecyclerView.ViewHolder {
-        String produrl, imgurl, title, desc;
+        String produrl, imgurl, title, desc, fpPrice;
         String[] specs = new String[5];
         ImageView FlipkartprooImg;
         Button btnBookMark;
