@@ -17,36 +17,6 @@
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/tvFlipkart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="106dp"
-        android:fontFamily="serif"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/tvAmazon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/tvFlipkart"
-        android:fontFamily="serif"
-        android:layout_below="@+id/tvFlipkart"
-        android:layout_marginTop="61dp"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/tvEbay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/tvAmazon"
-        android:layout_below="@+id/tvAmazon"
-        android:layout_marginTop="85dp"
-        android:fontFamily="serif"
-        android:text="TextView" />
-
-    <TextView
         android:id="@+id/tvsearched"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,5 +24,92 @@
         android:layout_alignStart="@+id/tvTitle"
         android:layout_marginTop="60dp"
         android:text="TextView" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button1"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autoSizeTextType="uniform" />
+
+        <Button
+            android:id="@+id/button2"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/button1"
+            android:layout_marginLeft="1dp"
+            android:layout_toRightOf="@id/button1"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button3"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autoSizeTextType="uniform" />
+
+        <Button
+            android:id="@+id/button4"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/button3"
+            android:layout_marginLeft="1dp"
+            android:layout_toRightOf="@id/button3"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="350dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button5"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autoSizeTextType="uniform" />
+
+        <Button
+            android:id="@+id/button6"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/button5"
+            android:layout_marginLeft="1dp"
+            android:layout_toRightOf="@id/button5"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
 
 </RelativeLayout>

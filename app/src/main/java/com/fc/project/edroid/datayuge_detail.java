@@ -3,6 +3,7 @@ package com.fc.project.edroid;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +35,8 @@ public class datayuge_detail extends AppCompatActivity {
     Button button1,button2,button3,button4;
     ImageView ivimg;
     TextView tvTitle;
-    int flag=0;
+
+    int flag;
     String appid="H3jyQd8owEXnHW32UBXXMUXgpWMr4m9QyHb";
 
     @Override
@@ -141,7 +143,7 @@ public class datayuge_detail extends AppCompatActivity {
             recyclerView.setOnFlingListener(null);
             recyclerView.invalidate();
 
-*/
+*/          flag=0;
             String[] storename=new String[4];
             String[] price=new String[4];
             final String[] produrl=new String[4];
@@ -155,14 +157,16 @@ public class datayuge_detail extends AppCompatActivity {
             }
             else {
                 button1.setText(storename[0] + ": " + price[0]);
+                flag++;
                 button1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Uri uri = Uri.parse(produrl[0]);
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
-                        flag=1;
+
                     }
+
                 });
 
             }
@@ -170,13 +174,14 @@ public class datayuge_detail extends AppCompatActivity {
 
             else {
                 button2.setText(storename[1] + ": " + price[1]);
+                flag++;
                 button2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Uri uri = Uri.parse(produrl[1]);
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
-                        flag=1;
+
                     }
                 });
 
@@ -184,13 +189,14 @@ public class datayuge_detail extends AppCompatActivity {
             if(storename[2]==null) button3.setVisibility(View.GONE);
             else {
                 button3.setText(storename[2] + ": " + price[2]);
+                flag++;
                 button3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Uri uri = Uri.parse(produrl[2]);
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
-                        flag=1;
+
                     }
                 });
 
@@ -198,19 +204,26 @@ public class datayuge_detail extends AppCompatActivity {
             if(storename[3]==null){ button4.setVisibility(View.GONE);    }
             else {
                 button4.setText(storename[3] + ": " + price[3]);
+                flag++;
                 button4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Uri uri = Uri.parse(produrl[3]);
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
-                        flag=1;
+
                     }
                 });
 
             }
-            if(flag==0) Toast.makeText(datayuge_detail.this, "Product not available in other stores, Check in Amazon,Flipkart and Ebay",Toast.LENGTH_LONG).show();
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if(flag==0) Toast.makeText(datayuge_detail.this, "Product not available in other stores, Check in Amazon,Flipkart and Ebay",Toast.LENGTH_LONG).show();
 
+                }
+            }, 1000);
 
         }
     }
